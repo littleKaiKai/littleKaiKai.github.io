@@ -1,7 +1,5 @@
 
 
-  
-
 
 
 
@@ -18,9 +16,13 @@
   
   
   
-    <meta name="description" content="">
+    <meta name="description" content="#类型转换
+##转换成数字
+
+parseInt（）和 parseFloat（）这两个方法可以将字符串转换成数字，前者是转成整型，后者是将字符串转换成浮点型，要注意，这两个方法都是将字符串转成数字，不要用在其他类型的数据上，不然只能是的得到NaN
+Number（）这个方法同样可以将字符串转成数字，但是这个方法只能是将纯数字形式的字符串转成数字，如果字符串中包含其他的字符，或者是不符合数字的格式...">
   
-  <title>Archives [ 小石头的个人博客 ]</title>
+  <title>类型转换 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -39,6 +41,15 @@
 <body>
 <div class="side-navigate hide-area">
   
+  
+    <div class="item next">
+      <a href="/2015/01/08/数组的方法汇总/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        数组的方法汇总
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -64,7 +75,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/archives">Archives</a>
             
@@ -103,96 +114,58 @@
     <div id="content-inner">
       
       
-  <article>
-    
-
-  <div id="recent-posts">
-    <h1>Archives
-    
-      <span class="posts-count">
-      Total
-      2
-      
-        posts
-      
-      </span>
-    
-    </h1>
-    
-    
+  <article id="post">
+    <h1>类型转换</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-01-16</span>
       
       
-        
-      
-      
+    </p>
     
-      
-      
-      
-    
-    
-    
-      
-      
-        
-        <h3 class="archive-year-title">2014
-        
-          <span class="posts-count">
-          Total
-          2
-          
-            posts
-          
-          </span>
-        
-        </h3>
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/07/30/Ajax知识随笔/">
-  
-    Ajax知识随笔
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">7-30</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/07/20/关于几个和firstChild相似内容的整理/">
-  
-    关于几个和firstChild相似内容的整理
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">7-20</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-  </div>
-
+    <p>#类型转换</p>
+<p>##转换成数字</p>
+<ol>
+<li>parseInt（）和 parseFloat（）<br>这两个方法可以将字符串转换成数字，前者是转成整型，后者是将字符串转换成浮点型，<strong>要注意</strong>，这两个方法都是将<strong>字符串</strong>转成数字，不要用在其他类型的数据上，不然只能是的得到NaN</li>
+<li>Number（）<br>这个方法同样可以将字符串转成数字，但是这个方法只能是将纯数字形式的字符串转成数字，如果字符串中包含其他的字符，或者是不符合数字的格式，是不能够转成数字的。但是上面的两个方法可以做到。</li>
+<li>隐式转换<br>这个方法的意思是，使用 + - X  / 这样的运算符同样可以将字符串转成数字，其中要注意的是<strong>+</strong>号，因为这个放在被转换对象前面表示正号，可以起到隐士转换的作用，但是如果是放在了被转换对象的后面，则会去拼接字符串。</li>
+<li>关于==这个判等符，是存在隐式转换的，而且转换的规则也很是多样和复杂。这里说一点，在==两边都是简单数据类型的时候，都是按照数字类型来转换的。这点要记牢</li>
+</ol>
+<p>##转成字符串</p>
+<ol>
+<li>函数方法：toString（）<br>这个方法可以将其他类型数据转成字符串，而且，从原型链的角度来考虑的话，他们在从Object.prototype原型上继承这个方法的时候，基本都重写了，所以不同数据类型调用这个方法的时候得到的结果形式可能不太相同。而且，我们经常会用到<code>Object.prototype.toString.call()</code>这个方法，因为这个方法可以判断某个数据类型的本质，比如说数组的话，会得到<code>[object Array]</code><br>另外一点值得注意：就是数字在转成字符串，并且用toString（）的时候，括号里可以写上数字，表示采用什么进制来表示，这样就方便了我们的进制转换</li>
+<li>强制转换 String（）<br>这个方法和toString方法差不多，不同的地方在于，这个方法同样可以转换Null 和undefined</li>
+<li>隐式转换<br>转成字符串的隐式转换的方法，最常用的是直接加上一个空字符，也就是 <code>2+&#39;&#39;</code></li>
+</ol>
+<h2 id="转成布尔值"><a href="#转成布尔值" class="headerlink" title="转成布尔值"></a>转成布尔值</h2><ol>
+<li>强制转换 Boolean（）<br>这个方法中，只有null、 undefined、空字符串、0、NaN会转成false，其他为true</li>
+<li>隐式转换<br>最常用的隐式转换是用！！再加上要转换的对象。另外要注意再while和if的条件判断处，也是会自动隐式转换成布尔值的。</li>
+</ol>
 
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#转成布尔值"><span class="toc-text">转成布尔值</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2015/01/08/数组的方法汇总/" class="next">Next post 数组的方法汇总 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
 
       
       
@@ -287,6 +260,8 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
+
+  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
