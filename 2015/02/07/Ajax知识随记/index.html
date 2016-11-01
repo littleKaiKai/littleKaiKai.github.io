@@ -1,7 +1,5 @@
 
 
-  
-
 
 
 
@@ -18,9 +16,23 @@
   
   
   
-    <meta name="description" content="">
+    <meta name="description" content="同源和跨域
+
+在同一个域名下的是同源
+子级域名和顶级域名也是跨域
+同源指的是域名、协议、端口号都相同
+\
+有资源引用的标签都可以跨域引用资源
+通过资源加载的这些标签对象都有onload事件
+同源的页面可以相互改变内容
+顶级域名 baidu.com（第一个出现的str+.com）
+
+
+jsonp
+script标签会把src加载过来的内容，强制转成js样式来执行
+跨域之间只能通过get方式给ph...">
   
-  <title>Archives [ 小石头的个人博客 ]</title>
+  <title>Ajax知识随记 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -39,6 +51,15 @@
 <body>
 <div class="side-navigate hide-area">
   
+  
+    <div class="item next">
+      <a href="/2015/01/28/关于几个和firstChild相似内容的整理/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        关于几个和firstChild相似内容的整理
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -64,7 +85,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/archives">Archives</a>
             
@@ -103,96 +124,60 @@
     <div id="content-inner">
       
       
-  <article>
-    
-
-  <div id="recent-posts">
-    <h1>Archives
-    
-      <span class="posts-count">
-      Total
-      2
-      
-        posts
-      
-      </span>
-    
-    </h1>
-    
-    
+  <article id="post">
+    <h1>Ajax知识随记</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-02-07</span>
       
       
-        
-      
-      
+    </p>
     
-      
-      
-      
-    
-    
-    
-      
-      
-        
-        <h3 class="archive-year-title">2014
-        
-          <span class="posts-count">
-          Total
-          2
-          
-            posts
-          
-          </span>
-        
-        </h3>
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/09/05/工作随笔/">
-  
-    工作随笔
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">9-5</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/08/11/原生JS中三种绑定事件的方式/">
-  
-    原生JS中三种绑定事件的方式
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">8-11</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-  </div>
-
+    <h2 id="同源和跨域"><a href="#同源和跨域" class="headerlink" title="同源和跨域"></a>同源和跨域</h2><blockquote>
+<ol>
+<li>在同一个域名下的是同源</li>
+<li>子级域名和顶级域名也是跨域</li>
+<li>同源指的是域名、协议、端口号都相同</li>
+<li>\<ifame\></ifame\></li>
+<li>有资源引用的标签都可以跨域引用资源</li>
+<li>通过资源加载的这些标签对象都有onload事件</li>
+<li>同源的页面可以相互改变内容</li>
+<li>顶级域名 baidu.com（第一个出现的str+.com）</li>
+</ol>
+</blockquote>
+<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><ul>
+<li>script标签会把src加载过来的内容，强制转成js样式来执行</li>
+<li>跨域之间只能通过get方式给php传参</li>
+<li><h3 id="异步上传文件"><a href="#异步上传文件" class="headerlink" title="异步上传文件"></a>异步上传文件</h3><ul>
+<li>JQuery—File—Upload</li>
+</ul>
+</li>
+</ul>
 
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#同源和跨域"><span class="toc-text">同源和跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jsonp"><span class="toc-text">jsonp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步上传文件"><span class="toc-text">异步上传文件</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2015/01/28/关于几个和firstChild相似内容的整理/" class="next">Next post 关于几个和firstChild相似内容的整理 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
 
       
       
@@ -287,6 +272,8 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
+
+  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
