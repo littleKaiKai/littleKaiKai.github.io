@@ -1,0 +1,358 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="今天，有个刚入前端的小伙伴让我看了一段代码，如下：`
+
+    hello    world    !
+    var ul = document.getElementById(“ul”);    var li1 = ul.firstChild;    console.log(li1);他的意思，是想得到第一个li元素，然后去做一系列的操作，接着他就开心地去运行谷歌浏览器。。。结果，想必大家...">
+  
+  <title>关于几个和firstChild相似内容的整理 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="/2015/01/16/类型转换/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        类型转换
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>关于几个和firstChild相似内容的整理</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-01-28</span>
+      
+      
+    </p>
+    
+    <p>今天，有个刚入前端的小伙伴让我看了一段代码，如下：<br>`</p>
+<p><body></body></p>
+<p><ul id="ul"><br>    <li id="li1">hello</li><br>    <li id="li2">world</li><br>    <li id="li3">!</li><br></ul></p>
+<p><script><br>    var ul = document.getElementById(“ul”);<br>    var li1 = ul.firstChild;<br>    console.log(li1);<br></script><br><br><code>他的意思，是想得到第一个li元素，然后去做一系列的操作，接着他就开心地去运行谷歌浏览器。。。结果，想必大家都知道。在**谷歌浏览器**中他这样的写法是根本获取不到第一个li元素的，因为</code> firstChild <code>获取到的是第一个节点，而不是第一个元素节点！然而，作为一个有追求（捂脸）的前端工程师，我们怎么能不去跑一下我们亲爱的 **IE浏览器**呢，结果奇迹出现了，IE8及其以下，竟然成功了。。。
+当然，我们的主旨并不是只集中在firstChild的兼容性问题上，实际上，在看到</code>firstChild`这个单词的时候，我感觉自己脑子里突然冒出来好多东西：</p>
+<ul>
+<li>DOM 中的<code>firstChild</code>属性</li>
+<li>DOM 中的<code>firstElementChild</code>  属性</li>
+<li>CSS3 中的 <code>：first-child</code>伪类选择器</li>
+<li>CSS3 中的 <code>：first-of-type</code> 伪类选择器</li>
+<li>jQuery 中的<code>first-child</code>选择器</li>
+</ul>
+<p>说实话，时间过了这么长，这些最基础的东西，真是有些记不太清了，所以，这里打算稍微整理一下，把知识梳理一下。</p>
+<h3 id="1-fitstChild"><a href="#1-fitstChild" class="headerlink" title="1. fitstChild"></a>1. fitstChild</h3><p>想必，绝大多数人，第一个认识的基本都是这个吧。作为DOM对象的属性，它返回的是指定节点的第一个子节点，但正如一开始看到的引子一样，这个属性，在谷歌浏览器中返回的可以是文本节点、注释节点、元素节点等等，但是在IE8及其以下中，得到的结果又有些不一样，在第一个子节点是一个换行空文本节点的话，浏览器是会忽略这个换行的。所以我们一般不会使用这个属性来对DOM进行一些操作。我们使用最多的是下面的这个<code>firstElementChild</code> 。</p>
+<h3 id="2-firstElementChild"><a href="#2-firstElementChild" class="headerlink" title="2. firstElementChild"></a>2. firstElementChild</h3><p>这个DOM对象属性，是我们非常喜欢用的。因为这个属性，正符合我们的的意思，我们可以用它来获取到某个指定DOM节点下的第一个元素节点。但是，很可惜的，这个属性也是有兼容性的。兼容性如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">浏览器</th>
+<th style="text-align:right">开始支持此属性的版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Chrome</td>
+<td style="text-align:right">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Firefox (Gecko)</td>
+<td style="text-align:right">1.9.1</td>
+</tr>
+<tr>
+<td style="text-align:left">IE</td>
+<td style="text-align:right">9.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Opera</td>
+<td style="text-align:right">10.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Safari</td>
+<td style="text-align:right">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>所以，在我们用原生js做一些项目时，如果需要使用到这个属性，那我们首先要进行兼容性的处理了，代码如下：<br><code>function getFirstElement(element) {
+    if (element.firstElementChild) return element.firstElementChild;
+    var el = element.firstChild;
+    while (el &amp;&amp; 1!= el.nodeType) el = el.nextSibling;
+    return el;
+}</code></p>
+<h3 id="3-CSS3中的：first-child伪类选择器"><a href="#3-CSS3中的：first-child伪类选择器" class="headerlink" title="3. CSS3中的：first-child伪类选择器"></a>3. CSS3中的：first-child伪类选择器</h3><p><code>：first-child</code>是<code>CSS3</code>中提供的伪类选择器，通过它我们可以选择到属于其父元素的首个子元素。实例代码如下：<br>`<br>&lt;!DOCTYPE html&gt;</p>
+<p><html lang="en"></html></p>
+<p><head><br>    <meta charset="UTF-8"><br>    <title>Title</title><br>    <style><br>        p:first-child {<br>            height: 100px;<br>            background-color: red;<br>        }<br>    </style><br></head></p>
+<p><body></body></p>
+<p><div id="dv1"><br>    <p>hello</p><br>    <p>world</p><br>    <p>!</p><br></div></p>
+<p><div id="dv2"><br>    <p>javascript</p><br>    <p>is</p><br>    <p>good</p><br></div></p>
+<p><div id="dv3"><br>    <h5>这是标题</h5><br>    <p>php</p><br>    <p>is</p><br>    <p>good</p><br></div><br><br><br><code>在这段示例代码中，我们能够将</code>id<code>为</code>“dv1”<code>和</code>“dv2”<code>下面的第一个</code>p<code>元素设置上样式，但是对于，</code>“dv3”<code>中的第一个</code>p<code>元素，我们是设置不上的，这是因为，</code>: first-child<code>这个伪类选择器要求其父元素下面的第一个元素必须是指定的标签，如果是其他的话，是选择不到的，针对这种情况，我们经常使用下面的这个伪类选择器</code>：first-of-type`</p>
+<h3 id="4-CSS3中的：first-of-type伪类选择器"><a href="#4-CSS3中的：first-of-type伪类选择器" class="headerlink" title="4. CSS3中的：first-of-type伪类选择器"></a>4. CSS3中的：first-of-type伪类选择器</h3><p>同样是上面的那段代码，如果我们使用<code>：first-of-type</code> 这个选择器的话，我们是<strong>能够</strong>选择到每个父元素下的第一个<code>p</code>元素的！</p>
+<h3 id="5-jQuery-中的-：first-child-选择器"><a href="#5-jQuery-中的-：first-child-选择器" class="headerlink" title="5. jQuery 中的 ：first-child 选择器"></a>5. jQuery 中的 ：first-child 选择器</h3><p>jQuery中的<code>：first-child</code>选择器选择到的元素和CSS3中的<code>：first-child</code>伪类选择器一样，比如说，同样是上面的代码，我们应用jQuery的选择器<br>`<br>&lt;!DOCTYPE html&gt;</p>
+<p><html lang="en"></html></p>
+<p><head><br>    <meta charset="UTF-8"><br>    <title>Title</title><br></head></p>
+<p><body></body></p>
+<p><div id="dv1"><br>    <p>hello</p><br>    <p>world</p><br>    <p>!</p><br></div></p>
+<p><div id="dv2"><br>    <p>javascript</p><br>    <p>is</p><br>    <p>good</p><br></div></p>
+<p><div id="dv3"><br>    <h5>这是标题</h5><br>    <p>php</p><br>    <p>is</p><br>    <p>good</p><br></div></p>
+<p><script src="jquery.js"></script></p>
+<p><script><br>    $(“p:first-child”).css({<br>        height: “100px”,<br>        backgroundColor: “red”<br>    })<br></script><br><br><br><code>最后有样式的标签依然是</code>id<code>为</code>dv1<code>和</code>dv2<code>下面的第一个p标签，</code>dv3<code>中的第一个</code>p`标签并没有样式。</p>
+<p>###总结<br>这5个相近的内容，<code>fitstChild</code>和 <code>firstElementChild</code>是DOM对象的属性，<code>CSS3中的：first-child</code>和<code>CSS3中的：first-of-type</code>以及<code>jQuery 中的 ：first-child</code>这三个都是选择器，它们之间有相同效果的，有不同效果的，感觉实在是有些容易混淆，但好在规则并不是很随意。多加回顾，还是能够分清的。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-fitstChild"><span class="toc-text">1. fitstChild</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-firstElementChild"><span class="toc-text">2. firstElementChild</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-CSS3中的：first-child伪类选择器"><span class="toc-text">3. CSS3中的：first-child伪类选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-text">这是标题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-CSS3中的：first-of-type伪类选择器"><span class="toc-text">4. CSS3中的：first-of-type伪类选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-jQuery-中的-：first-child-选择器"><span class="toc-text">5. jQuery 中的 ：first-child 选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-text">这是标题</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2015/01/16/类型转换/" class="next">Next post 类型转换 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
