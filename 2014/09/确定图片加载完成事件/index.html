@@ -1,0 +1,311 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="如果需要等到某个图片加载完成之后，然后再去做一些事情的话：
+
+可以使用onload事件，用法跟click这样事件的用法是一样的
+也可以使用
+123456789101112&gt;  function loadImage(url, callback) &#123;	 var img = new Image(); //创建一个Image对象，实现图片的预下载	 img.src = url;	 i...">
+  
+  <title>确定图片加载完成事件 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2014/10/11/正则表达式概念/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        正则表达式概念
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2014/09/05/工作随笔/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        工作随笔
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>确定图片加载完成事件</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2014-09-30</span>
+      
+      
+    </p>
+    
+    <h3 id="如果需要等到某个图片加载完成之后，然后再去做一些事情的话："><a href="#如果需要等到某个图片加载完成之后，然后再去做一些事情的话：" class="headerlink" title="如果需要等到某个图片加载完成之后，然后再去做一些事情的话："></a>如果需要等到某个图片加载完成之后，然后再去做一些事情的话：</h3><blockquote>
+<ol>
+<li>可以使用onload事件，用法跟click这样事件的用法是一样的</li>
+<li><p>也可以使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt;  function loadImage(url, callback) &#123;</div><div class="line">	 var img = new Image(); //创建一个Image对象，实现图片的预下载</div><div class="line">	 img.src = url;</div><div class="line">	 if(img.complete) &#123; // 如果图片已经存在于浏览器缓存，直接调用回调函数</div><div class="line">	     callback.call(img);</div><div class="line">	     return; // 直接返回，不用再处理onload事件</div><div class="line">	    &#125;</div><div class="line">	 img.onload = function () &#123; //图片下载完毕时异步调用callback函数。</div><div class="line">	        callback.call(img);//将回调函数的this替换为Image对象</div><div class="line">	    &#125;;</div><div class="line">	&#125;;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>更加详细的解释在 ［链接］（<a href="http://www.111cn.net/wy/jquery/62561.htm）" target="_blank" rel="external">http://www.111cn.net/wy/jquery/62561.htm）</a></p>
+<h3 id="jqury当中offset和position的区别"><a href="#jqury当中offset和position的区别" class="headerlink" title="jqury当中offset和position的区别"></a>jqury当中offset和position的区别</h3><p>在jquery中position（）获取到的是元素距离最近带有定位的元素的距离，而offset（）的话获取的永远是距离浏览器文档的距离。</p>
+<h3 id="cursor：hand并不是标准的写法，很有可能没有效果，标准的写法应该是cursor：handler"><a href="#cursor：hand并不是标准的写法，很有可能没有效果，标准的写法应该是cursor：handler" class="headerlink" title="cursor：hand并不是标准的写法，很有可能没有效果，标准的写法应该是cursor：handler"></a>cursor：hand并不是标准的写法，很有可能没有效果，标准的写法应该是cursor：handler</h3><h3 id="如果一个父盒子没有设置高度，是由内容撑起的高度，后面的子盒子又想去继承父盒子的宽度和高度的话，是可以通过设置自身宽高来达到继承效果的"><a href="#如果一个父盒子没有设置高度，是由内容撑起的高度，后面的子盒子又想去继承父盒子的宽度和高度的话，是可以通过设置自身宽高来达到继承效果的" class="headerlink" title="如果一个父盒子没有设置高度，是由内容撑起的高度，后面的子盒子又想去继承父盒子的宽度和高度的话，是可以通过设置自身宽高来达到继承效果的"></a>如果一个父盒子没有设置高度，是由内容撑起的高度，后面的子盒子又想去继承父盒子的宽度和高度的话，是可以通过设置自身宽高来达到继承效果的</h3><h3 id="css3通过transition的动画的缺点确实是不能控制动画，不能控制谁有动画，谁没有动画，不能控制什么时候开始动画，什么时候结束动画，所以如果要用可控动画的话，还是要去通过js的动画"><a href="#css3通过transition的动画的缺点确实是不能控制动画，不能控制谁有动画，谁没有动画，不能控制什么时候开始动画，什么时候结束动画，所以如果要用可控动画的话，还是要去通过js的动画" class="headerlink" title="css3通过transition的动画的缺点确实是不能控制动画，不能控制谁有动画，谁没有动画，不能控制什么时候开始动画，什么时候结束动画，所以如果要用可控动画的话，还是要去通过js的动画"></a>css3通过transition的动画的缺点确实是不能控制动画，不能控制谁有动画，谁没有动画，不能控制什么时候开始动画，什么时候结束动画，所以如果要用可控动画的话，还是要去通过js的动画</h3></li>
+</ol>
+</blockquote>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如果需要等到某个图片加载完成之后，然后再去做一些事情的话："><span class="toc-text">如果需要等到某个图片加载完成之后，然后再去做一些事情的话：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jqury当中offset和position的区别"><span class="toc-text">jqury当中offset和position的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cursor：hand并不是标准的写法，很有可能没有效果，标准的写法应该是cursor：handler"><span class="toc-text">cursor：hand并不是标准的写法，很有可能没有效果，标准的写法应该是cursor：handler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果一个父盒子没有设置高度，是由内容撑起的高度，后面的子盒子又想去继承父盒子的宽度和高度的话，是可以通过设置自身宽高来达到继承效果的"><span class="toc-text">如果一个父盒子没有设置高度，是由内容撑起的高度，后面的子盒子又想去继承父盒子的宽度和高度的话，是可以通过设置自身宽高来达到继承效果的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css3通过transition的动画的缺点确实是不能控制动画，不能控制谁有动画，谁没有动画，不能控制什么时候开始动画，什么时候结束动画，所以如果要用可控动画的话，还是要去通过js的动画"><span class="toc-text">css3通过transition的动画的缺点确实是不能控制动画，不能控制谁有动画，谁没有动画，不能控制什么时候开始动画，什么时候结束动画，所以如果要用可控动画的话，还是要去通过js的动画</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2014/10/11/正则表达式概念/" class="prev">&larr; Prev post 正则表达式概念</a>
+  
+
+  
+
+  
+    <a href="/2014/09/05/工作随笔/" class="next">Next post 工作随笔 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
