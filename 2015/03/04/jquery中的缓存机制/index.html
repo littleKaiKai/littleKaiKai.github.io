@@ -1,12 +1,8 @@
 
 
-  
 
 
 
-
-
-  
 
 
 <!doctype html>
@@ -20,9 +16,9 @@
   
   
   
-    <meta name="description" content="">
+    <meta name="description" content="jquery中缓存机制">
   
-  <title>Archives: 2014 [ 小石头的个人博客 ]</title>
+  <title>jquery中的缓存机制 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -41,6 +37,24 @@
 <body>
 <div class="side-navigate hide-area">
   
+    <div class="item prev">
+      <a href="/2015/03/22/闭包/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        闭包
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2015/02/07/Ajax知识随记/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Ajax知识随记
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -66,7 +80,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/archives">Archives</a>
             
@@ -105,304 +119,42 @@
     <div id="content-inner">
       
       
-  <article>
-    
-
-  <div id="recent-posts">
-    <h1>Archives
-    
-      <span class="posts-count">
-      Total
-      10
-      
-        posts
-      
-      </span>
-    
-    </h1>
-    
-    
-      
-      
-        
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-    
-    
-      
-      
-        
-        <h3 class="archive-year-title">2014
-        
-          <span class="posts-count">
-          Total
-          10
-          
-            posts
-          
-          </span>
-        
-        </h3>
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/12/20/函数作用域/">
-  
-    函数作用域
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">12-20</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/11/27/递归/">
-  
-    递归
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-27</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
+  <article id="post">
+    <h1>jquery中的缓存机制</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-03-04</span>
       
       
-      <div class="post-title-item">
-  
-  <a href="/2014/11/19/对象原型中的方法/">
-  
-    对象原型中的方法
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-19</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/11/03/实现继承的三种方式/">
-  
-    实现继承的三种方式
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-3</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/10/11/正则表达式概念/">
-  
-    正则表达式概念
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">10-11</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/09/30/确定图片加载完成事件/">
-  
-    确定图片加载完成事件
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">9-30</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/09/05/工作随笔2/">
-  
-    工作随笔
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">9-5</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/09/05/工作随笔/">
-  
-    工作随笔
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">9-5</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/09/05/工作随笔3/">
-  
-    工作随笔
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">9-5</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2014/08/11/原生JS中三种绑定事件的方式/">
-  
-    原生JS中三种绑定事件的方式
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">8-11</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
+    </p>
     
-  </div>
-
-
+    <h1 id="jquery中缓存机制"><a href="#jquery中缓存机制" class="headerlink" title="jquery中缓存机制"></a>jquery中缓存机制</h1>
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#jquery中缓存机制"><span class="toc-text">jquery中缓存机制</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2015/03/22/闭包/" class="prev">&larr; Prev post 闭包</a>
+  
+
+  
+
+  
+    <a href="/2015/02/07/Ajax知识随记/" class="next">Next post Ajax知识随记 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
 
       
       
@@ -497,6 +249,8 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
+
+  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
