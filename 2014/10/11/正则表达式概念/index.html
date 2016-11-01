@@ -1,0 +1,332 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="正则表达式
+
+什么是正则表达式
+正则表达式是用来匹配的，包含普通字符或者是元字符（+ * ）的字符串对象
+在其他语言中，正则表达式就是一个字符串，在js中，正则表达式是一个对象
+
+
+创建正则表达式的方式
+var r = /123/
+var r = new RegExp(字符串或者字面量)
+
+
+正则表达式的作用：
+匹配 -&gt; test
+提取 -&gt; exec作用是用来匹配并且提取相应...">
+  
+  <title>正则表达式概念 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2014/11/03/实现继承的三种方式/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        实现继承的三种方式
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2014/09/30/确定图片加载完成事件/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        确定图片加载完成事件
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>正则表达式概念</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2014-10-11</span>
+      
+      
+    </p>
+    
+    <h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><blockquote>
+<ul>
+<li>什么是正则表达式<ul>
+<li>正则表达式是用来匹配的，包含普通字符或者是元字符（+ * ）的字符串对象</li>
+<li>在其他语言中，正则表达式就是一个字符串，在js中，正则表达式是一个对象</li>
+</ul>
+</li>
+<li>创建正则表达式的方式<ul>
+<li><code>var r = /123/</code></li>
+<li><code>var r = new RegExp(字符串或者字面量)</code></li>
+</ul>
+</li>
+<li>正则表达式的作用：<ul>
+<li>匹配 -&gt; test</li>
+<li>提取 -&gt; exec<br>作用是用来匹配并且提取相应的内容，如果匹配到相应的内容了，就会把获取到的内容放到返回值中去了，返回值是一个数组或者null，数组中包含了：1. 所有被匹配到的项；2. index： 被匹配项在字符串中的所引号<br><code>var r = /e/g  全局模式</code><br>在正则中找分组的时候，只看左小括号出现的位置<br>如果不想让分组的内容在结果中展示出来，只需要将（）替换为”（？：）“<br>（）-&gt; 分组并捕获<br>（？：）-&gt; 分组不捕获</li>
+<li>替换 -&gt; replace</li>
+<li><strong>正则表达式如果前后都由^ $的限制，那么其实还隐藏的含义是，中间的内容只能是我们规定好的的那两个字符之间的内容</strong></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式"><span class="toc-text">正则表达式</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2014/11/03/实现继承的三种方式/" class="prev">&larr; Prev post 实现继承的三种方式</a>
+  
+
+  
+
+  
+    <a href="/2014/09/30/确定图片加载完成事件/" class="next">Next post 确定图片加载完成事件 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
