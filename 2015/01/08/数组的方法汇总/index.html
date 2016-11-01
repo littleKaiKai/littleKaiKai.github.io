@@ -16,15 +16,15 @@
   
   
   
-    <meta name="description" content="作用域
+    <meta name="description" content="##数组的方法：
 
-从字面意思理解：起作用的那块区域
-作用域是用来限制变量的，一般所说的作用域就是指的变量的作用域
-作用域主要有两种作用域：
-块级作用域：在支持块级作用域的语言里面，一个代码块就能来限制变量。C系
-词法作用域：一个变量的作用范围，在代码写出来的那一刻，就定下来了，不会根据代码的运行而受到影响，换句话说，变量的作用范围只与代码声明的位置有关，而与运行无关。函数也是同样的道理，只与函数声明...">
+
+slice()
+这个方法用来复制数组中的某些元素，第一个参数为起始的索引，第二个参数为结束的索引，但是要注意，复制出来的这些元素中，是不包括end的。返回的是一个数组，里面包含了复制的那些元素。
+这个方法的一个妙用是：[].slice.call(auguments)这样就可以实现将函数实参的这个伪数组转换成真正的数组
+针对上面这个需求，还可以使用下面将会提到的Array...">
   
-  <title>函数作用域 [ 小石头的个人博客 ]</title>
+  <title>数组的方法汇总 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -43,22 +43,13 @@
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
-      <a href="/2015/01/08/数组的方法汇总/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        数组的方法汇总
-      </div>
-    </div>
-  
   
     <div class="item next">
-      <a href="/2014/11/27/递归/">
+      <a href="/2014/12/20/函数作用域/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        递归
+        函数作用域
       </div>
     </div>
   
@@ -126,45 +117,105 @@
       
       
   <article id="post">
-    <h1>函数作用域</h1>
+    <h1>数组的方法汇总</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2014-12-20</span>
+      <span id = "post-title-date">Created at 2015-01-08</span>
       
       
     </p>
     
-    <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><blockquote>
-<ul>
-<li>从字面意思理解：起作用的那块区域</li>
-<li>作用域是用来限制变量的，一般所说的作用域就是指的变量的作用域</li>
-<li>作用域主要有两种作用域：<ul>
-<li>块级作用域：在支持块级作用域的语言里面，一个代码块就能来限制变量。C系</li>
-<li>词法作用域：一个变量的作用范围，<strong>在代码写出来的那一刻，就定下来了</strong>，不会根据代码的运行而受到影响，换句话说，变量的<strong>作用范围</strong>只与<strong>代码声明的位置</strong>有关，而与运行无关。函数也是同样的道理，只与<strong>函数声明的位置有关</strong>，而与调用的位置无关 （在js中，在循环外部能够访问到for内部的变量）</li>
+    <p>##数组的方法：</p>
+<blockquote>
+<ol>
+<li>slice()<ul>
+<li>这个方法用来复制数组中的某些元素，第一个参数为起始的索引，第二个参数为结束的索引，但是要注意，复制出来的这些元素中，是不包括end的。返回的是一个数组，里面包含了复制的那些元素。</li>
+<li>这个方法的一个妙用是：<code>[].slice.call(auguments)</code>这样就可以实现将函数实参的这个伪数组转换成真正的数组</li>
+<li>针对上面这个需求，还可以使用下面将会提到的<code>Array.from(伪数组)</code></li>
 </ul>
 </li>
+<li>splice()<ul>
+<li>这个方法是用来删除数组的元素的，第一个参数是开始删除元素的索引，第二个参数是要删除的元素的长度或者说是个数。</li>
 </ul>
-</blockquote>
-<h3 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h3><blockquote>
+</li>
+<li><p>shift()</p>
 <ul>
-<li>在js中，每一个函数都形成了一个作用域，所以，在函数内部声明的变量，在函数外部是访问不到的</li>
-<li>在js中，只有函数能够形成一个作用域，所以，词法作用域也叫做函数作用域</li>
-<li>变量提升： ① 变量名字的提升 ② 函数声明的提升</li>
-<li>js代码执行的过程：① 预解析，就是把所有的变量以及函数提升到<strong>当前</strong>作用域的最上方 ② 一行一行的从上到下执行代码</li>
-<li>in的意思是<strong>前面的</strong>是不是<strong>后面的</strong> <strong>属性</strong>  </li>
-<li>最外面声明的全局变量都是window的属性</li>
+<li>这个方法是用来删除数组中第一个元素的</li>
 </ul>
-</blockquote>
-<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><blockquote>
+</li>
+<li><p>unshift()</p>
 <ul>
-<li>每一个函数都有一个作用域，（都是它的内部），如果一个函数内部又嵌套了另外一个函数，那么嵌套的函数也会有一个作用域，这样，嵌套函数就能访问到外部函数中的变量，以及全局作用域中的变量，此时就形成了一跳作用域链，包括自身的作用域以及外函数的作用域以及全局作用域</li>
-<li>全局作用域：script标签包裹的内容就是一个全局作用域</li>
-<li>fn中能访问到的变量：①自身的；②上一级作用域中的</li>
-<li>绘制作用域链的规则：①绘制作用域链的时候，只绘制在当前作用域中声明的变量或者函数，不画赋值 ②把全局作用域看作是0级别链，③ 如果是在全局作用域中存在一个函数，此时，在这个函数上引出一条新的链，此时，把这条链叫做1级别的链④如果在函数的内部又声明了一个函数，然后这个函数又引出一条链出来，把这条链称作2级别的链。。。</li>
-<li>变量的搜索原则：从高级别的链到低级别的链</li>
-<li>首先是在当前（n）中国查找有没有声明这个变量，如果有，直接使用，如果没有</li>
-<li>就去n-1级别的链中去寻找，如果有，直接由，如果没有，再到低级，直到0级</li>
-<li>如果在0级中还是没有，那么如果是赋值的话，就相当于创建了一个全局变量<strong>（只有在找不到的时候才是重新在自己的作用域定义了一个全局变量，否则就是赋值，不是定义全局变量了）</strong>，如果是获取，就会报错</li>
+<li>这个方法是用来在数组的首位添加一个元素的</li>
 </ul>
+</li>
+<li><p>pop()</p>
+<ul>
+<li>这个方法是删除数组的最后一个元素</li>
+</ul>
+</li>
+<li><p>push()</p>
+<ul>
+<li>这个方法是在数组的最后添加用一个元素</li>
+</ul>
+</li>
+<li><p>join()</p>
+<ul>
+<li>这个方法是将数组中的元素用某个标识拼接起来</li>
+</ul>
+</li>
+<li><p>concat()</p>
+<ul>
+<li>这个方法是将另外一个数组中的元素添加到第一个参数数组中</li>
+</ul>
+</li>
+<li><p>indexOf()</p>
+<ul>
+<li>这个方法不只是数组的，字符串中 也可以使用，它是用来查找数组中有没有某个元素的</li>
+</ul>
+</li>
+<li><p>foreach()</p>
+<ul>
+<li>这个是ES6中新增的方法，使用来遍历数组的</li>
+</ul>
+</li>
+<li><p>map()</p>
+<ul>
+<li>这个同样也是用来遍历数组的，而且这个方法可以返回一个经过操作之后的新数组</li>
+</ul>
+</li>
+<li><p>filter()</p>
+<ul>
+<li>过滤，这个方法遍历数组，然后返回我们指定条件的数组元素。当然，返回的依然是一个数组</li>
+</ul>
+</li>
+<li><p>find()</p>
+<ul>
+<li>这个方法用来给出符合条件的第一个元素</li>
+</ul>
+</li>
+<li><p>findIndex()</p>
+<ul>
+<li>这个也是用来返回符合条件的第一个，但是这个方法的返回值是索引</li>
+</ul>
+</li>
+<li><p>Array.from(伪数组)，这里必须是Array来调用这个方法</p>
+<ul>
+<li>这个就是用来将一个伪数组转换成真正的数组</li>
+</ul>
+</li>
+<li><p>reduce()</p>
+<ul>
+<li>这个方法是用来将数组的元素累积。比如<code>var total = [0, 1, 2, 3].reduce(function(a, b) {
+   return a + b;
+}，0);
+// total == 6</code></li>
+</ul>
+</li>
+<li><p>includes()</p>
+<ul>
+<li>这个方法是用来判断数组中是否含有某个元素</li>
+</ul>
+</li>
+</ol>
 </blockquote>
 
   </article>
@@ -173,20 +224,18 @@
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#词法作用域"><span class="toc-text">词法作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域链"><span class="toc-text">作用域链</span></a></li></ol></li></ol>
+    
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2015/01/08/数组的方法汇总/" class="prev">&larr; Prev post 数组的方法汇总</a>
-  
 
   
 
   
-    <a href="/2014/11/27/递归/" class="next">Next post 递归 &rarr;</a>
+    <a href="/2014/12/20/函数作用域/" class="next">Next post 函数作用域 &rarr;</a>
   
 </nav>
 
