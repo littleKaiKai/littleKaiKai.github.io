@@ -1,8 +1,14 @@
 
 
+  
 
 
 
+
+  
+
+
+  
 
 
 <!doctype html>
@@ -16,15 +22,9 @@
   
   
   
-    <meta name="description" content="闭包官方的介绍
-闭包其实算是js这门语言中，比较高级和难以理解的一个语法点。
-javaScript权威指南中对闭包的解释说的是，闭包指的是一个包含函数体，并且包含这个函数体在定义时的周围环境的综合体。
-后者网上还有一种通俗理解是，在函数中嵌套函数，并且把被嵌套的那个函数return出来，这个函数就叫做闭包
-
-我的理解
-我理解的闭包是，一个函数，我们能够访问到它，并且它引用了自己作用域外的一些...">
+    <meta name="description" content="">
   
-  <title>闭包 [ 小石头的个人博客 ]</title>
+  <title>Archives: 8/2016: 2016 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -43,24 +43,6 @@ javaScript权威指南中对闭包的解释说的是，闭包指的是一个包�
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
-      <a href="/2016/08/22/页面中创建元素的方法/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        页面中创建元素的方法
-      </div>
-    </div>
-  
-  
-    <div class="item next">
-      <a href="/2015/03/04/jquery中的缓存机制/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        jquery中的缓存机制
-      </div>
-    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -86,7 +68,7 @@ javaScript权威指南中对闭包的解释说的是，闭包指的是一个包�
           </li>
         
           
-            <li>
+            <li class="active">
           
             <a href="/archives">Archives</a>
             
@@ -125,59 +107,70 @@ javaScript权威指南中对闭包的解释说的是，闭包指的是一个包�
     <div id="content-inner">
       
       
-  <article id="post">
-    <h1>闭包</h1>
-    <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2015-03-22</span>
-      
-      
-    </p>
+  <article>
     
-    <h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h3 id="官方的介绍"><a href="#官方的介绍" class="headerlink" title="官方的介绍"></a>官方的介绍</h3><ol>
-<li>闭包其实算是js这门语言中，比较高级和难以理解的一个语法点。</li>
-<li>javaScript权威指南中对闭包的解释说的是，闭包指的是一个包含函数体，并且包含这个函数体在定义时的周围环境的综合体。</li>
-<li>后者网上还有一种通俗理解是，在函数中嵌套函数，并且把被嵌套的那个函数return出来，这个函数就叫做闭包</li>
-</ol>
-<h3 id="我的理解"><a href="#我的理解" class="headerlink" title="我的理解"></a>我的理解</h3><ol>
-<li>我理解的闭包是，一个函数，我们能够访问到它，并且它引用了自己作用域外的一些变量，那么这个函数就叫做闭包。而且闭包的使用，往往都带着一点异步的成分里面。所以，现在也有还有一种说法，就是所有的函数的都是闭包。</li>
-<li>闭包，其实并不是非要在一个函数内部，显示的return出一个函数，才叫闭包，这只不过是闭包最常见的一种形式而已。我们在函数内部，设置一个定时器，一定时间后，会执行一个函数，这个函数同样是一个闭包，因为我们在外部访问到了它，而且它引用了自己作用域外的变量，所以，往宽泛里说，我们平常常用的注册事件也是闭包</li>
-<li>闭包，在使用的时候也要注意，在IE6-8浏览器中，闭包的使用是有可能造成内存泄漏的，所以这个时候，我们在使用完闭包后，要将闭包手动地释放一下，以免造成内存泄漏<br><code>{ // 某个scope作用域
- var a = document.getElementById(&#39;id_a&#39;);
- // dom -&gt; fun
- a.onclick = function(e) {
- };
- // fun -&gt; a -&gt; dom , 解除对dom元素的引用, fun -&gt; a -X- dom
- a = null;
-}</code></li>
-</ol>
+
+  <div id="recent-posts">
+    <h1>Archives
+    
+      <span class="posts-count">
+      Total
+      1
+      
+        post
+      
+      </span>
+    
+    </h1>
+    
+    
+      
+      
+        
+      
+      
+    
+    
+    
+      
+      
+        
+        <h3 class="archive-year-title">2016
+        
+          <span class="posts-count">
+          Total
+          1
+          
+            post
+          
+          </span>
+        
+        </h3>
+      
+      <div class="post-title-item">
+  
+  <a href="/2016/08/22/页面中创建元素的方法/">
+  
+    页面中创建元素的方法
+  
+  </a>
+  <p class="page-title-sub">
+    <span id = "post-title-date">8-22</span>
+    
+    
+    
+      <br>
+      
+      
+    
+  </p>
+  
+</div>
+    
+  </div>
+
 
   </article>
-  <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
-  <div class="random-toc">
-    <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#闭包"><span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#官方的介绍"><span class="toc-text">官方的介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的理解"><span class="toc-text">我的理解</span></a></li></ol></li></ol></li></ol>
-  </div>
-</div>
-
-  
-<nav id="pagination">
-  
-    <a href="/2016/08/22/页面中创建元素的方法/" class="prev">&larr; Prev post 页面中创建元素的方法</a>
-  
-
-  
-
-  
-    <a href="/2015/03/04/jquery中的缓存机制/" class="next">Next post jquery中的缓存机制 &rarr;</a>
-  
-</nav>
-
-  <!-- JiaThis Button BEGIN -->
-
-<!-- JiaThis Button END -->
-
 
       
       
@@ -272,8 +265,6 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
-
-  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";

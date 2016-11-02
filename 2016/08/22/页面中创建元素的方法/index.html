@@ -16,15 +16,12 @@
   
   
   
-    <meta name="description" content="闭包官方的介绍
-闭包其实算是js这门语言中，比较高级和难以理解的一个语法点。
-javaScript权威指南中对闭包的解释说的是，闭包指的是一个包含函数体，并且包含这个函数体在定义时的周围环境的综合体。
-后者网上还有一种通俗理解是，在函数中嵌套函数，并且把被嵌套的那个函数return出来，这个函数就叫做闭包
+    <meta name="description" content="页面中创建元素作为前端程序员，我们经常会碰到动态在页面中添加一个或者多个htmlElement，在这个时候我们通常的思路可以分为两大方面。
+第一种方法是通过html字符串的形式也就是说，我们首先把我们需要的html字符串写出来，然后再通过html或者innerHtml的方法渲染到页面中。这里面我们要注意的东西有两点：
 
-我的理解
-我理解的闭包是，一个函数，我们能够访问到它，并且它引用了自己作用域外的一些...">
+第一点是，我们在写我们需要的字符串的时候，我们可以手动地拼接，也可以使用...">
   
-  <title>闭包 [ 小石头的个人博客 ]</title>
+  <title>页面中创建元素的方法 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -44,21 +41,21 @@ javaScript权威指南中对闭包的解释说的是，闭包指的是一个包�
 <div class="side-navigate hide-area">
   
     <div class="item prev">
-      <a href="/2016/08/22/页面中创建元素的方法/">
+      <a href="/2016/09/02/’VUE知识点/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        页面中创建元素的方法
+        VUE知识点
       </div>
     </div>
   
   
     <div class="item next">
-      <a href="/2015/03/04/jquery中的缓存机制/">
+      <a href="/2015/03/22/闭包/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        jquery中的缓存机制
+        闭包
       </div>
     </div>
   
@@ -126,30 +123,33 @@ javaScript权威指南中对闭包的解释说的是，闭包指的是一个包�
       
       
   <article id="post">
-    <h1>闭包</h1>
+    <h1>页面中创建元素的方法</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2015-03-22</span>
+      <span id = "post-title-date">Created at 2016-08-22</span>
       
       
     </p>
     
-    <h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h3 id="官方的介绍"><a href="#官方的介绍" class="headerlink" title="官方的介绍"></a>官方的介绍</h3><ol>
-<li>闭包其实算是js这门语言中，比较高级和难以理解的一个语法点。</li>
-<li>javaScript权威指南中对闭包的解释说的是，闭包指的是一个包含函数体，并且包含这个函数体在定义时的周围环境的综合体。</li>
-<li>后者网上还有一种通俗理解是，在函数中嵌套函数，并且把被嵌套的那个函数return出来，这个函数就叫做闭包</li>
-</ol>
-<h3 id="我的理解"><a href="#我的理解" class="headerlink" title="我的理解"></a>我的理解</h3><ol>
-<li>我理解的闭包是，一个函数，我们能够访问到它，并且它引用了自己作用域外的一些变量，那么这个函数就叫做闭包。而且闭包的使用，往往都带着一点异步的成分里面。所以，现在也有还有一种说法，就是所有的函数的都是闭包。</li>
-<li>闭包，其实并不是非要在一个函数内部，显示的return出一个函数，才叫闭包，这只不过是闭包最常见的一种形式而已。我们在函数内部，设置一个定时器，一定时间后，会执行一个函数，这个函数同样是一个闭包，因为我们在外部访问到了它，而且它引用了自己作用域外的变量，所以，往宽泛里说，我们平常常用的注册事件也是闭包</li>
-<li>闭包，在使用的时候也要注意，在IE6-8浏览器中，闭包的使用是有可能造成内存泄漏的，所以这个时候，我们在使用完闭包后，要将闭包手动地释放一下，以免造成内存泄漏<br><code>{ // 某个scope作用域
- var a = document.getElementById(&#39;id_a&#39;);
- // dom -&gt; fun
- a.onclick = function(e) {
- };
- // fun -&gt; a -&gt; dom , 解除对dom元素的引用, fun -&gt; a -X- dom
- a = null;
-}</code></li>
-</ol>
+    <h1 id="页面中创建元素"><a href="#页面中创建元素" class="headerlink" title="页面中创建元素"></a>页面中创建元素</h1><p>作为前端程序员，我们经常会碰到动态在页面中添加一个或者多个htmlElement，在这个时候我们通常的思路可以分为两大方面。</p>
+<h2 id="第一种方法是通过html字符串的形式"><a href="#第一种方法是通过html字符串的形式" class="headerlink" title="第一种方法是通过html字符串的形式"></a>第一种方法是通过html字符串的形式</h2><p>也就是说，我们首先把我们需要的html字符串写出来，然后再通过html或者innerHtml的方法渲染到页面中。这里面我们要注意的东西有两点：</p>
+<ul>
+<li><p>第一点是，我们在写我们需要的字符串的时候，我们可以手动地拼接，也可以使用模板字符串，具体的实现方法有多种：</p>
+<ul>
+<li>第一种是直接手动拼接</li>
+<li>第二种是我们可以使用ES6的拼接字符串的语法，这样要比直接拼接快速多了</li>
+<li>第三种是，我们可以通过模板引擎的方式来得到我们想要的字符串，这在我们处理大量渲染的时候，是非常高效的。</li>
+<li>第四种是，现将字符串保存到数组中，然后调用数组的join方法</li>
+</ul>
+</li>
+<li><p>第二点是，我们还要注意，在渲染的时候，我们要先拼接好所有的字符串一次性的添加到页面中，因为一次性将所有的元素添加到页面中去的效率，要比多次添加的效率高很多，使用innerHTML和creatElement创建元素的效率，几乎效率一样</p>
+<h2 id="第二种是通过document-creatElement的方式"><a href="#第二种是通过document-creatElement的方式" class="headerlink" title="第二种是通过document.creatElement的方式"></a>第二种是通过document.creatElement的方式</h2><p>这种方法的话，我们同样是需要注意，我们的html字符串首先是需要一个元素来包裹起来，但是有时候我们又不希望多加这个元素，所以，好多时候，我们都会放弃这种方法，来选择第一种方法。但是拼接字符串又确实是每个前端程序员都不喜欢的。这个时候，我们其实还有一个API可以用，这就是<code>document.creatDocumentFragment()</code></p>
+<blockquote>
+<ul>
+<li>要<strong>注意</strong>：<figure class="highlight plain"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;  - ```var container = document.creatDocumentFragment() ```使用这个创建出来的容器，只做为容器，不占用结构，在往页面添加的时候，之后把这个容器中的子元素添加到页面中，而不会把这个容器也添加到页面中</div><div class="line">&gt;  - ``` var container = document.creatDocumentFragment() 创建出来的元素没有innerHTML的属性</div></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+</li>
+</ul>
 
   </article>
   <div class="random-toc-area">
@@ -157,20 +157,20 @@ javaScript权威指南中对闭包的解释说的是，闭包指的是一个包�
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#闭包"><span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#官方的介绍"><span class="toc-text">官方的介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的理解"><span class="toc-text">我的理解</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#页面中创建元素"><span class="toc-text">页面中创建元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一种方法是通过html字符串的形式"><span class="toc-text">第一种方法是通过html字符串的形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二种是通过document-creatElement的方式"><span class="toc-text">第二种是通过document.creatElement的方式</span></a></li></ol></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2016/08/22/页面中创建元素的方法/" class="prev">&larr; Prev post 页面中创建元素的方法</a>
+    <a href="/2016/09/02/’VUE知识点/" class="prev">&larr; Prev post VUE知识点</a>
   
 
   
 
   
-    <a href="/2015/03/04/jquery中的缓存机制/" class="next">Next post jquery中的缓存机制 &rarr;</a>
+    <a href="/2015/03/22/闭包/" class="next">Next post 闭包 &rarr;</a>
   
 </nav>
 
