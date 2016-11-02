@@ -18,8 +18,7 @@
   
     <meta name="description" content="事件委托相信经常做Ajax请求，并且渲染数据的同学，对事件代理这个名词都不会陌生。
 什么是事件委托？事件委托指的是，我们在为htmlElement注册事件的时候，并不是直接注册在这个元素上，而是注册在它的父级，或者甚至是body上，然后通过冒泡的机制，来触发这些事件
-什么时候用事件委托？正如一开始所说，我们经常在动态渲染页面标签的时候，用到事件委托
-原生js的写法123456parentNo...">
+什么时候用事件委托？正如一开始所说，我们经常在动态渲染页面标签的时候，用到事件委托。因为我们发Ajax请求，请求成功后渲染数据...">
   
   <title>事件委托 [ 小石头的个人博客 ]</title>
   
@@ -132,7 +131,7 @@
     
     <h1 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h1><p>相信经常做Ajax请求，并且渲染数据的同学，对事件代理这个名词都不会陌生。</p>
 <h2 id="什么是事件委托？"><a href="#什么是事件委托？" class="headerlink" title="什么是事件委托？"></a>什么是事件委托？</h2><p>事件委托指的是，我们在为htmlElement注册事件的时候，并不是直接注册在这<br>个元素上，而是注册在它的父级，或者甚至是body上，然后通过冒泡的机制，来<br>触发这些事件</p>
-<h2 id="什么时候用事件委托？"><a href="#什么时候用事件委托？" class="headerlink" title="什么时候用事件委托？"></a>什么时候用事件委托？</h2><p>正如一开始所说，我们经常在动态渲染页面标签的时候，用到事件委托</p>
+<h2 id="什么时候用事件委托？"><a href="#什么时候用事件委托？" class="headerlink" title="什么时候用事件委托？"></a>什么时候用事件委托？</h2><p>正如一开始所说，我们经常在动态渲染页面标签的时候，用到事件委托。因为<br>我们发Ajax请求，请求成功后渲染数据，这是一个异步过程。</p>
 <h2 id="原生js的写法"><a href="#原生js的写法" class="headerlink" title="原生js的写法"></a>原生js的写法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">parentNode.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">  </div><div class="line">  <span class="keyword">if</span>(e.target &amp;&amp; e.target.nodeName. == <span class="string">"我们真正要注册事件的节点"</span>) &#123;</div><div class="line">    <span class="comment">//这里就是我们的业务代码</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h2 id="jquery的写法"><a href="#jquery的写法" class="headerlink" title="jquery的写法"></a>jquery的写法</h2><p>在jquery当中，我们直接通过on就可以实现事件委托<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(parentNode).on(<span class="string">'click'</span>,<span class="string">'childNode'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">	<span class="comment">//业务代码</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
 
