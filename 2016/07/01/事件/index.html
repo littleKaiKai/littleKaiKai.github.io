@@ -16,11 +16,14 @@
   
   
   
-    <meta name="description" content="事件委托相信经常做Ajax请求，并且渲染数据的同学，对事件代理这个名词都不会陌生。
-什么是事件委托？事件委托指的是，我们在为htmlElement注册事件的时候，并不是直接注册在这个元素上，而是注册在它的父级，或者甚至是body上，然后通过冒泡的机制，来触发这些事件
-什么时候用事件委托？正如一开始所说，我们经常在动态渲染页面标签的时候，用到事件委托。因为我们发Ajax请求，请求成功后渲染数据...">
+    <meta name="description" content="事件常见事件
+click,dbclick,mouseover,mouseout,mouseenter,mouseleave,keydown,keypress,keyup,mousedown,mousemove,mouseup,focus,blur,scroll,resize,load事件三要素
+事件源
+事件名称、（要注意事件名称是不带on的，比如click）
+事件处理程序事件的三个阶段
+捕获...">
   
-  <title>事件委托 [ 小石头的个人博客 ]</title>
+  <title>事件 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -40,21 +43,21 @@
 <div class="side-navigate hide-area">
   
     <div class="item prev">
-      <a href="/2016/08/18/Ajax的封装/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        Ajax的封装
-      </div>
-    </div>
-  
-  
-    <div class="item next">
       <a href="/2016/07/12/绑定事件的三种方式及兼容性写写法/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
         绑定事件的三种方式及兼容性写写法
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2016/06/21/在ES3中的变量命名冲突问题/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        在ES3中的变量命名冲突问题
       </div>
     </div>
   
@@ -122,18 +125,37 @@
       
       
   <article id="post">
-    <h1>事件委托</h1>
+    <h1>事件</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-08-10</span>
+      <span id = "post-title-date">Created at 2016-07-01</span>
       
       
     </p>
     
-    <h1 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h1><p>相信经常做Ajax请求，并且渲染数据的同学，对事件代理这个名词都不会陌生。</p>
-<h2 id="什么是事件委托？"><a href="#什么是事件委托？" class="headerlink" title="什么是事件委托？"></a>什么是事件委托？</h2><p>事件委托指的是，我们在为htmlElement注册事件的时候，并不是直接注册在这<br>个元素上，而是注册在它的父级，或者甚至是body上，然后通过冒泡的机制，来<br>触发这些事件</p>
-<h2 id="什么时候用事件委托？"><a href="#什么时候用事件委托？" class="headerlink" title="什么时候用事件委托？"></a>什么时候用事件委托？</h2><p>正如一开始所说，我们经常在动态渲染页面标签的时候，用到事件委托。因为<br>我们发Ajax请求，请求成功后渲染数据，这是一个异步过程。</p>
-<h2 id="原生js的写法"><a href="#原生js的写法" class="headerlink" title="原生js的写法"></a>原生js的写法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">parentNode.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">  </div><div class="line">  <span class="keyword">if</span>(e.target &amp;&amp; e.target.nodeName. == <span class="string">"我们真正要注册事件的节点"</span>) &#123;</div><div class="line">    <span class="comment">//这里就是我们的业务代码</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h2 id="jquery的写法"><a href="#jquery的写法" class="headerlink" title="jquery的写法"></a>jquery的写法</h2><p>在jquery当中，我们直接通过on就可以实现事件委托<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(parentNode).on(<span class="string">'click'</span>,<span class="string">'childNode'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">	<span class="comment">//业务代码</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+    <h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><h2 id="常见事件"><a href="#常见事件" class="headerlink" title="常见事件"></a>常见事件</h2><ul>
+<li><code>click,dbclick,mouseover,mouseout,mouseenter,mouseleave,keydown,keypress,keyup,mousedown,mousemove,mouseup,focus,blur,scroll,resize,load</code><h2 id="事件三要素"><a href="#事件三要素" class="headerlink" title="事件三要素"></a>事件三要素</h2></li>
+<li>事件源</li>
+<li>事件名称、（要注意事件名称是不带on的，比如click）</li>
+<li>事件处理程序<h2 id="事件的三个阶段"><a href="#事件的三个阶段" class="headerlink" title="事件的三个阶段"></a>事件的三个阶段</h2></li>
+<li>捕获     IE11以下浏览器不支持捕获阶段</li>
+<li>处理目标对象阶段  </li>
+<li>冒泡<h2 id="绑定事件的几种方式"><a href="#绑定事件的几种方式" class="headerlink" title="绑定事件的几种方式"></a>绑定事件的几种方式</h2></li>
+<li>行内绑定，<strong>此处必须是调用，要加小括号的</strong></li>
+<li><code>onclick</code> //这是写在js当中的方式</li>
+<li><code>addEventListener(eventName,handler,useCapture)</code></li>
+<li><code>attachEvent(&quot;on&quot;+eventName,handler)</code> <strong>这是IE中的添加事件的方式</strong><h2 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h2></li>
+<li>就是事件处理函数的参数event</li>
+<li>在符合标准的浏览器中直接function(e){}括号里设置了行参，之后在执行的时候，<br>浏览器会自动把事件对象传进去</li>
+<li>但是对于IE，我们还是要处理兼容性的。要用windo.event来获取。<h2 id="事件是什么时候绑定的"><a href="#事件是什么时候绑定的" class="headerlink" title="事件是什么时候绑定的"></a>事件是什么时候绑定的</h2></li>
+<li>页面加载的时候，执行到绑定事件的代码的时候，就绑定上了事件</li>
+<li>事件触发的时候，是在实际执行触发事件动作的时候触发的<h2 id="jquery中绑定事件的方式"><a href="#jquery中绑定事件的方式" class="headerlink" title="jquery中绑定事件的方式"></a>jquery中绑定事件的方式</h2></li>
+<li><code>on(eventName,selector,data,handler)</code> ,selector是将事件绑定在前面的父元素上，<br>但是只有事件源是selector的时候，才会触发事件，可以给后期动态创建出来的子元素<br>也添加上事件。</li>
+<li><code>bind(&#39;click&#39;, function () { })</code> 这个方法不能实现事件委托</li>
+<li>`live(‘click’,function(){ }) 这个是后来改进的专门为实现事件委托而生的，但是<br>这个方法其实是将所有的<br>事件都绑在了document上，这显然是不合理的。</li>
+<li><code>delegate(selector,eventName,handler)</code> 这个就完美解决了事件委托的任务</li>
+<li><code>click()</code> 这个就是最简单的直接注册事件</li>
+<li>我们一定要注意的一点是，虽然jquery当中提供了这么多的绑定事件的方法，但是，实际<br>上，在内部，后面的这几个方法都是调用的on，所以我们只需要记住on的用法就可以了。</li>
+</ul>
 
   </article>
   <div class="random-toc-area">
@@ -141,20 +163,20 @@
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事件委托"><span class="toc-text">事件委托</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是事件委托？"><span class="toc-text">什么是事件委托？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么时候用事件委托？"><span class="toc-text">什么时候用事件委托？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原生js的写法"><span class="toc-text">原生js的写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jquery的写法"><span class="toc-text">jquery的写法</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事件"><span class="toc-text">事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见事件"><span class="toc-text">常见事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件三要素"><span class="toc-text">事件三要素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件的三个阶段"><span class="toc-text">事件的三个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定事件的几种方式"><span class="toc-text">绑定事件的几种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件对象"><span class="toc-text">事件对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件是什么时候绑定的"><span class="toc-text">事件是什么时候绑定的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jquery中绑定事件的方式"><span class="toc-text">jquery中绑定事件的方式</span></a></li></ol></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2016/08/18/Ajax的封装/" class="prev">&larr; Prev post Ajax的封装</a>
+    <a href="/2016/07/12/绑定事件的三种方式及兼容性写写法/" class="prev">&larr; Prev post 绑定事件的三种方式及兼容性写写法</a>
   
 
   
 
   
-    <a href="/2016/07/12/绑定事件的三种方式及兼容性写写法/" class="next">Next post 绑定事件的三种方式及兼容性写写法 &rarr;</a>
+    <a href="/2016/06/21/在ES3中的变量命名冲突问题/" class="next">Next post 在ES3中的变量命名冲突问题 &rarr;</a>
   
 </nav>
 

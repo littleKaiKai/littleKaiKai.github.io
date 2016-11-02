@@ -16,11 +16,10 @@
   
   
   
-    <meta name="description" content="事件委托相信经常做Ajax请求，并且渲染数据的同学，对事件代理这个名词都不会陌生。
-什么是事件委托？事件委托指的是，我们在为htmlElement注册事件的时候，并不是直接注册在这个元素上，而是注册在它的父级，或者甚至是body上，然后通过冒泡的机制，来触发这些事件
-什么时候用事件委托？正如一开始所说，我们经常在动态渲染页面标签的时候，用到事件委托。因为我们发Ajax请求，请求成功后渲染数据...">
+    <meta name="description" content="判断一个对象究竟是不是数组的方法判断一个对象究竟是不是一个数组，我们可能会一下子想到好多方法，但是并不是，每个方法都是有效或者说是正确的。这里说一下我想到的几个。当然，这里面也是有错误和正确的。
+首先想到的是typeOf()这个方法我们确实很常用，但是这个用来判断基本类型的数据是可以的，用来判断引用类型数据或者说是复杂类型数据的话，就不合适了，因为对于复杂类型数据，我们得到的结果都是obje...">
   
-  <title>事件委托 [ 小石头的个人博客 ]</title>
+  <title>判断一个对象究竟是不是数组 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -40,21 +39,21 @@
 <div class="side-navigate hide-area">
   
     <div class="item prev">
-      <a href="/2016/08/18/Ajax的封装/">
+      <a href="/2015/05/10/this的指向/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        Ajax的封装
+        this的指向
       </div>
     </div>
   
   
     <div class="item next">
-      <a href="/2016/07/12/绑定事件的三种方式及兼容性写写法/">
+      <a href="/2015/04/18/jquery的入口函数/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        绑定事件的三种方式及兼容性写写法
+        js、jquery的入口函数
       </div>
     </div>
   
@@ -122,18 +121,19 @@
       
       
   <article id="post">
-    <h1>事件委托</h1>
+    <h1>判断一个对象究竟是不是数组</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-08-10</span>
+      <span id = "post-title-date">Created at 2015-05-09</span>
       
       
     </p>
     
-    <h1 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h1><p>相信经常做Ajax请求，并且渲染数据的同学，对事件代理这个名词都不会陌生。</p>
-<h2 id="什么是事件委托？"><a href="#什么是事件委托？" class="headerlink" title="什么是事件委托？"></a>什么是事件委托？</h2><p>事件委托指的是，我们在为htmlElement注册事件的时候，并不是直接注册在这<br>个元素上，而是注册在它的父级，或者甚至是body上，然后通过冒泡的机制，来<br>触发这些事件</p>
-<h2 id="什么时候用事件委托？"><a href="#什么时候用事件委托？" class="headerlink" title="什么时候用事件委托？"></a>什么时候用事件委托？</h2><p>正如一开始所说，我们经常在动态渲染页面标签的时候，用到事件委托。因为<br>我们发Ajax请求，请求成功后渲染数据，这是一个异步过程。</p>
-<h2 id="原生js的写法"><a href="#原生js的写法" class="headerlink" title="原生js的写法"></a>原生js的写法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">parentNode.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">  </div><div class="line">  <span class="keyword">if</span>(e.target &amp;&amp; e.target.nodeName. == <span class="string">"我们真正要注册事件的节点"</span>) &#123;</div><div class="line">    <span class="comment">//这里就是我们的业务代码</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h2 id="jquery的写法"><a href="#jquery的写法" class="headerlink" title="jquery的写法"></a>jquery的写法</h2><p>在jquery当中，我们直接通过on就可以实现事件委托<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(parentNode).on(<span class="string">'click'</span>,<span class="string">'childNode'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">	<span class="comment">//业务代码</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+    <h1 id="判断一个对象究竟是不是数组的方法"><a href="#判断一个对象究竟是不是数组的方法" class="headerlink" title="判断一个对象究竟是不是数组的方法"></a>判断一个对象究竟是不是数组的方法</h1><p>判断一个对象究竟是不是一个数组，我们可能会一下子想到好多方法，<br>但是并不是，每个方法都是有效或者说是正确的。这里说一下我想到<br>的几个。当然，这里面也是有错误和正确的。</p>
+<h2 id="首先想到的是typeOf"><a href="#首先想到的是typeOf" class="headerlink" title="首先想到的是typeOf()"></a>首先想到的是typeOf()</h2><p>这个方法我们确实很常用，但是这个用来判断基本类型的数据是可以的，<br>用来判断引用类型数据或者说是复杂类型数据的话，就不合适了，因为<br>对于复杂类型数据，我们得到的结果都是object，所以，这个显然是<br>不行的。</p>
+<h2 id="然后是instanceof"><a href="#然后是instanceof" class="headerlink" title="然后是instanceof"></a>然后是instanceof</h2><p>我们利用<code>Array instaneceof 被检测对象</code>，这个方法确实可以做到，<br>但是这个方法是有兼容性问题的。</p>
+<h2 id="再然后，是我想到利用判断这个对象上是不是有数组的一些方法，比如"><a href="#再然后，是我想到利用判断这个对象上是不是有数组的一些方法，比如" class="headerlink" title="再然后，是我想到利用判断这个对象上是不是有数组的一些方法，比如"></a>再然后，是我想到利用判断这个对象上是不是有数组的一些方法，比如</h2><p>说concat之类的。但是如果我们在被检测对象上加过某些方法，那也就失效了。</p>
+<h2 id="最后，我想到了ES5中的Array-isArray-被检测对象-这个方法，这个"><a href="#最后，我想到了ES5中的Array-isArray-被检测对象-这个方法，这个" class="headerlink" title="最后，我想到了ES5中的Array.isArray(被检测对象)这个方法，这个"></a>最后，我想到了ES5中的<code>Array.isArray(被检测对象)</code>这个方法，这个</h2><p>方法确实是ok了，但是它也是有兼容性问题的。</p>
+<h2 id="最最后，我又想到了对象原型上的Object-prototype-toString-这个"><a href="#最最后，我又想到了对象原型上的Object-prototype-toString-这个" class="headerlink" title="最最后，我又想到了对象原型上的Object.prototype.toString()这个"></a>最最后，我又想到了对象原型上的<code>Object.prototype.toString()</code>这个</h2><p>方法，利用这个方法，如果被检测对象是数组的话，得到<code>[object,Array]</code>,<br>如果是其他类型对象的话，就会得到其他对应的结果。谢天谢地，终于解决了。<br>所以最终的写法是<code>Object.prototype.toString.call(被检测对象)</code></p>
 
   </article>
   <div class="random-toc-area">
@@ -141,20 +141,20 @@
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事件委托"><span class="toc-text">事件委托</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是事件委托？"><span class="toc-text">什么是事件委托？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么时候用事件委托？"><span class="toc-text">什么时候用事件委托？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原生js的写法"><span class="toc-text">原生js的写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jquery的写法"><span class="toc-text">jquery的写法</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#判断一个对象究竟是不是数组的方法"><span class="toc-text">判断一个对象究竟是不是数组的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#首先想到的是typeOf"><span class="toc-text">首先想到的是typeOf()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#然后是instanceof"><span class="toc-text">然后是instanceof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#再然后，是我想到利用判断这个对象上是不是有数组的一些方法，比如"><span class="toc-text">再然后，是我想到利用判断这个对象上是不是有数组的一些方法，比如</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后，我想到了ES5中的Array-isArray-被检测对象-这个方法，这个"><span class="toc-text">最后，我想到了ES5中的Array.isArray(被检测对象)这个方法，这个</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最最后，我又想到了对象原型上的Object-prototype-toString-这个"><span class="toc-text">最最后，我又想到了对象原型上的Object.prototype.toString()这个</span></a></li></ol></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2016/08/18/Ajax的封装/" class="prev">&larr; Prev post Ajax的封装</a>
+    <a href="/2015/05/10/this的指向/" class="prev">&larr; Prev post this的指向</a>
   
 
   
 
   
-    <a href="/2016/07/12/绑定事件的三种方式及兼容性写写法/" class="next">Next post 绑定事件的三种方式及兼容性写写法 &rarr;</a>
+    <a href="/2015/04/18/jquery的入口函数/" class="next">Next post js、jquery的入口函数 &rarr;</a>
   
 </nav>
 

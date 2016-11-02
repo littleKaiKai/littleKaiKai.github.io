@@ -1,0 +1,336 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="#this的指向问题
+函数的四种调用模式，函数的这四种调用模式中，唯一不同的就是this的指向
+函数调用模式   this指的是window
+函数和方法  只是称呼不同：
+如果一个函数跟任何对象都没有关联，那么，就把这个函数叫做函数
+如果一个函数作为对象的一个属性存在，那么，此时就叫做方法
+
+
+方法调用模式    谁调用的这个方法，this指的就是谁
+构造函数模式    this指的是新构造...">
+  
+  <title>this的指向 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2016/04/10/bind/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        bind
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2015/05/09/判断一个对象究竟是不是数组/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        判断一个对象究竟是不是数组
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>this的指向</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-05-10</span>
+      
+      
+    </p>
+    
+    <p>#this的指向问题</p>
+<h2 id="函数的四种调用模式，函数的这四种调用模式中，唯一不同的就是this的指向"><a href="#函数的四种调用模式，函数的这四种调用模式中，唯一不同的就是this的指向" class="headerlink" title="函数的四种调用模式，函数的这四种调用模式中，唯一不同的就是this的指向"></a>函数的四种调用模式，函数的这四种调用模式中，唯一不同的就是this的指向</h2><ul>
+<li>函数调用模式   <strong>this指的是window</strong><ul>
+<li>函数和方法  只是称呼不同：</li>
+<li>如果一个函数跟任何对象都没有关联，那么，就把这个函数叫做函数</li>
+<li>如果一个函数作为对象的一个属性存在，那么，此时就叫做方法</li>
+</ul>
+</li>
+<li>方法调用模式    <strong>谁调用的这个方法，this指的就是谁</strong></li>
+<li>构造函数模式   <strong> this指的是新构造出来的实例</strong><ul>
+<li>构造函数内部，不用写返回值，会默认把新创建出来的对象返回。</li>
+<li>但是，也可以有返回值。如果</li>
+<li>返回的是简单的数据类型，此时，构造函数的返回值会被忽略掉</li>
+<li>返回的如果是复杂的数据类型（对象），此时，新创建出来的对象会被舍弃掉，<br>返回的是自己写的返回的对象</li>
+<li>工厂模式的效率要比寄生模式高，自己公司用，用工厂模式，给其他公司提供接口，用寄生模式</li>
+</ul>
+</li>
+<li><strong>上下文模式（借用方法模式）</strong>这中模式会改变this的指向，其实就是call和apply<h2 id="在查看函数内部的this到底指向谁的时候，只看函数是怎么调用的，而不管函数是在那儿定义的，"><a href="#在查看函数内部的this到底指向谁的时候，只看函数是怎么调用的，而不管函数是在那儿定义的，" class="headerlink" title="在查看函数内部的this到底指向谁的时候，只看函数是怎么调用的，而不管函数是在那儿定义的，"></a>在查看函数内部的this到底指向谁的时候，只看函数是怎么调用的，而不管函数是在那儿定义的，</h2>也不管是在哪调用的</li>
+<li>如果是直接调用，那this就是指的window</li>
+<li>如果是对象来调用，那this就是当前对象</li>
+<li>如果是作为构造函数来调用，那this就是当前实例<h2 id="上下文模式-call-和-apply"><a href="#上下文模式-call-和-apply" class="headerlink" title="上下文模式(call 和 apply)"></a>上下文模式(call 和 apply)</h2></li>
+<li>上下文指的就是对象所处的环境</li>
+<li>其他的三种模式中，this的值都是固定的，在上下文调用模式中，this是可以改变的，也就是说，<br>想让上下文是谁就是谁。</li>
+<li><p>call和apply的基本语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">基本语法：apply（thisArgs，[array]）</div><div class="line">第一个参数：表示想让哪个对象来**调用**函数 （当然是谁调用，<span class="keyword">this</span>就指向谁了，所以关键是让这个对象去调用那个方法了）（注意是一种**借调**的关系）</div><div class="line">第二个参数：是一个数组或者是伪数组的对象（可选），这个数组中的每一项元素都将作为被调用函数的参数</div><div class="line">想以函数模式调用： fn.apply(<span class="built_in">window</span>)  fn.apply(<span class="literal">null</span>)  fn.apply(undefned)  fn.apply( )  </div><div class="line">想以方法模式调用 ： fn.apply(obj，[])</div></pre></td></tr></table></figure>
+</li>
+<li><p>apply()会将第二个参数，一个个拿出来给函数传参，<strong>并且传给的是前面借用的方法的小括号里</strong></p>
+</li>
+<li>call()方法和apply()方法基本上是一样的，只不过call()方法不会像apply那样，将第二个参数数组展开来，<br>而是需要传入多个参数，一个个地传入。其他的都是一样的。</li>
+</ul>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的四种调用模式，函数的这四种调用模式中，唯一不同的就是this的指向"><span class="toc-text">函数的四种调用模式，函数的这四种调用模式中，唯一不同的就是this的指向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在查看函数内部的this到底指向谁的时候，只看函数是怎么调用的，而不管函数是在那儿定义的，"><span class="toc-text">在查看函数内部的this到底指向谁的时候，只看函数是怎么调用的，而不管函数是在那儿定义的，</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下文模式-call-和-apply"><span class="toc-text">上下文模式(call 和 apply)</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2016/04/10/bind/" class="prev">&larr; Prev post bind</a>
+  
+
+  
+
+  
+    <a href="/2015/05/09/判断一个对象究竟是不是数组/" class="next">Next post 判断一个对象究竟是不是数组 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
