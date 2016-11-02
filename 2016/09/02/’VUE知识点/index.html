@@ -1,0 +1,327 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="VUEVUE也是MVVM模式Angular在内部是用事件来触发的，监听所有的数据是否发生了变化VUE的指令
+v-for 循环，相当于angular中的ng-repeat
+v-model ， 表单双向绑定，相当于angular中的ng-model
+v-on， 绑定事件，v-on:事件名：事件函数。相当于angular中的ng-事件名
+v-text， 标签体内容的绑定，相当于angular中的n...">
+  
+  <title>VUE知识点 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="/2015/03/22/闭包/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        闭包
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>VUE知识点</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-02</span>
+      
+      
+    </p>
+    
+    <h1 id="VUE"><a href="#VUE" class="headerlink" title="VUE"></a>VUE</h1><h2 id="VUE也是MVVM模式"><a href="#VUE也是MVVM模式" class="headerlink" title="VUE也是MVVM模式"></a>VUE也是MVVM模式</h2><h2 id="Angular在内部是用事件来触发的，监听所有的数据是否发生了变化"><a href="#Angular在内部是用事件来触发的，监听所有的数据是否发生了变化" class="headerlink" title="Angular在内部是用事件来触发的，监听所有的数据是否发生了变化"></a>Angular在内部是用事件来触发的，监听所有的数据是否发生了变化</h2><h2 id="VUE的指令"><a href="#VUE的指令" class="headerlink" title="VUE的指令"></a>VUE的指令</h2><ol>
+<li>v-for 循环，相当于angular中的ng-repeat</li>
+<li>v-model ， 表单双向绑定，相当于angular中的ng-model</li>
+<li>v-on， 绑定事件，v-on:事件名：事件函数。相当于angular中的ng-事件名</li>
+<li>v-text， 标签体内容的绑定，相当于angular中的ng-bind</li>
+<li>v-bind：src=“” 在图片路径的时候，不能直接用src=“”，而是通过v-bind来写，不像angular，在src中也可以写数据</li>
+<li>v-html，可以渲染html字符串</li>
+<li>v-if  判断来指定显示和隐藏</li>
+<li>v-show 显示</li>
+<li>v-else  隐藏</li>
+<li>v-cloak  </li>
+<li>v-link 配合路由系统使用，用来指向某个路由路径的名字，方便这个路由路径在路径指向变了的时候，模板中的代码不用改。可以有写name和写path两种方法</li>
+<li>ES5中字符串有两个新的字符串方法：endwidth  startwidth</li>
+<li>URL解码：decodeURI</li>
+<li>Object.assign(obj1,obj2)合并两个对象</li>
+<li>v-bind:class=””</li>
+<li>Vue.http.jsonp();</li>
+<li>Vue.http.get()</li>
+</ol>
+<h2 id="VUE的过滤器"><a href="#VUE的过滤器" class="headerlink" title="VUE的过滤器"></a>VUE的过滤器</h2><ol>
+<li>limitBy 限制显示几个字符</li>
+<li>capitalize 首字母大写</li>
+<li>uppercase</li>
+<li>lowercase</li>
+<li>currency</li>
+<li>filterBy</li>
+</ol>
+<h2 id="VUE的组件"><a href="#VUE的组件" class="headerlink" title="VUE的组件"></a>VUE的组件</h2><ol>
+<li>组件就是把html，css，数据结合在一起</li>
+<li>模块化是把js文件独立成块，而VUE的组件化指的是，将html，css，js数据结合起来<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> MyComponent = Vue.extend(&#123;</div><div class="line">	<span class="attr">template</span> : <span class="string">'这里面是html字符串'</span>，</div><div class="line">	<span class="comment">// 这个template不能像angular那样写templateUrl，但是可以类似模板引擎那样，document.getElementById("tpl").innerHtml</span></div><div class="line">	data : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="keyword">return</span> &#123;<span class="comment">//这里面就是上面的模板需要的数据&#125;；</span></div><div class="line">			这里的数据还可以是通过Ajax请求获得的。异步的</div><div class="line">		&#125;,</div><div class="line">	<span class="attr">route</span> : &#123;</div><div class="line">		 <span class="comment">//这个属性只有在使用了vue-router的时候才会有</span></div><div class="line">		 data ： <span class="function"><span class="keyword">function</span>（<span class="title">transition</span>）</span>&#123;</div><div class="line">				<span class="built_in">console</span>.log(transition)</div><div class="line">				这里的数据，在上面的data里面都要提前定义</div><div class="line">			&#125;</div><div class="line">	methods : &#123;</div><div class="line">			<span class="attr">sayHi</span> :  <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">Vue.component(<span class="string">'my-component'</span>,Mycomponent)，这里第一个参数是页面中以什么标签形式来展示这个组件；第二个参数就是我们定义的组件</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="VUE中的路由"><a href="#VUE中的路由" class="headerlink" title="VUE中的路由"></a>VUE中的路由</h2><ol>
+<li>其实路由就是根据不同的url去做不同的事情，不管是前台的ui-router，还是后台的根据请求路径做不同的事情</li>
+<li>在vue中实现路由系统的话，使用的是vue-router.js<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//先定义组件</span></div><div class="line"><span class="keyword">var</span> Home = Vue.extends (&#123;</div><div class="line">		<span class="attr">template</span> : <span class="string">"html字符串"</span>,</div><div class="line">		<span class="attr">data</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">				<span class="keyword">return</span> &#123;&#125;</div><div class="line">			&#125;,</div><div class="line">		<span class="attr">methods</span> : &#123;</div><div class="line">				<span class="attr">sayHi</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">			&#125;</div><div class="line">	&#125;);</div><div class="line"><span class="comment">//生成一个路由对象</span></div><div class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> VueRouter();</div><div class="line"><span class="comment">//配置路由规则</span></div><div class="line">router.map(&#123;</div><div class="line">		<span class="string">'/home'</span> : &#123; <span class="comment">// 当前锚点是/home时，会渲染下面这个组件</span></div><div class="line">				component : Home</div><div class="line">			&#125;</div><div class="line">	&#125;);</div><div class="line"><span class="comment">// 都不匹配的时候，走这里</span></div><div class="line">router.redirect(&#123;<span class="string">'*'</span>：<span class="string">'/home'</span>&#125;)</div><div class="line"><span class="comment">// 启动路由</span></div><div class="line"><span class="comment">// 第一个参数是一个空组件</span></div><div class="line"><span class="comment">// 第二个参数就是页面中要定义应用的范围</span></div><div class="line"><span class="keyword">var</span> App = Vue.extend(&#123;&#125;) </div><div class="line">router.start(App,<span class="string">'#box'</span>)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="VUE的基本模式："><a href="#VUE的基本模式：" class="headerlink" title="VUE的基本模式："></a>VUE的基本模式：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> vue = <span class="keyword">new</span> Vue(&#123;</div><div class="line">		<span class="attr">el</span> : <span class="string">"#box"</span>,</div><div class="line">		<span class="attr">data</span> : &#123;</div><div class="line">		&#125;,</div><div class="line">		methods ： &#123;</div><div class="line">		&#125;</div><div class="line">	&#125;)</div></pre></td></tr></table></figure>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#VUE"><span class="toc-text">VUE</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#VUE也是MVVM模式"><span class="toc-text">VUE也是MVVM模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Angular在内部是用事件来触发的，监听所有的数据是否发生了变化"><span class="toc-text">Angular在内部是用事件来触发的，监听所有的数据是否发生了变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VUE的指令"><span class="toc-text">VUE的指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VUE的过滤器"><span class="toc-text">VUE的过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VUE的组件"><span class="toc-text">VUE的组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VUE中的路由"><span class="toc-text">VUE中的路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VUE的基本模式："><span class="toc-text">VUE的基本模式：</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2015/03/22/闭包/" class="next">Next post 闭包 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
