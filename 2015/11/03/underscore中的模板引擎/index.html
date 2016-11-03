@@ -16,9 +16,10 @@
   
   
   
-    <meta name="description" content="bind()方法用了这么长时间的javaScript，还真是很少用到这个函数原型上的方法(Function.prototype.bind())。其实这个方法的意思和call()和apply()非常像，都能改变this的指向，但是不同的地方在于，call()和apply()直接是调用了借用的这个方法或者是函数，但是对于find()而言，它是生成了一个新的函数，并且把this改为了，传进去的那个...">
+    <meta name="description" content="_.template123&lt;div class="carousel-inner" role="listbox"&gt;  &lt;!--渲染的HTML字符串--&gt;&lt;/div&gt;
+12345678/*取到模版当中的字符串*/var imageTemplateStr = $('#image_template').html();/*转化成模版函数*/var imageTemp...">
   
-  <title>bind [ 小石头的个人博客 ]</title>
+  <title>underscore中的模板引擎 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -38,21 +39,21 @@
 <div class="side-navigate hide-area">
   
     <div class="item prev">
-      <a href="/2016/05/13/CSS3新增知识列表/">
+      <a href="/2016/04/10/bind/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        CSS3新增知识列表
+        bind
       </div>
     </div>
   
   
     <div class="item next">
-      <a href="/2015/11/03/underscore中的模板引擎/">
+      <a href="/2015/05/10/this的指向/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        underscore中的模板引擎
+        this的指向
       </div>
     </div>
   
@@ -120,37 +121,36 @@
       
       
   <article id="post">
-    <h1>bind</h1>
+    <h1>underscore中的模板引擎</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-04-10</span>
+      <span id = "post-title-date">Created at 2015-11-03</span>
       
       
     </p>
     
-    <h1 id="bind-方法"><a href="#bind-方法" class="headerlink" title="bind()方法"></a>bind()方法</h1><p>用了这么长时间的javaScript，还真是很少用到这个函数原型上的<br>方法(Function.prototype.bind())。<br>其实这个方法的意思和call()和apply()非常像，都能改变this的指向，<br>但是不同的地方在于，call()和apply()直接是调用了借用的这个方法或者<br>是函数，但是对于find()而言，它是生成了一个新的函数，并且把this改为<br>了，传进去的那个参数。比如说下面的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> log = <span class="built_in">console</span>.log.find(<span class="built_in">console</span>);</div></pre></td></tr></table></figure></p>
-<p>这样我们就得到了一个log函数，并且函数中的this依然指回了console这个<br>对象，所以我们应用log就跟使用console.log一样。</p>
-<h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><p>很可惜的是，这个方法也是有兼容性的，IE9及以上才支持，所以我们还需要<br>自己封装一个函数，来实现bind的功能。代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Function</span>.prototype.bind = <span class="built_in">Function</span>.prototype.bind || <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> self = <span class="keyword">this</span>,</div><div class="line">                        args = <span class="built_in">arguments</span>;</div><div class="line">                <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                    self.apply(obj,[].slice.call(args,<span class="number">1</span>))</div><div class="line">                &#125;</div><div class="line">            &#125;</div></pre></td></tr></table></figure></p>
-
+    <h1 id="template"><a href="#template" class="headerlink" title="_.template"></a>_.template</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"carousel-inner"</span> <span class="attr">role</span>=<span class="string">"listbox"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!--渲染的HTML字符串--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*取到模版当中的字符串*/</span></div><div class="line"><span class="keyword">var</span> imageTemplateStr = $(<span class="string">'#image_template'</span>).html();</div><div class="line"><span class="comment">/*转化成模版函数*/</span></div><div class="line"><span class="keyword">var</span> imageTemplate = _.template(imageTemplateStr);</div><div class="line"><span class="comment">/*传入数据 解析成 html 字符*/</span></div><div class="line"><span class="keyword">var</span> imageHtml = imageTemplate(&#123;<span class="attr">model</span>:data&#125;);</div><div class="line"><span class="comment">/*把html字符串渲染在页面当中*/</span></div><div class="line">$(<span class="string">'.carousel-inner'</span>).html(imageHtml);</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/template"</span> <span class="attr">id</span>=<span class="string">"image_template"</span>&gt;</span><span class="javascript"></span></div><div class="line">    &lt;%_.each(model,<span class="function"><span class="keyword">function</span>(<span class="params">obj,i</span>)</span>&#123;%&gt;</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item &lt;%=(i==0?'active':'')%&gt;"</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span>(<span class="attr">isMobile</span>)&#123; %&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"m_imgBox"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&lt;%=obj.img%&gt;"</span> <span class="attr">alt</span>=<span class="string">""</span>/&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">%&#125;</span> <span class="attr">else</span> &#123;%&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"pc_imgBox"</span> <span class="attr">style</span>=<span class="string">"background-image:url(&lt;%=obj.bac%&gt;)"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">%&#125;%</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%&#125;)%</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bind-方法"><span class="toc-text">bind()方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容性"><span class="toc-text">兼容性</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#template"><span class="toc-text">_.template</span></a></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2016/05/13/CSS3新增知识列表/" class="prev">&larr; Prev post CSS3新增知识列表</a>
+    <a href="/2016/04/10/bind/" class="prev">&larr; Prev post bind</a>
   
 
   
 
   
-    <a href="/2015/11/03/underscore中的模板引擎/" class="next">Next post underscore中的模板引擎 &rarr;</a>
+    <a href="/2015/05/10/this的指向/" class="next">Next post this的指向 &rarr;</a>
   
 </nav>
 

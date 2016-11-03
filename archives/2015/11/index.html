@@ -1,8 +1,14 @@
 
 
+  
 
 
 
+
+  
+
+
+  
 
 
 <!doctype html>
@@ -16,9 +22,9 @@
   
   
   
-    <meta name="description" content="bind()方法用了这么长时间的javaScript，还真是很少用到这个函数原型上的方法(Function.prototype.bind())。其实这个方法的意思和call()和apply()非常像，都能改变this的指向，但是不同的地方在于，call()和apply()直接是调用了借用的这个方法或者是函数，但是对于find()而言，它是生成了一个新的函数，并且把this改为了，传进去的那个...">
+    <meta name="description" content="">
   
-  <title>bind [ 小石头的个人博客 ]</title>
+  <title>Archives: 11/2015: 2015 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -37,24 +43,6 @@
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
-      <a href="/2016/05/13/CSS3新增知识列表/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        CSS3新增知识列表
-      </div>
-    </div>
-  
-  
-    <div class="item next">
-      <a href="/2015/11/03/underscore中的模板引擎/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        underscore中的模板引擎
-      </div>
-    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -80,7 +68,7 @@
           </li>
         
           
-            <li>
+            <li class="active">
           
             <a href="/archives">Archives</a>
             
@@ -119,45 +107,70 @@
     <div id="content-inner">
       
       
-  <article id="post">
-    <h1>bind</h1>
-    <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-04-10</span>
-      
-      
-    </p>
+  <article>
     
-    <h1 id="bind-方法"><a href="#bind-方法" class="headerlink" title="bind()方法"></a>bind()方法</h1><p>用了这么长时间的javaScript，还真是很少用到这个函数原型上的<br>方法(Function.prototype.bind())。<br>其实这个方法的意思和call()和apply()非常像，都能改变this的指向，<br>但是不同的地方在于，call()和apply()直接是调用了借用的这个方法或者<br>是函数，但是对于find()而言，它是生成了一个新的函数，并且把this改为<br>了，传进去的那个参数。比如说下面的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> log = <span class="built_in">console</span>.log.find(<span class="built_in">console</span>);</div></pre></td></tr></table></figure></p>
-<p>这样我们就得到了一个log函数，并且函数中的this依然指回了console这个<br>对象，所以我们应用log就跟使用console.log一样。</p>
-<h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><p>很可惜的是，这个方法也是有兼容性的，IE9及以上才支持，所以我们还需要<br>自己封装一个函数，来实现bind的功能。代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Function</span>.prototype.bind = <span class="built_in">Function</span>.prototype.bind || <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> self = <span class="keyword">this</span>,</div><div class="line">                        args = <span class="built_in">arguments</span>;</div><div class="line">                <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                    self.apply(obj,[].slice.call(args,<span class="number">1</span>))</div><div class="line">                &#125;</div><div class="line">            &#125;</div></pre></td></tr></table></figure></p>
+
+  <div id="recent-posts">
+    <h1>Archives
+    
+      <span class="posts-count">
+      Total
+      1
+      
+        post
+      
+      </span>
+    
+    </h1>
+    
+    
+      
+      
+        
+      
+      
+    
+    
+    
+      
+      
+        
+        <h3 class="archive-year-title">2015
+        
+          <span class="posts-count">
+          Total
+          1
+          
+            post
+          
+          </span>
+        
+        </h3>
+      
+      <div class="post-title-item">
+  
+  <a href="/2015/11/03/underscore中的模板引擎/">
+  
+    underscore中的模板引擎
+  
+  </a>
+  <p class="page-title-sub">
+    <span id = "post-title-date">11-3</span>
+    
+    
+    
+      <br>
+      
+      
+    
+  </p>
+  
+</div>
+    
+  </div>
+
 
   </article>
-  <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
-  <div class="random-toc">
-    <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bind-方法"><span class="toc-text">bind()方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容性"><span class="toc-text">兼容性</span></a></li></ol></li></ol>
-  </div>
-</div>
-
-  
-<nav id="pagination">
-  
-    <a href="/2016/05/13/CSS3新增知识列表/" class="prev">&larr; Prev post CSS3新增知识列表</a>
-  
-
-  
-
-  
-    <a href="/2015/11/03/underscore中的模板引擎/" class="next">Next post underscore中的模板引擎 &rarr;</a>
-  
-</nav>
-
-  <!-- JiaThis Button BEGIN -->
-
-<!-- JiaThis Button END -->
-
 
       
       
@@ -252,8 +265,6 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
-
-  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
