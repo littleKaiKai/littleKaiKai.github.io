@@ -1,8 +1,14 @@
 
 
+  
 
 
 
+
+  
+
+
+  
 
 
 <!doctype html>
@@ -16,10 +22,9 @@
   
   
   
-    <meta name="description" content="在ES3中的变量命名冲突的问题由于，javaScript是一门弱类型的语言，所以，我们在不小心对一个变量重新定义，语法也是不会报错的。这样确实很灵活，但是这样无疑是给我们的开发造成了很多的隐患。这是javaScript这门语言的问题，不是我们所能决定的。这篇笔记，主要是记录了一些变量命名在发生冲突时候，javaScript究竟会怎样给我们抉择。
-其实，说白了，就是谁命名在后，变量指的就是谁，...">
+    <meta name="description" content="">
   
-  <title>在ES3中的变量命名冲突问题 [ 小石头的个人博客 ]</title>
+  <title>Archives: 5/2016: 2016 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -38,24 +43,6 @@
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
-      <a href="/2016/07/01/事件/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        事件
-      </div>
-    </div>
-  
-  
-    <div class="item next">
-      <a href="/2016/05/13/CSS3新增知识列表/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        CSS3新增知识列表
-      </div>
-    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -81,7 +68,7 @@
           </li>
         
           
-            <li>
+            <li class="active">
           
             <a href="/archives">Archives</a>
             
@@ -120,65 +107,70 @@
     <div id="content-inner">
       
       
-  <article id="post">
-    <h1>在ES3中的变量命名冲突问题</h1>
-    <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-06-21</span>
-      
-      
-    </p>
+  <article>
     
-    <h1 id="在ES3中的变量命名冲突的问题"><a href="#在ES3中的变量命名冲突的问题" class="headerlink" title="在ES3中的变量命名冲突的问题"></a>在ES3中的变量命名冲突的问题</h1><p>由于，javaScript是一门弱类型的语言，所以，我们在不小心对一个变量重新定义，<br>语法也是不会报错的。这样确实很灵活，但是这样无疑是给我们的开发造成了很多<br>的隐患。这是javaScript这门语言的问题，不是我们所能决定的。这篇笔记，主要<br>是记录了一些变量命名在发生冲突时候，javaScript究竟会怎样给我们抉择。</p>
-<h2 id="其实，说白了，就是谁命名在后，变量指的就是谁，但是我们一定要注意函数"><a href="#其实，说白了，就是谁命名在后，变量指的就是谁，但是我们一定要注意函数" class="headerlink" title="其实，说白了，就是谁命名在后，变量指的就是谁，但是我们一定要注意函数"></a>其实，说白了，就是谁命名在后，变量指的就是谁，但是我们一定要注意函数</h2><p>的声明提升。<br>1.两个变量或者两个函数命名冲突</p>
-<ul>
-<li><code>var num = 123; var num =456;第二个var相当于赋值，重复定义无效</code></li>
-<li><code>function fn（）{}；function fn（）{}；第二个函数覆盖第二个函数，赋值操作</code><br>2.如果一个变量跟一个函数命名冲突了</li>
-</ul>
-<ol>
-<li>如果这个变量声明了但是没有赋值，此时获取到的名字，指的是函数</li>
-<li>如果一个变量声明并赋值了，此时要看获取名字的位置<ul>
-<li>如果是在赋值之前访问，此时的名字指的是函数</li>
-<li>如果是在赋值之后访问，此时的名字指的是变量<br>3.如果变量名和参数的名字冲突</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>参数是最早被提升的</li>
-<li>如果是一个变量和参数名冲突了，此时：<ul>
-<li>如果没有赋值，那么变量的值为参数的值</li>
-<li>如果赋值了，那么变量的值为变量的值</li>
-</ul>
-</li>
-<li>如果一个函数和参数的名字冲突了，那么此名字指的是函数</li>
-</ul>
+
+  <div id="recent-posts">
+    <h1>Archives
+    
+      <span class="posts-count">
+      Total
+      1
+      
+        post
+      
+      </span>
+    
+    </h1>
+    
+    
+      
+      
+        
+      
+      
+    
+    
+    
+      
+      
+        
+        <h3 class="archive-year-title">2016
+        
+          <span class="posts-count">
+          Total
+          1
+          
+            post
+          
+          </span>
+        
+        </h3>
+      
+      <div class="post-title-item">
+  
+  <a href="/2016/05/13/CSS3新增知识列表/">
+  
+    CSS3新增知识列表
+  
+  </a>
+  <p class="page-title-sub">
+    <span id = "post-title-date">5-13</span>
+    
+    
+    
+      <br>
+      
+      
+    
+  </p>
+  
+</div>
+    
+  </div>
+
 
   </article>
-  <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
-  <div class="random-toc">
-    <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#在ES3中的变量命名冲突的问题"><span class="toc-text">在ES3中的变量命名冲突的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#其实，说白了，就是谁命名在后，变量指的就是谁，但是我们一定要注意函数"><span class="toc-text">其实，说白了，就是谁命名在后，变量指的就是谁，但是我们一定要注意函数</span></a></li></ol></li></ol>
-  </div>
-</div>
-
-  
-<nav id="pagination">
-  
-    <a href="/2016/07/01/事件/" class="prev">&larr; Prev post 事件</a>
-  
-
-  
-
-  
-    <a href="/2016/05/13/CSS3新增知识列表/" class="next">Next post CSS3新增知识列表 &rarr;</a>
-  
-</nav>
-
-  <!-- JiaThis Button BEGIN -->
-
-<!-- JiaThis Button END -->
-
 
       
       
@@ -273,8 +265,6 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
-
-  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
