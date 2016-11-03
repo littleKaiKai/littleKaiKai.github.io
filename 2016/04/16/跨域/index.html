@@ -1,0 +1,320 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="同源&amp;跨域同源同源策略是浏览器的一种安全策略，所谓同源是指，域名，协议，端口完全相同。
+跨域不同源则跨域例如http://www.example.com/
+http://api.example.com/detail.html  不同源 域名不同  
+https//www.example.com/detail.html   不同源 协议不同  
+http://www.example.c...">
+  
+  <title>同源&跨域 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2016/05/13/CSS3新增知识列表/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        CSS3新增知识列表
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2016/04/10/bind/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        bind
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>同源&跨域</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-04-16</span>
+      
+      
+    </p>
+    
+    <h1 id="同源-amp-跨域"><a href="#同源-amp-跨域" class="headerlink" title="同源&amp;跨域"></a>同源&amp;跨域</h1><h2 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h2><p>同源策略是浏览器的一种安全策略，所谓同源是指，域名，协议，端口完全相同。</p>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>不同源则跨域<br>例如<a href="http://www.example.com/" target="_blank" rel="external">http://www.example.com/</a></p>
+<pre><code>http://api.example.com/detail.html  不同源 域名不同  
+https//www.example.com/detail.html   不同源 协议不同  
+http://www.example.com:8080/detail.html 不同源 端口不同  
+http://api.example.com:8080/detail.html 不同源 域名、端口不同  
+https://api.example.com/detail.html 不同源 协议、域名不同  
+https://www.example.com:8080/detail.html    不同源 端口、协议不同  
+http://www.example.com/detail/index.html    同源  只是目录不同  
+</code></pre><h2 id="跨域方案"><a href="#跨域方案" class="headerlink" title="跨域方案"></a>跨域方案</h2><p>1、顶级域名相同的可以通过domain.name来解决，即同时设置 domain.name = 顶级域名（如example.com）<br>2、document.domain + iframe<br>3、window.name + iframe  这种方法是因为window有一个name属性，并且在浏览器的各窗口之间都是可以访问到的。<br>4、location.hash + iframe<br>5、window.postMessage()<br>6、JsonP<br>参考资料<br><a href="http://rickgray.me/2015/09/03/solutions-to-cross-domain-in-browser.html" target="_blank" rel="external">http://rickgray.me/2015/09/03/solutions-to-cross-domain-in-browser.html</a></p>
+<h2 id="JsonP"><a href="#JsonP" class="headerlink" title="JsonP"></a>JsonP</h2><p>上面虽然说了好几种跨域方案，但是我们现在用的最多的还是JsonP</p>
+<ol>
+<li>ajax不能跨域，是因为浏览器设置了不允许跨域</li>
+<li>cdn请求数据就是跨域</li>
+<li>link、img等标签都可以实现跨域，但是它们都会分别将拿到的数据按照样式、图片去渲染解析，不合适，所以我们用script</li>
+<li>每一个资源对象，都有一个onload事件</li>
+<li>jsonp的原理，就是动态的创建一个script标签，设置src属性，请求数据，并且把我们的回调函数以参数形式传递过去，然后后台拿到这个参数（前端定义的函数名），返回的时候调用这个函数，并把参数传入，就实现了跨域</li>
+<li>封装jsonp方法函数：<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//动态创建script标签，设置src属性</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">url,arg,fn</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> fnName = <span class="string">'fun_'</span> + <span class="built_in">Math</span>.random().toString().substr(<span class="number">3</span>);</div><div class="line">        <span class="built_in">window</span>[fnName] = fn;</div><div class="line">        <span class="keyword">var</span> script = <span class="built_in">document</span>.creatElement(<span class="string">'script'</span>);</div><div class="line">        <span class="keyword">var</span> queryStr = <span class="string">''</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> arg)&#123;</div><div class="line">                queryStr += key + <span class="string">'='</span> +arg[key] + <span class="string">'&amp;'</span></div><div class="line">            &#125;;</div><div class="line">        url += <span class="string">'?'</span> + queryStr + <span class="string">'callback='</span> + fnName; </div><div class="line">        script.src = url;</div><div class="line">        <span class="built_in">document</span>.body.appendChild(script)</div><div class="line">    &#125;</div></pre></td></tr></table></figure></li>
+</ol>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#同源-amp-跨域"><span class="toc-text">同源&跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#同源"><span class="toc-text">同源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域方案"><span class="toc-text">跨域方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JsonP"><span class="toc-text">JsonP</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2016/05/13/CSS3新增知识列表/" class="prev">&larr; Prev post CSS3新增知识列表</a>
+  
+
+  
+
+  
+    <a href="/2016/04/10/bind/" class="next">Next post bind &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+

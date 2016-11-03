@@ -1,0 +1,353 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="artTemplate模板引擎原理其实模板引擎的原理，基本上都是一样的，就是利用正则去替换掉我们预先定义好的标签。下面是两个这方面详解的链接
+正则表达式exec用法http://www.w3school.com.cn/jsref/jsref_exec_regexp.asp
+模版原理(支持扩展)http://blog.jobbole.com/56689/
+流行的前端模板引擎BaiduTempl...">
+  
+  <title> artTemplate模板引擎 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2014/08/11/原生JS中三种绑定事件的方式/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        原生JS中三种绑定事件的方式
+      </div>
+    </div>
+  
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1> artTemplate模板引擎</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 0205-10-23</span>
+      
+      
+    </p>
+    
+    <h1 id="artTemplate模板引擎"><a href="#artTemplate模板引擎" class="headerlink" title="artTemplate模板引擎"></a>artTemplate模板引擎</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>其实模板引擎的原理，基本上都是一样的，就是利用正则去替换掉我们<br>预先定义好的标签。<br>下面是两个这方面详解的链接</p>
+<p>正则表达式exec用法<br><a href="http://www.w3school.com.cn/jsref/jsref_exec_regexp.asp" target="_blank" rel="external">http://www.w3school.com.cn/jsref/jsref_exec_regexp.asp</a></p>
+<p>模版原理(支持扩展)<br><a href="http://blog.jobbole.com/56689/" target="_blank" rel="external">http://blog.jobbole.com/56689/</a></p>
+<h2 id="流行的前端模板引擎"><a href="#流行的前端模板引擎" class="headerlink" title="流行的前端模板引擎"></a>流行的前端模板引擎</h2><p>BaiduTemplate：<a href="http://tangram.baidu.com/BaiduTemplate/" target="_blank" rel="external">http://tangram.baidu.com/BaiduTemplate/</a></p>
+<p>ArtTemplate：<a href="https://github.com/aui/artTemplate" target="_blank" rel="external">https://github.com/aui/artTemplate</a></p>
+<p>velocity.js：<a href="https://github.com/shepherdwind/velocity.js/" target="_blank" rel="external">https://github.com/shepherdwind/velocity.js/</a></p>
+<p>Handlebars：<a href="http://handlebarsjs.com/" target="_blank" rel="external">http://handlebarsjs.com/</a></p>
+<h2 id="artTemplate原生语法"><a href="#artTemplate原生语法" class="headerlink" title="artTemplate原生语法"></a>artTemplate原生语法</h2><p><strong>使用</strong></p>
+<p>在页面中引用模板引擎：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"dist/template-native.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>下载(<a href="https://raw.github.com/aui/artTemplate/master/dist/template-native.js" target="_blank" rel="external">https://raw.github.com/aui/artTemplate/master/dist/template-native.js</a>)</p>
+<p><strong>表达式</strong></p>
+<pre><code>&lt;% 与 %&gt; 符号包裹起来的语句则为模板的逻辑表达式。
+</code></pre><p><strong>输出表达式</strong></p>
+<p>对内容编码输出：</p>
+<pre><code>&lt;%=content%&gt;
+</code></pre><p>不编码输出：</p>
+<pre><code>&lt;%=#content%&gt;
+</code></pre><p>编码可以防止数据中含有 HTML 字符串，避免引起 XSS 攻击。</p>
+<p><strong>逻辑</strong></p>
+<p>支持使用 js 原生语法</p>
+<pre><code>&lt;h1&gt;&lt;%=title%&gt;&lt;/h1&gt;
+&lt;ul&gt;
+    &lt;%for(i = 0; i &lt; list.length; i ++) {%>
+            <li>条目内容 <%=i +="" 1%=""> ：<%=list[i]%></%=list[i]%></%=i></li>
+        <%}%&gt; &lt;="" ul&gt;="" <="" code=""></%}%&gt;></code></pre><p>模板不能访问全局对象，公用的方法请参见文档 辅助方法 章节<br>模板包含表达式</p>
+<p>用于嵌入子模板。</p>
+<pre><code>&lt;% include(&apos;template_name&apos;) %&gt;
+</code></pre><p>子模板默认共享当前数据，亦可以指定数据：</p>
+<pre><code>&lt;% include(&apos;template_name&apos;, news_list) %&gt;
+</code></pre><p>辅助方法</p>
+<p>使用template.helper(name, callback)注册公用辅助方法，例如一个基本的 UBB 替换方法：</p>
+<pre><code>template.helper(&apos;$ubb2html&apos;, function (content) {
+    // 处理字符串...
+    return content;
+});
+</code></pre><p>模板中使用的方式：</p>
+<pre><code>&lt;% $ubb2html(content) %&gt;
+</code></pre><h1 id="artTemplate-简洁语法"><a href="#artTemplate-简洁语法" class="headerlink" title="artTemplate 简洁语法"></a>artTemplate 简洁语法</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"dist/template.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>下载(<a href="https://raw.github.com/aui/artTemplate/master/dist/template.js" target="_blank" rel="external">https://raw.github.com/aui/artTemplate/master/dist/template.js</a>)</p>
+<p>编写模版</p>
+<pre><code>&lt;script id=&quot;test&quot; type=&quot;text/html&quot;&gt;
+&lt;h1&gt;{{title}}&lt;/h1&gt;
+&lt;ul&gt;
+    {{each list as value i}}
+        &lt;li&gt;索引 {{i + 1}} ：{{value}}&lt;/li&gt;
+    {{/each}}
+&lt;/ul&gt;
+&lt;/script&gt;
+</code></pre><p>渲染数据</p>
+<pre><code>var data = {
+    title: &apos;标签&apos;,
+    list: [&apos;文艺&apos;, &apos;博客&apos;, &apos;摄影&apos;, &apos;电影&apos;, &apos;民谣&apos;, &apos;旅行&apos;, &apos;吉他&apos;]
+};
+var html = template(&apos;test&apos;, data);
+document.getElementById(&apos;content&apos;).innerHTML = html;
+</code></pre><p>简洁语法    </p>
+<pre><code>{{if admin}}
+    {{include 'admin_content'}}
+
+    {{each list}}
+        &lt;div&gt;{{$index}}. {{$value.user}}&lt;/div&gt;
+    {{/each}}
+{{/if}}
+</code></pre>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#artTemplate模板引擎"><span class="toc-text">artTemplate模板引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流行的前端模板引擎"><span class="toc-text">流行的前端模板引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#artTemplate原生语法"><span class="toc-text">artTemplate原生语法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#artTemplate-简洁语法"><span class="toc-text">artTemplate 简洁语法</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2014/08/11/原生JS中三种绑定事件的方式/" class="prev">&larr; Prev post 原生JS中三种绑定事件的方式</a>
+  
+
+  
+
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
