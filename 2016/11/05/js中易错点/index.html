@@ -1,0 +1,310 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="JS中易错点笔记数组的reverse方法var arr = [1,2,3];
+var arr2 = arr.reverse();
+console.log(arr); // [3,2,1]
+console.log(arr2); // [3,2,1];
+如上面代码所见，数组的这个reverse方法，会反转我们的数组，这没有什么问题，也没有什么要我们多加注意的地方，但是我们要注意到的一点是这个方法...">
+  
+  <title>js中易错点笔记 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="/2016/11/04/关于利用photoShop进行切图/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        关于利用photoShop进行切图
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>js中易错点笔记</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-11-05</span>
+      
+      
+    </p>
+    
+    <h2 id="JS中易错点笔记"><a href="#JS中易错点笔记" class="headerlink" title="JS中易错点笔记"></a>JS中易错点笔记</h2><h2 id="数组的reverse方法"><a href="#数组的reverse方法" class="headerlink" title="数组的reverse方法"></a>数组的reverse方法</h2><pre><code>var arr = [1,2,3];
+var arr2 = arr.reverse();
+console.log(arr); // [3,2,1]
+console.log(arr2); // [3,2,1];
+</code></pre><p>如上面代码所见，数组的这个reverse方法，会反转我们的数组，这没有<br>什么问题，也没有什么要我们多加注意的地方，但是我们要注意到的一点<br>是<strong>这个方法会将我们的原数组改变</strong>，所以我们在以后要用的时候，一定<br>要注意这一点。</p>
+<h2 id="window-close"><a href="#window-close" class="headerlink" title="window.close"></a>window.close</h2><p>这个BOM方法可以将我们当前窗口关闭，这在我们用js代码来写，用户是否<br>确认关闭当前窗口的时候可以用得到。比方说下面的代码：</p>
+<pre><code>if (confirm(&apos;您确定关闭当前窗口吗？&apos;)) {
+    window.close();
+}
+</code></pre><h2 id="document-forms"><a href="#document-forms" class="headerlink" title="document.forms"></a>document.forms</h2><p>这个API是用来获取到页面中的所有的form表单</p>
+<h2 id="document-forms-0-elements"><a href="#document-forms-0-elements" class="headerlink" title="document.forms[0].elements"></a>document.forms[0].elements</h2><p>这个API使用来获取到页面中第一个表单元素的所有input（textarea）</p>
+<h2 id="在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？"><a href="#在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？" class="headerlink" title="在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？"></a>在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？</h2><p>构造函数模式要比字面量形式复杂，所以还是喜欢用字面量形式。比如说</p>
+<pre><code>var req = /\\/  // 表示一个/
+var req = new ReqExp(&apos;\\\\&apos;)  // 表示一个/
+</code></pre><h2 id="ajax请求的状态码"><a href="#ajax请求的状态码" class="headerlink" title="ajax请求的状态码"></a>ajax请求的状态码</h2><pre><code>200---服务器成功返回数据
+304---页面未修改
+404---请求的网页不存在
+403---服务器禁止访问
+503---服务器暂时不可用
+500---服务器内部错误
+</code></pre>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS中易错点笔记"><span class="toc-text">JS中易错点笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的reverse方法"><span class="toc-text">数组的reverse方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#window-close"><span class="toc-text">window.close</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#document-forms"><span class="toc-text">document.forms</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#document-forms-0-elements"><span class="toc-text">document.forms[0].elements</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？"><span class="toc-text">在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax请求的状态码"><span class="toc-text">ajax请求的状态码</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2016/11/04/关于利用photoShop进行切图/" class="next">Next post 关于利用photoShop进行切图 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
