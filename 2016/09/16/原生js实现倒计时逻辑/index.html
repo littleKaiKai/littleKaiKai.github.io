@@ -1,14 +1,8 @@
 
 
-  
 
 
 
-
-  
-
-
-  
 
 
 <!doctype html>
@@ -22,9 +16,9 @@
   
   
   
-    <meta name="description" content="">
+    <meta name="description" content="angular中的倒计时服务—$interval12345678910111213141516171819202122// 倒计时的关键就是，当下一级出现-1的时候，上一级要减1，本级   要变成最大的数值$interval (function()&#123;    var timeLeft = &#123;h:1,m:10,s:10&#125;;    var stop = $interv...">
   
-  <title>Archives: 9/2016: 2016 [ 小石头的个人博客 ]</title>
+  <title>angular实现倒计时逻辑 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -43,6 +37,15 @@
 <body>
 <div class="side-navigate hide-area">
   
+  
+    <div class="item next">
+      <a href="/2016/09/02/’VUE知识点/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        VUE知识点
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -68,7 +71,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/archives">Archives</a>
             
@@ -107,96 +110,40 @@
     <div id="content-inner">
       
       
-  <article>
-    
-
-  <div id="recent-posts">
-    <h1>Archives
-    
-      <span class="posts-count">
-      Total
-      2
-      
-        posts
-      
-      </span>
-    
-    </h1>
-    
-    
+  <article id="post">
+    <h1>angular实现倒计时逻辑</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-09-16</span>
       
       
-        
-      
-      
+    </p>
     
-      
-      
-      
-    
-    
-    
-      
-      
-        
-        <h3 class="archive-year-title">2016
-        
-          <span class="posts-count">
-          Total
-          2
-          
-            posts
-          
-          </span>
-        
-        </h3>
-      
-      <div class="post-title-item">
-  
-  <a href="/2016/09/16/原生js实现倒计时逻辑/">
-  
-    angular实现倒计时逻辑
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">9-16</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2016/09/02/’VUE知识点/">
-  
-    VUE知识点
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">9-2</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-  </div>
-
-
+    <h2 id="angular中的倒计时服务—-interval"><a href="#angular中的倒计时服务—-interval" class="headerlink" title="angular中的倒计时服务—$interval"></a>angular中的倒计时服务—$interval</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">// 倒计时的关键就是，当下一级出现-1的时候，上一级要减1，本级</div><div class="line">   要变成最大的数值</div><div class="line">$interval (function()&#123;</div><div class="line">    var timeLeft = &#123;h:1,m:10,s:10&#125;;</div><div class="line">    var stop = $interval(function()&#123;</div><div class="line">        timeLeft--;</div><div class="line">        if (timeLeft.s == -1)&#123;</div><div class="line">            timeLeft.m--;</div><div class="line">            timeLeft.s = 59;</div><div class="line">        &#125;;</div><div class="line">        if (timeLeft.m == -1)&#123;</div><div class="line">            timeLeft.h--;</div><div class="line">            timeLeft.m = 59;</div><div class="line">        &#125;;</div><div class="line">        if (timeLeft.h == -1)&#123;</div><div class="line">            timeLeft.h = 0;</div><div class="line">            timeLeft.m = 0;</div><div class="line">            timeLeft.s = 0;</div><div class="line">            $interval.cancel(stop)</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#angular中的倒计时服务—-interval"><span class="toc-text">angular中的倒计时服务—$interval</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2016/09/02/’VUE知识点/" class="next">Next post VUE知识点 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
 
       
       
@@ -291,6 +238,8 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
+
+  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
