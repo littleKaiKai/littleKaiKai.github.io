@@ -145,7 +145,9 @@
 <h2 id="第二种是通过document-creatElement的方式"><a href="#第二种是通过document-creatElement的方式" class="headerlink" title="第二种是通过document.creatElement的方式"></a>第二种是通过document.creatElement的方式</h2><p>这种方法的话，我们同样是需要注意，我们的html字符串首先是需要一个元素来包裹起来，但是有时候我们又不希望多加这个元素，所以，好多时候，我们都会放弃这种方法，来选择第一种方法。但是拼接字符串又确实是每个前端程序员都不喜欢的。这个时候，我们其实还有一个API可以用，这就是<code>document.creatDocumentFragment()</code></p>
 <blockquote>
 <ul>
-<li>要<strong>注意</strong>：<figure class="highlight plain"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;  - ```var container = document.creatDocumentFragment() ```使用这个创建出来的容器，只做为容器，不占用结构，在往页面添加的时候，之后把这个容器中的子元素添加到页面中，而不会把这个容器也添加到页面中</div><div class="line">&gt;  - ``` var container = document.creatDocumentFragment() 创建出来的元素没有innerHTML的属性</div></pre></td></tr></table></figure></li>
+<li>要<strong>注意</strong>：<code>appendChild()括号中不能是元素集合，只能是一个节点</code></li>
+<li><code>var container = document.creatDocumentFragment()</code>使用这个创建出来的容器，只做为容器，不占用结构，在往页面添加的时候，之后把这个容器中的子元素添加到页面中，而不会把这个容器也添加到页面中</li>
+<li><code>var container = document.creatDocumentFragment() 创建出来的元素没有innerHTML的属性</code></li>
 </ul>
 </blockquote>
 </li>
