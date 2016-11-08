@@ -16,9 +16,10 @@
   
   
   
-    <meta name="description" content="angular中的倒计时服务—$interval1234567891011121314151617181920212223// 倒计时的关键就是，当下一级出现-1的时候，上一级要减1，本级   要变成最大的数值$interval (function()&#123;    var timeLeft = &#123;h:1,m:10,s:10&#125;;    var stop = $inte...">
+    <meta name="description" content="当页面中引入了很多库或者框架的时候，如果$这个符号使用的出现了冲突，那么我们应该怎么做呢，幸好，jQuery已经考虑到了这种情况，并且给出了解决的办法。核心就是通过jQyery.noConflict()这个函数，下面是几种方式的代码：123// 方式一，定义一个新的符号var $1 = jQuery.noConflict()
+123456// 方式二，先释放$这个变量给上一个js库，然后使用...">
   
-  <title>angular实现倒计时逻辑 [ 小石头的个人博客 ]</title>
+  <title>解决jQuery和其他库冲突的问题 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -38,21 +39,21 @@
 <div class="side-navigate hide-area">
   
     <div class="item prev">
-      <a href="/2016/10/08/常见布局实现方式/">
+      <a href="/2015/10/23/artTemplate模板引擎/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        常见布局实现方式
+         artTemplate模板引擎
       </div>
     </div>
   
   
     <div class="item next">
-      <a href="/2016/09/02/’VUE知识点/">
+      <a href="/2015/05/10/this的指向/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        VUE知识点
+        this的指向
       </div>
     </div>
   
@@ -120,34 +121,36 @@
       
       
   <article id="post">
-    <h1>angular实现倒计时逻辑</h1>
+    <h1>解决jQuery和其他库冲突的问题</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-09-16</span>
+      <span id = "post-title-date">Created at 2015-06-18</span>
       
       
     </p>
     
-    <h2 id="angular中的倒计时服务—-interval"><a href="#angular中的倒计时服务—-interval" class="headerlink" title="angular中的倒计时服务—$interval"></a>angular中的倒计时服务—$interval</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 倒计时的关键就是，当下一级出现-1的时候，上一级要减1，本级</span></div><div class="line">   要变成最大的数值</div><div class="line">$interval (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> timeLeft = &#123;<span class="attr">h</span>:<span class="number">1</span>,<span class="attr">m</span>:<span class="number">10</span>,<span class="attr">s</span>:<span class="number">10</span>&#125;;</div><div class="line">    <span class="keyword">var</span> stop = $interval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        timeLeft--;</div><div class="line">        <span class="keyword">if</span> (timeLeft.s == <span class="number">-1</span>)&#123;</div><div class="line">            timeLeft.m--;</div><div class="line">            timeLeft.s = <span class="number">59</span>;</div><div class="line">        &#125;;</div><div class="line">        <span class="keyword">if</span> (timeLeft.m == <span class="number">-1</span>)&#123;</div><div class="line">            timeLeft.h--;</div><div class="line">            timeLeft.m = <span class="number">59</span>;</div><div class="line">        &#125;;</div><div class="line">        <span class="keyword">if</span> (timeLeft.h == <span class="number">-1</span>)&#123;</div><div class="line">            timeLeft.h = <span class="number">0</span>;</div><div class="line">            timeLeft.m = <span class="number">0</span>;</div><div class="line">            timeLeft.s = <span class="number">0</span>;</div><div class="line">            $interval.cancel(stop)</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+    <p>当页面中引入了很多库或者框架的时候，如果$这个符号使用的出现了冲突，<br>那么我们应该怎么做呢，幸好，jQuery已经考虑到了这种情况，并且给出<br>了解决的办法。核心就是通过<code>jQyery.noConflict()</code>这个函数，下面是几种<br>方式的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 方式一，定义一个新的符号</span></div><div class="line"><span class="keyword">var</span> $<span class="number">1</span> = jQuery.noConflict()</div></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 方式二，先释放$这个变量给上一个js库，然后使用的时候通过传参形式</span></div><div class="line">jQuery.noConflict()；</div><div class="line">jQuery(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</div><div class="line">       <span class="comment">// 在这里面依然可以使用$,外面不受影响</span></div><div class="line">   &#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 方式三跟方式二差不多，先释放$这个变量给上一个js库，只不过将jQuery的代码</span></div><div class="line">   用一个自执行函数包裹起来</div><div class="line">jQuery.noConflict()；</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</div><div class="line">       $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">               <span class="comment">// 这里是使用jQuery的业务代码</span></div><div class="line">           &#125;)</div><div class="line">   &#125;)(jQuery)</div></pre></td></tr></table></figure>
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#angular中的倒计时服务—-interval"><span class="toc-text">angular中的倒计时服务—$interval</span></a></li></ol>
+    
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2016/10/08/常见布局实现方式/" class="prev">&larr; Prev post 常见布局实现方式</a>
+    <a href="/2015/10/23/artTemplate模板引擎/" class="prev">&larr; Prev post  artTemplate模板引擎</a>
   
 
   
 
   
-    <a href="/2016/09/02/’VUE知识点/" class="next">Next post VUE知识点 &rarr;</a>
+    <a href="/2015/05/10/this的指向/" class="next">Next post this的指向 &rarr;</a>
   
 </nav>
 
