@@ -1,0 +1,299 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="这是自己写的一个，根据鼠标进入方向不同，盒子遮罩层出现的位置不同的动画，整体的效果就是阴影追随鼠标。
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777...">
+  
+  <title>盒子阴影跟随鼠标进入和退出动画 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2016/04/05/js中易错点/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        js中易错点笔记
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2015/11/17/自己封装的jQuery的懒加载插件源码/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        自己封装的jQuery的懒加载插件源码
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>盒子阴影跟随鼠标进入和退出动画</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-12-14</span>
+      
+      
+    </p>
+    
+    <p>这是自己写的一个，根据鼠标进入方向不同，盒子遮罩层出现的位置不同的<br>动画，整体的效果就是阴影追随鼠标。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">coverMove</span>(<span class="params">config</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>._init(config);</div><div class="line">    <span class="keyword">this</span>.creatCover(<span class="keyword">this</span>.coverText);</div><div class="line">    <span class="keyword">this</span>.coverDirection(config);</div><div class="line"> &#125;</div><div class="line"> coverMove.prototype = &#123;</div><div class="line">    <span class="attr">constructor</span> : coverMove,</div><div class="line">    <span class="comment">//初始化函数</span></div><div class="line">    _init : <span class="function"><span class="keyword">function</span> (<span class="params">config</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.itemsBox = $(<span class="string">"."</span> + config.coverBoxClassName); <span class="comment">//jquery对象</span></div><div class="line">        <span class="keyword">this</span>.coverText = config.coverText;</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">//创建遮罩层函数</span></div><div class="line">    creatCover : <span class="function"><span class="keyword">function</span> (<span class="params">text</span>) </span>&#123;</div><div class="line">        $(<span class="string">"&lt;span class='coverMoveCover'&gt;"</span>+text+<span class="string">"&lt;/span&gt;"</span>).appendTo(<span class="keyword">this</span>.itemsBox);</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">//注册遮罩层出现方向的函数</span></div><div class="line">    coverDirection : <span class="function"><span class="keyword">function</span> (<span class="params">config</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> $itemsBox = <span class="keyword">this</span>.itemsBox,</div><div class="line">        $cover = $(<span class="string">"."</span> + config.coverBoxClassName +<span class="string">" .coverMoveCover"</span>);</div><div class="line">    $itemsBox.on(<span class="string">"mouseenter"</span>,<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> mouseX = e.pageX,</div><div class="line">            mouseY = e.pageY,</div><div class="line">            coverBoxWidth = $itemsBox.width(),</div><div class="line">            coverBoxHeight = $itemsBox.height(),</div><div class="line">            coverBoxX = $itemsBox.offset().left,</div><div class="line">            coverBoxY = $itemsBox.offset().top;</div><div class="line">        <span class="comment">//上边进</span></div><div class="line">        <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(mouseY-coverBoxY)&lt;<span class="number">20</span>) &#123;</div><div class="line">            $cover.css(&#123;<span class="string">"top"</span>:-coverBoxHeight+<span class="string">"px"</span>,<span class="string">"left"</span>:<span class="string">"0px"</span>&#125;);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(mouseY-(coverBoxY + coverBoxHeight))&lt;<span class="number">20</span> )&#123; <span class="comment">// 下面进</span></div><div class="line">            $cover.css(&#123;<span class="string">"top"</span>:coverBoxHeight+<span class="string">"px"</span>,<span class="string">"left"</span>:<span class="string">"0px"</span>&#125;);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">Math</span>.abs(mouseX-coverBoxX)&lt;<span class="number">20</span>) &#123; <span class="comment">// 左边进</span></div><div class="line">            $cover.css(&#123;<span class="string">"left"</span>:-coverBoxWidth+<span class="string">"px"</span>,<span class="string">"top"</span>:<span class="string">"0px"</span>&#125;);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">Math</span>.abs(mouseX-(coverBoxX + coverBoxWidth))&lt;<span class="number">20</span>) &#123; <span class="comment">//右边进</span></div><div class="line">            $cover.css(&#123;<span class="string">"left"</span>:coverBoxWidth+<span class="string">"px"</span>,<span class="string">"top"</span>:<span class="string">"0px"</span>&#125;);</div><div class="line">        &#125;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            $cover.stop(<span class="literal">true</span>,<span class="literal">true</span>)</div><div class="line">                .css(<span class="string">"line-height"</span>,coverBoxHeight+<span class="string">"px"</span>)</div><div class="line">                .animate(&#123;<span class="string">"top"</span>:<span class="string">"0px"</span>,<span class="string">"left"</span>:<span class="string">"0px"</span>&#125;,<span class="string">"fast"</span>);</div><div class="line">        &#125;,<span class="number">50</span>)</div><div class="line">    &#125;)</div><div class="line">    $itemsBox.on(<span class="string">"mouseleave"</span>,<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> mouseX = e.pageX,</div><div class="line">            mouseY = e.pageY,</div><div class="line">            coverBoxWidth = $itemsBox.width(),</div><div class="line">            coverBoxHeight = $itemsBox.height(),</div><div class="line">            coverBoxX = $itemsBox.offset().left,</div><div class="line">            coverBoxY = $itemsBox.offset().top,</div><div class="line">            x = mouseX - coverBoxX - coverBoxWidth/<span class="number">2</span>,</div><div class="line">            y = mouseY - coverBoxY - coverBoxHeight/<span class="number">2</span>,</div><div class="line">            angle = <span class="literal">null</span>,</div><div class="line">            angle1 = <span class="built_in">Math</span>.atan(coverBoxHeight/coverBoxWidth)*<span class="number">180</span>/<span class="built_in">Math</span>.PI,</div><div class="line">            angle2 = <span class="number">180</span> - angle1,</div><div class="line">            angle3 = <span class="number">180</span> + angle1,</div><div class="line">            angle4 = <span class="number">360</span> - angle1;</div><div class="line">        <span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; -y &gt;= <span class="number">0</span>) &#123;</div><div class="line">            angle = <span class="built_in">Math</span>.atan(y/-x)*<span class="number">180</span>/<span class="built_in">Math</span>.PI;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (x &lt;= <span class="number">0</span> &amp;&amp; -y &gt;= <span class="number">0</span>) &#123;</div><div class="line">            angle = <span class="built_in">Math</span>.atan(y/-x)*<span class="number">180</span>/<span class="built_in">Math</span>.PI + <span class="number">180</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (x &lt;= <span class="number">0</span> &amp;&amp; -y &lt;= <span class="number">0</span>) &#123;</div><div class="line">            angle = <span class="built_in">Math</span>.atan(y/-x)*<span class="number">180</span>/<span class="built_in">Math</span>.PI + <span class="number">180</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; -y &lt;= <span class="number">0</span>) &#123;</div><div class="line">            angle = <span class="built_in">Math</span>.atan(-y/x)*<span class="number">180</span>/<span class="built_in">Math</span>.PI + <span class="number">360</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//上边出</span></div><div class="line">        <span class="keyword">if</span> (angle &gt;= angle1 &amp;&amp; angle&lt;= angle2) &#123;</div><div class="line">            setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                $cover.stop(<span class="literal">false</span>,<span class="literal">true</span>)</div><div class="line">                    .animate(&#123;<span class="string">"top"</span>:-coverBoxHeight+<span class="string">"px"</span>,<span class="string">"left"</span>:<span class="string">"0px"</span>&#125;,<span class="string">"fast"</span>);</div><div class="line">            &#125;,<span class="number">50</span>)</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (angle &gt;= angle3 &amp;&amp; angle&lt;= angle4)&#123; <span class="comment">// 下面出</span></div><div class="line">            setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                $cover.stop(<span class="literal">false</span>,<span class="literal">true</span>)</div><div class="line">                    .animate(&#123;<span class="string">"top"</span>:coverBoxHeight+<span class="string">"px"</span>,<span class="string">"left"</span>:<span class="string">"0px"</span>&#125;,<span class="string">"fast"</span>);</div><div class="line">            &#125;,<span class="number">50</span>)</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(angle &gt;= angle2 &amp;&amp; angle&lt;= angle3) &#123; <span class="comment">// 左边出</span></div><div class="line">            setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                $cover.stop(<span class="literal">false</span>,<span class="literal">true</span>)</div><div class="line">                    .animate(&#123;<span class="string">"top"</span>:<span class="string">"0px"</span>,<span class="string">"left"</span>:-coverBoxWidth+<span class="string">"px"</span>&#125;,<span class="string">"fast"</span>);</div><div class="line">            &#125;,<span class="number">50</span>)</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(angle &lt;= angle1 || angle &gt;= angle4) &#123; <span class="comment">//右边出</span></div><div class="line">            setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                $cover.stop(<span class="literal">false</span>,<span class="literal">true</span>)</div><div class="line">                    .animate(&#123;<span class="string">"top"</span>:<span class="string">"0px"</span>,<span class="string">"left"</span>:coverBoxWidth+<span class="string">"px"</span>&#125;,<span class="string">"fast"</span>);</div><div class="line">            &#125;,<span class="number">50</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2016/04/05/js中易错点/" class="prev">&larr; Prev post js中易错点笔记</a>
+  
+
+  
+
+  
+    <a href="/2015/11/17/自己封装的jQuery的懒加载插件源码/" class="next">Next post 自己封装的jQuery的懒加载插件源码 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+

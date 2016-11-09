@@ -16,13 +16,10 @@
   
   
   
-    <meta name="description" content="JS中易错点笔记数组的reverse方法var arr = [1,2,3];
-var arr2 = arr.reverse();
-console.log(arr); // [3,2,1]
-console.log(arr2); // [3,2,1];
-如上面代码所见，数组的这个reverse方法，会反转我们的数组，这没有什么问题，也没有什么要我们多加注意的地方，但是我们要注意到的一点是这个方法...">
+    <meta name="description" content="这是自己封装的jQuery的懒加载插件的源码，使用的时候，只需要给要执行懒加载的图片，添加上lazy这个类名就可以。在js部分，我们要调用一下$.lazyLoad这个静态方法。封装插件的时候，我们一定要一个沙箱，将代码隔离起来，防止在最后压缩打包的时候，对全局变量造成污染。
+123456789101112131415161718192021222324252627 (function ($,...">
   
-  <title>js中易错点笔记 [ 小石头的个人博客 ]</title>
+  <title>自己封装的jQuery的懒加载插件源码 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -42,21 +39,21 @@ console.log(arr2); // [3,2,1];
 <div class="side-navigate hide-area">
   
     <div class="item prev">
-      <a href="/2016/04/10/bind/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        bind
-      </div>
-    </div>
-  
-  
-    <div class="item next">
       <a href="/2015/12/14/盒子阴影跟随鼠标进入和退出动画/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
         盒子阴影跟随鼠标进入和退出动画
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2015/11/03/underscore中的模板引擎/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        underscore中的模板引擎
       </div>
     </div>
   
@@ -124,54 +121,36 @@ console.log(arr2); // [3,2,1];
       
       
   <article id="post">
-    <h1>js中易错点笔记</h1>
+    <h1>自己封装的jQuery的懒加载插件源码</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-04-05</span>
+      <span id = "post-title-date">Created at 2015-11-17</span>
       
       
     </p>
     
-    <h2 id="JS中易错点笔记"><a href="#JS中易错点笔记" class="headerlink" title="JS中易错点笔记"></a>JS中易错点笔记</h2><h2 id="数组的reverse方法"><a href="#数组的reverse方法" class="headerlink" title="数组的reverse方法"></a>数组的reverse方法</h2><pre><code>var arr = [1,2,3];
-var arr2 = arr.reverse();
-console.log(arr); // [3,2,1]
-console.log(arr2); // [3,2,1];
-</code></pre><p>如上面代码所见，数组的这个reverse方法，会反转我们的数组，这没有<br>什么问题，也没有什么要我们多加注意的地方，但是我们要注意到的一点<br>是<strong>这个方法会将我们的原数组改变</strong>，所以我们在以后要用的时候，一定<br>要注意这一点。</p>
-<h2 id="window-close"><a href="#window-close" class="headerlink" title="window.close"></a>window.close</h2><p>这个BOM方法可以将我们当前窗口关闭，这在我们用js代码来写，用户是否<br>确认关闭当前窗口的时候可以用得到。比方说下面的代码：</p>
-<pre><code>if (confirm(&apos;您确定关闭当前窗口吗？&apos;)) {
-    window.close();
-}
-</code></pre><h2 id="document-forms"><a href="#document-forms" class="headerlink" title="document.forms"></a>document.forms</h2><p>这个API是用来获取到页面中的所有的form表单</p>
-<h2 id="document-forms-0-elements"><a href="#document-forms-0-elements" class="headerlink" title="document.forms[0].elements"></a>document.forms[0].elements</h2><p>这个API使用来获取到页面中第一个表单元素的所有input（textarea）</p>
-<h2 id="在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？"><a href="#在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？" class="headerlink" title="在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？"></a>在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？</h2><p>构造函数模式要比字面量形式复杂，所以还是喜欢用字面量形式。比如说</p>
-<pre><code>var req = /\\/  // 表示一个/
-var req = new ReqExp(&apos;\\\\&apos;)  // 表示一个/
-</code></pre><h2 id="ajax请求的状态码"><a href="#ajax请求的状态码" class="headerlink" title="ajax请求的状态码"></a>ajax请求的状态码</h2><pre><code>200---服务器成功返回数据
-304---页面未修改
-404---请求的网页不存在
-403---服务器禁止访问
-503---服务器暂时不可用
-500---服务器内部错误
-</code></pre>
+    <p>这是自己封装的jQuery的懒加载插件的源码，使用的时候，只需要给要执行懒加载<br>的图片，添加上lazy这个类名就可以。在js部分，我们要调用一下$.lazyLoad这个<br>静态方法。<br>封装插件的时候，我们一定要一个沙箱，将代码隔离起来，防止在最后压缩打包的<br>时候，对全局变量造成污染。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> (<span class="function"><span class="keyword">function</span> (<span class="params">$,w</span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">lazyLoad</span>(<span class="params">thresHolder</span>) </span>&#123;</div><div class="line">        <span class="comment">//实现业务逻辑</span></div><div class="line">        <span class="keyword">var</span> thresHolder = thresHolder,</div><div class="line">            $lazies = $(<span class="string">".lazy"</span>);</div><div class="line">        $.each($lazies,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> $<span class="keyword">this</span> = $(<span class="keyword">this</span>),</div><div class="line">                $w = $(w),</div><div class="line">                originUrl = $<span class="keyword">this</span>.attr(<span class="string">"data-origin"</span>),</div><div class="line">                <span class="comment">//元素距离页面高度</span></div><div class="line">                elTop = $<span class="keyword">this</span>.offset().top,</div><div class="line">                <span class="comment">//屏幕高度</span></div><div class="line">                winH = $w.height();</div><div class="line">            $w.on(<span class="string">"scroll"</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="comment">//滚动距离</span></div><div class="line">                <span class="keyword">if</span> ($<span class="keyword">this</span>.attr(<span class="string">"url"</span>) == originUrl) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">                <span class="keyword">var</span> scrollH = $w.scrollTop();</div><div class="line">                <span class="keyword">if</span> (elTop - winH - scrollH &lt;= thresHolder) &#123;</div><div class="line">                    <span class="comment">//进入可视区</span></div><div class="line">                    $<span class="keyword">this</span>.attr(<span class="string">"src"</span>,originUrl);</div><div class="line">                &#125;</div><div class="line">            &#125;)</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">    $.lazyLoad = lazyLoad;</div><div class="line">&#125;)(jQuery,<span class="built_in">window</span>);</div></pre></td></tr></table></figure>
+
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS中易错点笔记"><span class="toc-text">JS中易错点笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的reverse方法"><span class="toc-text">数组的reverse方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#window-close"><span class="toc-text">window.close</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#document-forms"><span class="toc-text">document.forms</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#document-forms-0-elements"><span class="toc-text">document.forms[0].elements</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？"><span class="toc-text">在写一个正则表达式的时候，用构造函数形式和字面量形式有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax请求的状态码"><span class="toc-text">ajax请求的状态码</span></a></li></ol>
+    
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2016/04/10/bind/" class="prev">&larr; Prev post bind</a>
+    <a href="/2015/12/14/盒子阴影跟随鼠标进入和退出动画/" class="prev">&larr; Prev post 盒子阴影跟随鼠标进入和退出动画</a>
   
 
   
 
   
-    <a href="/2015/12/14/盒子阴影跟随鼠标进入和退出动画/" class="next">Next post 盒子阴影跟随鼠标进入和退出动画 &rarr;</a>
+    <a href="/2015/11/03/underscore中的模板引擎/" class="next">Next post underscore中的模板引擎 &rarr;</a>
   
 </nav>
 
