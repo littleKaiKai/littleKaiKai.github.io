@@ -1,0 +1,362 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="常见面试题汇总
+javascrip是一门什么样的语言？这门语言有什么优点？
+
+很显然，这道题并没有什么固定的答案。我理解的javascript语言，有以下几点：
+
+javascript是一门不需要编译的语言。相对于其他c、java等语言，javascript的一大特点就是不用编译，就可以运行，但是它运行的环境也只能是在浏览器中，即使是后来，我们在node环境中，同样可以运行javascrip...">
+  
+  <title>面试题汇总 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2015/04/18/jquery的入口函数/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        js、jquery的入口函数
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2015/04/03/数组的高效去重方法/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        数组的高效去重方法
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>面试题汇总</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2015-04-12</span>
+      
+      
+    </p>
+    
+    <h1 id="常见面试题汇总"><a href="#常见面试题汇总" class="headerlink" title="常见面试题汇总"></a>常见面试题汇总</h1><ol>
+<li><p>javascrip是一门什么样的语言？这门语言有什么优点？</p>
+<blockquote>
+<p>很显然，这道题并没有什么固定的答案。<br>我理解的javascript语言，有以下几点：</p>
+<ul>
+<li>javascript是一门不需要编译的语言。相对于其他c、java等语言，javascript的<br>一大特点就是不用编译，就可以运行，但是它运行的环境也只能是在浏览器中，<br>即使是后来，我们在node环境中，同样可以运行javascript，但是，node其实也是<br>内置了Chrome的V8引擎</li>
+<li>javascript是一门弱类型的语言，在js中，之前定义的变量，同样可以再次定义，<br>并且，对于一个变量，数据类型也不会固定，在赋值的时候，也都可以更改。在js<br>中没有块级作用域，只有词法作用域等等</li>
+<li>另外，js也是一门面向对象的语言，只不过，js中并没有类的概念。面向对象的<br>实现是通过构造函数来实现的。但是在es6中，引入了类的概念，所以js这门语言<br>也是一直在快速更新中的</li>
+</ul>
+</blockquote>
+</li>
+<li><p>在不借助第三方框架的前提下，找到页面中所有的checkbox</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">var inputs = document.getElementsByTagName('input');</div><div class="line">var i = 0,</div><div class="line">	len = inputs.length,</div><div class="line">	checkboxArr = [];</div><div class="line">for (; i <span class="tag">&lt; <span class="attr">len</span>; <span class="attr">i</span>++) &#123;</span></div><div class="line">	<span class="attr">var</span> <span class="attr">inputItem</span> = <span class="string">inputs[i]</span></div><div class="line">	<span class="attr">if</span> (<span class="attr">inputItem.type</span> == <span class="string">'checkbox'</span>)<span class="attr">checkboxArr.push</span>(<span class="attr">inputItem</span>);</div><div class="line">&#125;;</div><div class="line"><span class="attr">console.log</span>(<span class="attr">checkboxArr</span>);</div></pre></td></tr></table></figure>
+<ol>
+<li>定义一个log方法，让它可以代理console.log</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="built_in">console</span>.log.apply(<span class="built_in">console</span>,<span class="built_in">arguments</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>[“1”, “2”, “3”].map(parseInt)结果返回什么？<br>这道题，刚开始看的时候，确实是感觉到蒙，但仔细想下，就知道在考察什么知识点了<br>首先说结果：[1,NaN,NaN].<br>因为在map的()中，需要传入的是参数是两个<code>(callback,[thisArg])</code>,第一个参数就是我<br>们常使用的回调函数，第二个参数是this的指向，不填的话，默认为window。<br>在第一个回调函数中，会自动传入三个参数<code>(value,index,array)</code>，第三个不用管，第一<br>个是数组的每一个value，第二个是数组的索引<br>但是在，parseInt()接收的两个参数<code>(string,radix)</code>，字符串，进制。而且在2-36之外<br>的进制代表数字的话，返回的都是NaN，但是还有一点，当string是1的时候，后面不管是什么进制，结果都是1，所以会出现[1,NaN,NaN]的结果。</p>
+</li>
+<li><p>Object.create()<br>这个是ES5中新增加的实现对象级别继承的快速方法。</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> a = &#123;<span class="attr">sayHi</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">1</span>)&#125;&#125;;</div><div class="line"><span class="keyword">var</span> b = <span class="built_in">Object</span>.create(a); </div><div class="line"><span class="comment">// 这里其实是可以传两个参数，第二个参数是一个配置对象，我们可以配置</span></div><div class="line">   writable,configurable(是否能够被删除),enumerable(是否可以被<span class="keyword">for</span> <span class="keyword">in</span>枚举)</div><div class="line">b.sayHi() <span class="comment">// 1</span></div></pre></td></tr></table></figure>
+<p>就像上面代码看到的一样，通过这种方式，我们很容易的就实现了两个对象之间的对象，<br>这比我们使用<strong>proto</strong>这个非标准方法要正式并且方便的多，但是，大家都知道，美好的<br>事情，都是有兼容性的，所以这个方法的兼容性写法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">creatObject</span>(<span class="params">b</span>)</span>&#123;</div><div class="line">   <span class="keyword">if</span> (<span class="built_in">Object</span>.create) &#123;</div><div class="line">       <span class="keyword">return</span> <span class="built_in">Object</span>.create(b)</div><div class="line">   &#125;<span class="keyword">else</span> &#123;</div><div class="line">       <span class="keyword">var</span> b = &#123;&#125;;</div><div class="line">       b.__proto__ = a;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>CSS3中新增倒影属性<br>CSS3中新增了一个倒影属性，box-reflect:below</p>
+</li>
+<li><p>em 和 rem<br>rem是css3中引进的新的单位，使用的时候，我们给html标签的font-size设置一个百分数<br>（相当于16px的），然后页面中的所有元素就都可以使用rem了，都是相对于html这个标签中设置的字体大小来的。<br>而em用法的话，同样也是在body标签中设置一下font-size为16px的百分之多少，但是em<br>存在的根本问题是，下面元素在设置多少倍的em的时候并不是很相当于body来说的，而是<br>相当于自己的父元素来说的，所以说这样就会出现很多不可控的地方</p>
+</li>
+<li><p>css3中的perspective属性<br>css3中的这个属性，是设置在父盒子上的，产生的效果是，在下面的子元素中，如果设置了translateZ这样的属性的时候，会出现近大远小的3d效果</p>
+</li>
+<li><p>HTML5中的应用缓存<br>html5中引入了应用程序缓存，这意味着web应用可以进行缓存，在没有网络的时候，也可以访问。用法就是在html标签里写上manifest属性。<br>manifest是写在html标签里的属性，表示我们缓存策略是根据哪个文件来执行的，这个manifest文件分为三个部分，cache manifest需要缓存的，network不缓存的，fallback<br>当无法访问时，回退的页面。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">DOCTYPE</span> <span class="attr">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">manifest</span> = <span class="string">'demo.appcache'</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>碰到过的兼容性问题<br>现在我们的兼容性只需要保证到IE7就行，但是说实话，即便是兼容性保证到IE7，还是会出现很多问题</p>
+<ul>
+<li>注册事件，我们在w3c标准的浏览器中，用addEventListener就可以，但是在IE中的<br>话，在IE9以上才支持，在IE中用的是attachEvent，并且，在注册事件的时候，还要在事件名处加上on</li>
+<li>事件对象也是，我们在w3c标准的浏览器中，直接写上行参就行，但是在IE中还需要<br>用window.event</li>
+<li>还有我们最常见的盒子模型，在w3c中，我们设置宽度的时候，设置的其实是content<br>的宽高，但是在IE中我们设置宽高的话，直接就是整个盒子的宽高，幸好，在css3中出现了box-sizing这个属性，我们可以统一它们</li>
+<li>dom获取中，document.getElementByClassName也是有兼容性</li>
+<li>dom中nextElementSibling、PreviousElementSibling也是有兼容性问题</li>
+<li>firstElementChild lastElementChild</li>
+<li>innerText  textContent</li>
+</ul>
+</li>
+<li><p>前端优化的问题</p>
+<ul>
+<li>首先就是减少http的请求，所以我们要把代码进行压缩，并且能够合并在一起的文件合并在一起，使用精灵图，或者base64图，或者对于某些静态资源，从cdn获取等等，这些都是为了减少http的请求</li>
+<li>对于图片较多的网站，我们可以使用懒加载的技术，等到页面滑动到的时候我们再将图片加载。</li>
+<li>对于js这些文件，放到页面的底部，不要影响到页面的渲染</li>
+<li>尽量减少重绘dom的次数，因为重绘com会十分影响页面的性能</li>
+<li>对于一个dom元素我们修改的样式太多的时候，建议使用添加类名的方式</li>
+<li>当我们对dom操作变动很大的时候，建议使用innerHTML，而不是一次次的去修改dom，增加重绘的次数</li>
+</ul>
+</li>
+</ol>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常见面试题汇总"><span class="toc-text">常见面试题汇总</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2015/04/18/jquery的入口函数/" class="prev">&larr; Prev post js、jquery的入口函数</a>
+  
+
+  
+
+  
+    <a href="/2015/04/03/数组的高效去重方法/" class="next">Next post 数组的高效去重方法 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
