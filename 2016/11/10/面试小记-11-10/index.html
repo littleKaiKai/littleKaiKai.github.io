@@ -1,0 +1,307 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="怎样判断一个对象是不是json？现在能做到的是，可以判断一个对象是对象，但是还做不到判断一个对象是不是json。在网上查资料，得到的代码是
+
+1234if(typeof(obj) === 'object' &amp;&amp; Object.prototype.toString.call(obj).toLowerCase() === '[object,object]' &amp;&amp; ...">
+  
+  <title>面试小记--11.10 [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="/2016/10/08/常见布局实现方式/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        常见布局实现方式
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>面试小记--11.10</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-11-10</span>
+      
+      
+    </p>
+    
+    <ol>
+<li>怎样判断一个对象是不是json？<br>现在能做到的是，可以判断一个对象是对象，但是还做不到判断一个对象是不是json。在网上查资料，得到的代码是</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span>(obj) === <span class="string">'object'</span> &amp;&amp; <span class="built_in">Object</span>.prototype.toString.call(obj).toLowerCase() === <span class="string">'[object,object]'</span> &amp;&amp; !obj.length) &#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="string">'isJson'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是这种写法的话，即使是普通的对象，也是会被判定为是true的，所以这样的话，并不能达到我们想要的效果。</p>
+<ol>
+<li>弹性盒子中的容器各属性以及各子项的属性<br>在弹性盒子模型中，容器的属性有</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">flex-direction <span class="comment">// 这个属性是设置主轴的方向（因为有direction嘛）</span></div><div class="line">flex-wrap <span class="comment">// 这个是设置主轴方向的子项目在占满之后应不应该换行</span></div><div class="line">flex-flow <span class="comment">// 这个属性是将上面这两个属性合起来写</span></div><div class="line">justify-content <span class="comment">// 这个属性是设置子项目在主轴上的一个排列方式，可以</span></div><div class="line">                <span class="comment">// 设置的值有flex-start、flex-end、center等</span></div><div class="line">align-items <span class="comment">// 这个属性设置的是交叉轴方向上的对齐方式，可以有flex-start、</span></div><div class="line">            <span class="comment">// flex-end、center等</span></div><div class="line">align-content <span class="comment">// 这个定义了多跟轴线的对齐方式，一般时候用不上</span></div></pre></td></tr></table></figure>
+<p>下面是项目的属性：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">order <span class="comment">// 这个属性定义的是当前子项目的顺序，这个值设置的越小的话，排列顺序</span></div><div class="line">      <span class="comment">// 将会越靠前</span></div><div class="line">flex-grow <span class="comment">// 这个属性定义的是当前项目的一个放大的比例，默认为0，也就是即便</span></div><div class="line">           <span class="comment">// 有剩余空间，也不会放大</span></div><div class="line">flex-shrink <span class="comment">// 这个属性定义的是当前项目的一个缩小比例，默认为1，也就是说</span></div><div class="line">            <span class="comment">// 当空间不足的时候，之但前子项是会进行压缩的</span></div><div class="line">flex-basis <span class="comment">// 这个属性是定义了在分配多余的空间前，项目占据的主轴空间，</span></div><div class="line">           <span class="comment">// 默认为auto，即项目本来的大小</span></div><div class="line">flex <span class="comment">// 这个属性是上面三个属性(flex-grow、flex-shrnk、flex-basis)的简写，</span></div><div class="line">     <span class="comment">// 浏览器会根据这个属性值去推算那三个的值，所以再用的时候直接设置</span></div><div class="line">     <span class="comment">// 这个属性的值就可以了。</span></div><div class="line">align-self <span class="comment">// 这个属性的意思是，当前项目可以有与其他项目不一样的对齐方式，</span></div><div class="line">           <span class="comment">// 也就是说这个属性会覆盖容器设置的align-items的属性</span></div></pre></td></tr></table></figure></p>
+<ol>
+<li>Promise</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">function getData(url) &#123;</div><div class="line">   return new Promise(function(resolve,reject) &#123;</div><div class="line">           $.ajax(&#123;</div><div class="line">                   method : &apos;get&apos;,</div><div class="line">                   url : url,</div><div class="line">                   dataType : json,</div><div class="line">                   success : resolve(data),</div><div class="line">                   error : reject(err)</div><div class="line">               &#125;)</div><div class="line">       &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>jQuery当中遍历节点的方法</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$().children() <span class="comment">// 获取所有的子节点</span></div><div class="line">$().next() <span class="comment">// 获取下一个兄弟节点</span></div><div class="line">$().prev() <span class="comment">// 获取上一个兄弟节点</span></div><div class="line">$().siblings() <span class="comment">// 获取所有的兄弟节点</span></div></pre></td></tr></table></figure>
+<p>原生dom中的前一个和后一个是previousSibling 和 nextSibling,没有s，siblings是jquery中的方法，不要记混了。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2016/10/08/常见布局实现方式/" class="next">Next post 常见布局实现方式 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
