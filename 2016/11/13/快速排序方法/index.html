@@ -1,14 +1,8 @@
 
 
-  
 
 
 
-
-  
-
-
-  
 
 
 <!doctype html>
@@ -22,9 +16,10 @@
   
   
   
-    <meta name="description" content="">
+    <meta name="description" content="快速排序法下面是快速排序方法的代码，利用的方法就是，选取中间值，然后小的在左边数组，大的在右边数组，然后再concat起来
+12345678910111213141516function quickSort(arr)&#123;   if (arr.length &lt;= 1) return arr;   var midIndex = Math.floor(arr.length / 2);...">
   
-  <title>Archives: 11/2016: 2016 [ 小石头的个人博客 ]</title>
+  <title>快速排序方法 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -43,6 +38,15 @@
 <body>
 <div class="side-navigate hide-area">
   
+  
+    <div class="item next">
+      <a href="/2016/11/10/面试小记-11-10/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        面试小记--11.10
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -68,7 +72,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/archives">Archives</a>
             
@@ -107,96 +111,41 @@
     <div id="content-inner">
       
       
-  <article>
-    
-
-  <div id="recent-posts">
-    <h1>Archives
-    
-      <span class="posts-count">
-      Total
-      2
-      
-        posts
-      
-      </span>
-    
-    </h1>
-    
-    
+  <article id="post">
+    <h1>快速排序方法</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-11-13</span>
       
       
-        
-      
-      
+    </p>
     
-      
-      
-      
-    
-    
-    
-      
-      
-        
-        <h3 class="archive-year-title">2016
-        
-          <span class="posts-count">
-          Total
-          2
-          
-            posts
-          
-          </span>
-        
-        </h3>
-      
-      <div class="post-title-item">
-  
-  <a href="/2016/11/13/快速排序方法/">
-  
-    快速排序方法
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-13</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2016/11/10/面试小记-11-10/">
-  
-    面试小记--11.10
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-10</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-  </div>
-
-
+    <h1 id="快速排序法"><a href="#快速排序法" class="headerlink" title="快速排序法"></a>快速排序法</h1><p>下面是快速排序方法的代码，利用的方法就是，选取中间值，然后小的在左边数组，大的在右边数组，然后再concat起来</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr</span>)</span>&#123;</div><div class="line">   <span class="keyword">if</span> (arr.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> arr;</div><div class="line">   <span class="keyword">var</span> midIndex = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>);</div><div class="line">   <span class="keyword">var</span> midValue = arr.splice(midIndex,<span class="number">1</span>)[<span class="number">0</span>];</div><div class="line">   <span class="keyword">var</span> left = [];</div><div class="line">   <span class="keyword">var</span> right = [];</div><div class="line">   <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">       <span class="keyword">if</span> (arr[i] &lt; midValue) &#123;</div><div class="line">           left.push(arr[i])</div><div class="line">       &#125;<span class="keyword">else</span> &#123;</div><div class="line">           right.push(arr[i])</div><div class="line">       &#125;</div><div class="line">   &#125;;</div><div class="line">   <span class="keyword">return</span> quickSort(left).concat(midValue,quickSort(right))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#快速排序法"><span class="toc-text">快速排序法</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2016/11/10/面试小记-11-10/" class="next">Next post 面试小记--11.10 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
 
       
       
@@ -291,6 +240,8 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
+
+  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
