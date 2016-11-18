@@ -16,10 +16,13 @@
   
   
   
-    <meta name="description" content="快速排序法下面是快速排序方法的代码，利用的方法就是，选取中间值，然后小的在左边数组，大的在右边数组，然后再concat起来
-12345678910111213141516function quickSort(arr)&#123;   if (arr.length &lt;= 1) return arr;   var midIndex = Math.floor(arr.length / 2);...">
+    <meta name="description" content="$.when()方法$.when()方法在我们处理多个ajax请求的时候有着非常重要的作用，最常见的应用场景是我们在渲染数据的时候，需要从后台拿到多个数据，然后一次性地去渲染到页面中，在这个场景中，我们会碰到三个难题：
+
+第一个就是我们，怎样才能构判断出我们所有的请求都成功了
+第二个难题就是，怎样实现，这么多的请求当中，出现一个错误，就结束我们的请求，并且通知我们有请求发生了错误
+第三个问题...">
   
-  <title>快速排序方法 [ 小石头的个人博客 ]</title>
+  <title>$.when()方法 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -38,22 +41,13 @@
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
-      <a href="/2016/11/18/when-方法/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        $.when()方法
-      </div>
-    </div>
-  
   
     <div class="item next">
-      <a href="/2016/11/10/面试小记-11-10/">
+      <a href="/2016/11/13/快速排序方法/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        面试小记--11.10
+        快速排序方法
       </div>
     </div>
   
@@ -121,35 +115,38 @@
       
       
   <article id="post">
-    <h1>快速排序方法</h1>
+    <h1>$.when()方法</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-11-13</span>
+      <span id = "post-title-date">Created at 2016-11-18</span>
       
       
     </p>
     
-    <h1 id="快速排序法"><a href="#快速排序法" class="headerlink" title="快速排序法"></a>快速排序法</h1><p>下面是快速排序方法的代码，利用的方法就是，选取中间值，然后小的在左边数组，大的在右边数组，然后再concat起来</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr</span>)</span>&#123;</div><div class="line">   <span class="keyword">if</span> (arr.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> arr;</div><div class="line">   <span class="keyword">var</span> midIndex = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>);</div><div class="line">   <span class="keyword">var</span> midValue = arr.splice(midIndex,<span class="number">1</span>)[<span class="number">0</span>];</div><div class="line">   <span class="keyword">var</span> left = [];</div><div class="line">   <span class="keyword">var</span> right = [];</div><div class="line">   <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">       <span class="keyword">if</span> (arr[i] &lt; midValue) &#123;</div><div class="line">           left.push(arr[i])</div><div class="line">       &#125;<span class="keyword">else</span> &#123;</div><div class="line">           right.push(arr[i])</div><div class="line">       &#125;</div><div class="line">   &#125;;</div><div class="line">   <span class="keyword">return</span> quickSort(left).concat(midValue,quickSort(right))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+    <h1 id="when-方法"><a href="#when-方法" class="headerlink" title="$.when()方法"></a>$.when()方法</h1><p>$.when()方法在我们处理多个ajax请求的时候有着非常重要的作用，最常见的应用场景是<br>我们在渲染数据的时候，需要从后台拿到多个数据，然后一次性地去渲染到页面中，在这<br>个场景中，我们会碰到三个难题：</p>
+<ul>
+<li>第一个就是我们，怎样才能构判断出我们所有的请求都成功了</li>
+<li>第二个难题就是，怎样实现，这么多的请求当中，出现一个错误，就结束我们的请求，并且通知我们有请求发生了错误</li>
+<li>第三个问题是，我们在渲染我们请求回来的数据的时候，是有顺序的，也就是说每一个数据在什么地方是有顺序这个怎么实现<br>幸好，问题总归是有解决办法的————那就是$.when().done(function(){}).fail(function(){})<br>下面是一个小例子</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">       <span class="keyword">var</span> arr = [];</div><div class="line">       <span class="keyword">var</span> a1,b1,c1;</div><div class="line">       <span class="keyword">var</span> a = $.ajax(&#123;</div><div class="line">           <span class="attr">method</span> : <span class="string">'get'</span>,</div><div class="line">           <span class="attr">url</span> : <span class="string">'01.json'</span>,</div><div class="line">       &#125;);</div><div class="line">       <span class="keyword">var</span> b = $.ajax(&#123;</div><div class="line">           <span class="attr">method</span> : <span class="string">'get'</span>,</div><div class="line">           <span class="attr">url</span> : <span class="string">'02.json'</span>,</div><div class="line">       &#125;);</div><div class="line">       <span class="keyword">var</span> c = $.ajax(&#123;</div><div class="line">           <span class="attr">method</span> : <span class="string">'get'</span>,</div><div class="line">           <span class="attr">url</span> : <span class="string">'03.json'</span>,</div><div class="line">       &#125;);</div><div class="line">       $.when(a,b,c).done(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">           arr.push(<span class="built_in">JSON</span>.parse(a.responseText).name);</div><div class="line">           arr.push(<span class="built_in">JSON</span>.parse(b.responseText).name);</div><div class="line">           arr.push(<span class="built_in">JSON</span>.parse(c.responseText).name);</div><div class="line">           <span class="built_in">console</span>.log(arr);</div><div class="line">       &#125;).fail(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">           <span class="built_in">console</span>.log(<span class="string">'fail'</span>)</div><div class="line">       &#125;)</div><div class="line">   &lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#快速排序法"><span class="toc-text">快速排序法</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#when-方法"><span class="toc-text">$.when()方法</span></a></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2016/11/18/when-方法/" class="prev">&larr; Prev post $.when()方法</a>
-  
 
   
 
   
-    <a href="/2016/11/10/面试小记-11-10/" class="next">Next post 面试小记--11.10 &rarr;</a>
+    <a href="/2016/11/13/快速排序方法/" class="next">Next post 快速排序方法 &rarr;</a>
   
 </nav>
 
