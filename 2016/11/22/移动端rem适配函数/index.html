@@ -1,14 +1,8 @@
 
 
-  
 
 
 
-
-  
-
-
-  
 
 
 <!doctype html>
@@ -22,9 +16,10 @@
   
   
   
-    <meta name="description" content="">
+    <meta name="description" content="这里粘贴一下，简述里九彩拼盘（作者）的关于rem适配多终端的函数：
+1234567891011121314151617181920212223242526 ;(function(win) &#123;    var doc = win.document;    var docEl = doc.documentElement;    var tid;    function refreshRe...">
   
-  <title>Archives: 11/2016: 2016 [ 小石头的个人博客 ]</title>
+  <title>移动端rem适配函数 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -43,6 +38,15 @@
 <body>
 <div class="side-navigate hide-area">
   
+  
+    <div class="item next">
+      <a href="/2016/11/18/when-方法/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        jQuery.when()方法
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -68,7 +72,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/archives">Archives</a>
             
@@ -107,148 +111,41 @@
     <div id="content-inner">
       
       
-  <article>
+  <article id="post">
+    <h1>移动端rem适配函数</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2016-11-22</span>
+      
+      
+    </p>
     
-
-  <div id="recent-posts">
-    <h1>Archives
-    
-      <span class="posts-count">
-      Total
-      4
-      
-        posts
-      
-      </span>
-    
-    </h1>
-    
-    
-      
-      
-        
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-    
-    
-      
-      
-        
-        <h3 class="archive-year-title">2016
-        
-          <span class="posts-count">
-          Total
-          4
-          
-            posts
-          
-          </span>
-        
-        </h3>
-      
-      <div class="post-title-item">
-  
-  <a href="/2016/11/22/移动端rem适配函数/">
-  
-    移动端rem适配函数
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-22</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2016/11/18/when-方法/">
-  
-    jQuery.when()方法
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-18</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2016/11/13/快速排序方法/">
-  
-    快速排序方法
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-13</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2016/11/10/面试小记-11-10/">
-  
-    面试小记--11.10
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-10</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
+    <p>这里粘贴一下，简述里九彩拼盘（作者）的关于rem适配多终端的函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> ;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">win</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> doc = win.document;</div><div class="line">    <span class="keyword">var</span> docEl = doc.documentElement;</div><div class="line">    <span class="keyword">var</span> tid;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">refreshRem</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> width = docEl.getBoundingClientRect().width;</div><div class="line">        <span class="keyword">if</span> (width &gt; <span class="number">540</span>) &#123; <span class="comment">// 最大宽度</span></div><div class="line">            width = <span class="number">540</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">var</span> rem = width / <span class="number">10</span>; <span class="comment">// 将屏幕宽度分成10份， 1份为1rem</span></div><div class="line">        docEl.style.fontSize = rem + <span class="string">'px'</span>;</div><div class="line">    &#125;</div><div class="line">    win.addEventListener(<span class="string">'resize'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        clearTimeout(tid);</div><div class="line">        tid = setTimeout(refreshRem, <span class="number">300</span>);</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">    win.addEventListener(<span class="string">'pageshow'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (e.persisted) &#123;</div><div class="line">            clearTimeout(tid);</div><div class="line">            tid = setTimeout(refreshRem, <span class="number">300</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">    refreshRem();</div><div class="line">&#125;)(<span class="built_in">window</span>);</div></pre></td></tr></table></figure>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
     
   </div>
+</div>
 
+  
+<nav id="pagination">
+  
 
-  </article>
+  
+
+  
+    <a href="/2016/11/18/when-方法/" class="next">Next post jQuery.when()方法 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
 
       
       
@@ -343,6 +240,8 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
+
+  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
