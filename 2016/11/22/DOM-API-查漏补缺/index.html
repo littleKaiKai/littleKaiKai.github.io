@@ -16,10 +16,13 @@
   
   
   
-    <meta name="description" content="这里粘贴一下，简述里九彩拼盘（作者）的关于rem适配多终端的函数：
-1234567891011121314151617181920212223242526 ;(function(win) &#123;    var doc = win.document;    var docEl = doc.documentElement;    var tid;    function refreshRe...">
+    <meta name="description" content="有些API啊总是用了忘，用了忘。好记性不如烂笔头，赶紧记下来把，就当是做一个工具箱了。
+
+document.documentElment这个API获取到的就是我们html标签
+getBoundingClientRect()这个API里包含了我们选中元素距离浏览器窗口的上下左右距离，并且，还有一个width属性，这个属性是当前元素的宽度
+document.documentElement.get...">
   
-  <title>移动端rem适配函数 [ 小石头的个人博客 ]</title>
+  <title>DOM API 查漏补缺 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -38,22 +41,13 @@
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
-      <a href="/2016/11/22/DOM-API-查漏补缺/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        DOM API 查漏补缺
-      </div>
-    </div>
-  
   
     <div class="item next">
-      <a href="/2016/11/18/when-方法/">
+      <a href="/2016/11/22/移动端rem适配函数/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        jQuery.when()方法
+        移动端rem适配函数
       </div>
     </div>
   
@@ -121,15 +115,25 @@
       
       
   <article id="post">
-    <h1>移动端rem适配函数</h1>
+    <h1>DOM API 查漏补缺</h1>
     <p class="page-title-sub">
       <span id = "post-title-date">Created at 2016-11-22</span>
       
       
     </p>
     
-    <p>这里粘贴一下，简述里九彩拼盘（作者）的关于rem适配多终端的函数：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> ;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">win</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> doc = win.document;</div><div class="line">    <span class="keyword">var</span> docEl = doc.documentElement;</div><div class="line">    <span class="keyword">var</span> tid;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">refreshRem</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> width = docEl.getBoundingClientRect().width;</div><div class="line">        <span class="keyword">if</span> (width &gt; <span class="number">540</span>) &#123; <span class="comment">// 最大宽度</span></div><div class="line">            width = <span class="number">540</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">var</span> rem = width / <span class="number">10</span>; <span class="comment">// 将屏幕宽度分成10份， 1份为1rem</span></div><div class="line">        docEl.style.fontSize = rem + <span class="string">'px'</span>;</div><div class="line">    &#125;</div><div class="line">    win.addEventListener(<span class="string">'resize'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        clearTimeout(tid);</div><div class="line">        tid = setTimeout(refreshRem, <span class="number">300</span>);</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">    win.addEventListener(<span class="string">'pageshow'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (e.persisted) &#123;</div><div class="line">            clearTimeout(tid);</div><div class="line">            tid = setTimeout(refreshRem, <span class="number">300</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">    refreshRem();</div><div class="line">&#125;)(<span class="built_in">window</span>);</div></pre></td></tr></table></figure>
+    <p>有些API啊总是用了忘，用了忘。好记性不如烂笔头，赶紧记下来把，<br>就当是做一个工具箱了。</p>
+<ol>
+<li><code>document.documentElment</code>这个API获取到的就是我们html标签</li>
+<li><code>getBoundingClientRect()</code>这个API里包含了我们选中元素距离浏览器窗口的上下<br>左右距离，并且，还有一个width属性，这个属性是当前元素的宽度</li>
+<li><code>document.documentElement.getBoundingClientRect().width</code>可以获取到html标签<br>的宽度，<strong>要注意这个属性在移动端获取到的其实是viewport这个视图容器的宽度，<br>所以我们在移动端的时候，一定要在meta标签里设置viewport为device-width</strong>这在用rem布局的时候，会用到</li>
+<li><code>document.body.clientWidth</code>，同样的，这个API也可以在rem布局的时候使用，得到<br>的是body标签的宽度</li>
+<li><code>window.addEventListener(&#39;pageshow&#39;,function(){})</code>这个事件是页面显示事件。<br>这个事件和window.onload事件差不多，但是在某些浏览器中，有”往返缓存”的特性，<br>所以在单击前进后退按钮的时候，有可能不会触发onload事件，所以这个时候我们就需要使用pageshow事件了。</li>
+<li><code>event.persisted</code>事件对象上的这个属性用来判断，在有”往返缓存”特性的浏览器中<br>当前页面是从服务器请求的，还是bfcache的</li>
+<li>其实手机上的分辨率的提高，是能够将css中1px的内容展示得更清楚，<strong>并不是</strong>能够展示更多的东西</li>
+<li></li>
+</ol>
+
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
@@ -143,13 +147,11 @@
   
 <nav id="pagination">
   
-    <a href="/2016/11/22/DOM-API-查漏补缺/" class="prev">&larr; Prev post DOM API 查漏补缺</a>
-  
 
   
 
   
-    <a href="/2016/11/18/when-方法/" class="next">Next post jQuery.when()方法 &rarr;</a>
+    <a href="/2016/11/22/移动端rem适配函数/" class="next">Next post 移动端rem适配函数 &rarr;</a>
   
 </nav>
 
