@@ -1,0 +1,319 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="管木凯">
+  
+  
+  
+  
+    <meta name="description" content="NodeJS几行代码搭建服务器的背后利用NodeJS搭建起一个web服务器，只需要下面几行简单的代码
+12345678910// app.js文件const http = require('http');const app = http.createServer(function(req,res)&#123;  res.writeHead(200,&#123;'content-type':'...">
+  
+  <title> [ 小石头的个人博客 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="/2016/11/22/DOM-API-查漏补缺/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        DOM API 查漏补缺
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg"/>
+          <div id="homelink">小石头的个人博客</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>No Title</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2017-11-13</span>
+      
+      
+    </p>
+    
+    <h4 id="NodeJS几行代码搭建服务器的背后"><a href="#NodeJS几行代码搭建服务器的背后" class="headerlink" title="NodeJS几行代码搭建服务器的背后"></a>NodeJS几行代码搭建服务器的背后</h4><p>利用NodeJS搭建起一个web服务器，只需要下面几行简单的代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// app.js文件</span></div><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">const</span> app = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">  res.writeHead(<span class="number">200</span>,&#123;<span class="string">'content-type'</span>:<span class="string">'text/plain'</span>&#125;);</div><div class="line">  res.write(<span class="string">'hello world'</span>);</div><div class="line">  res.end();</div><div class="line">&#125;);</div><div class="line">app.listen(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'server is running'</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>命令行<code>node app</code>，然后在浏览器中访问<a href="http://127.0.0.1:3000，我们就能够看到&#39;hello" target="_blank" rel="external">http://127.0.0.1:3000，我们就能够看到&#39;hello</a> world’了。</p>
+<p>大家都明白，我们之所以能够用几行代码，就起一个服务，是因为node做好了一系列的封装，那么，在这几行代码的背后，node究竟做了哪些呢？我们来一步一步地研究。</p>
+<h5 id="Step1"><a href="#Step1" class="headerlink" title="Step1"></a>Step1</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div></pre></td></tr></table></figure>
+<p>查看http模块源码，发现在http模块做的事情很简单，更像是一个集合器：①引入了六个<code>_http_*.js</code>文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> agent = <span class="built_in">require</span>(<span class="string">'_http_agent'</span>);<span class="comment">// agent代理，如果启用了keep-alive，那么这个代理相当于一个连接池，这个代理了维护了一定数量的socket链接。</span></div><div class="line"><span class="keyword">const</span> client = <span class="built_in">require</span>(<span class="string">'_http_client'</span>);<span class="comment">// 创建http请求客户端</span></div><div class="line"><span class="keyword">const</span> common = <span class="built_in">require</span>(<span class="string">'_http_common'</span>);<span class="comment">// http的工具模块</span></div><div class="line"><span class="keyword">const</span> incoming = <span class="built_in">require</span>(<span class="string">'_http_incoming'</span>);<span class="comment">// 我们的request对象就是incoming.IncomingMessage的实例</span></div><div class="line"><span class="keyword">const</span> outgoing = <span class="built_in">require</span>(<span class="string">'_http_outgoing'</span>);<span class="comment">// 我们的response对象就是outgoing.OutgoingMessage的实例</span></div><div class="line"><span class="keyword">const</span> server = <span class="built_in">require</span>(<span class="string">'_http_server'</span>);<span class="comment">// 创建服务端</span></div></pre></td></tr></table></figure>
+<p>②暴露出一个创建服务端的方法<code>createServer</code>，一个创建客户端方法<code>request</code>和一个客户端请求<code>get</code>。</p>
+<h5 id="Step2"><a href="#Step2" class="headerlink" title="Step2"></a>Step2</h5><p>首先把创建出app对象的整个流程贴出来</p>
+<p><img src="./img/server.png"></p>
+<p>再来看我们的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// app.js文件</span></div><div class="line"><span class="keyword">const</span> app = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">  res.writeHead(<span class="number">200</span>,&#123;<span class="string">'content-type'</span>:<span class="string">'text/plain'</span>&#125;);</div><div class="line">  res.write(<span class="string">'hello world'</span>);</div><div class="line">  res.end();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这一步，调用了http模块暴露出来的<code>createServer</code>方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// http.js文件</span></div><div class="line"><span class="keyword">const</span> server = <span class="built_in">require</span>(<span class="string">'_http_server'</span>);</div><div class="line"><span class="keyword">const</span> Server = server.Server;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createServer</span>(<span class="params">requestListener</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Server(requestListener);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以，这个方法是创建了一个<code>server.Server</code> 的实例对象，我们这里命名为app，下面是<code>server.Server</code> 函数的源码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// _http_server.js文件</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Server</span>(<span class="params">requestListener</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Server)) <span class="keyword">return</span> <span class="keyword">new</span> Server(requestListener);</div><div class="line">  </div><div class="line">  net.Server.call(<span class="keyword">this</span>, &#123; <span class="attr">allowHalfOpen</span>: <span class="literal">true</span> &#125;); <span class="comment">// 采用call方式调用net.Server构造函数，将net.Server构造函数上的属性添加到app这个对象上。</span></div><div class="line">  </div><div class="line">  <span class="keyword">if</span> (requestListener) &#123;</div><div class="line">    <span class="keyword">this</span>.on(<span class="string">'request'</span>, requestListener);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.httpAllowHalfOpen = <span class="literal">false</span>;</div><div class="line">  <span class="keyword">this</span>.on(<span class="string">'connection'</span>, connectionListener);</div><div class="line">  <span class="keyword">this</span>.timeout = <span class="number">2</span> * <span class="number">60</span> * <span class="number">1000</span>;</div><div class="line">  <span class="keyword">this</span>._pendingResponseData = <span class="number">0</span>;</div><div class="line">  <span class="keyword">this</span>.maxHeadersCount = <span class="literal">null</span>;</div><div class="line">&#125;</div><div class="line">util.inherits(Server, net.Server);<span class="comment">//Object.setPrototypeOf(Server.prototype,net.Server.prototype)</span></div></pre></td></tr></table></figure>
+<p>从上面的代码来看，我们的app对象上，现在已经有了”request”和”connection”这两个事件，并且当这两个事件触发时，我们都设置了相应的”requestListener”和”connectionListener”，那么为什么，app调用on方法，就能给这个对象添加上方法？这个on方法又是从哪里来的呢？自定义的事件又是怎样触发的呢？在上面的源码中，有这么两句：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">net.Server.call(<span class="keyword">this</span>, &#123; <span class="attr">allowHalfOpen</span>: <span class="literal">true</span> &#125;); </div><div class="line"><span class="comment">// 采用call方式调用net.Server构造函数，将net.Server构造函数上的属性添加到app这个对象上。</span></div><div class="line">util.inherits(Server, net.Server);</div><div class="line"><span class="comment">// 即Object.setPrototypeOf(Server.prototype,net.Server.prototype)</span></div></pre></td></tr></table></figure>
+<p>所以我们再接着看<code>net.Server</code> 函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// net.js文件</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Server</span>(<span class="params">options, connectionListener</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Server))</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Server(options, connectionListener);</div><div class="line"></div><div class="line">  EventEmitter.call(<span class="keyword">this</span>); </div><div class="line">  <span class="comment">// 采用call方式调用EventEmitter构造函数，将EventEmitter构造函数上的属性添加到app这个对象上。</span></div><div class="line"></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> options === <span class="string">'function'</span>) &#123; </div><div class="line">    connectionListener = options;</div><div class="line">    options = &#123;&#125;;</div><div class="line">    <span class="keyword">this</span>.on(<span class="string">'connection'</span>, connectionListener);</div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (options == <span class="literal">null</span> || <span class="keyword">typeof</span> options === <span class="string">'object'</span>) &#123;</div><div class="line">    options = options || &#123;&#125;;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> connectionListener === <span class="string">'function'</span>) &#123;</div><div class="line">      <span class="keyword">this</span>.on(<span class="string">'connection'</span>, connectionListener); </div><div class="line">    &#125;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'options must be an object'</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">this</span>._connections = <span class="number">0</span>;</div><div class="line"></div><div class="line">  <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, <span class="string">'connections'</span>, &#123; </div><div class="line">    <span class="attr">get</span>: internalUtil.deprecate(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>._usingSlaves) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>._connections;</div><div class="line">    &#125;, <span class="string">'Server.connections property is deprecated. '</span> +</div><div class="line">       <span class="string">'Use Server.getConnections method instead.'</span>, <span class="string">'DEP0020'</span>),</div><div class="line">    <span class="attr">set</span>: internalUtil.deprecate(<span class="function">(<span class="params">val</span>) =&gt;</span> (<span class="keyword">this</span>._connections = val),</div><div class="line">                                <span class="string">'Server.connections property is deprecated.'</span>,</div><div class="line">                                <span class="string">'DEP0020'</span>),</div><div class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>, <span class="attr">enumerable</span>: <span class="literal">false</span></div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">this</span>._handle = <span class="literal">null</span>;</div><div class="line">  <span class="keyword">this</span>._usingSlaves = <span class="literal">false</span>;</div><div class="line">  <span class="keyword">this</span>._slaves = [];</div><div class="line">  <span class="keyword">this</span>._unref = <span class="literal">false</span>;</div><div class="line"></div><div class="line">  <span class="keyword">this</span>.allowHalfOpen = options.allowHalfOpen || <span class="literal">false</span>;</div><div class="line">  <span class="keyword">this</span>.pauseOnConnect = !!options.pauseOnConnect;</div><div class="line">&#125;</div><div class="line">util.inherits(Server, EventEmitter); </div><div class="line"><span class="comment">// 即Object.setPrototypeOf(Server.prototype,EventEmitter.prototype)</span></div></pre></td></tr></table></figure>
+<p><code>net.Server</code> 函数给app对象添加了<code>allowHalfOpen</code> 、<code>pauseOnConnect</code> 等属性，并且，由于继承<code>net.Server.prototype</code> 的关系，app的原型方法上又多出了listen、address、getConnections、close、listenFD、ref、unref等方法。</p>
+<p>但是，还是没有找到绑定事件的on方法，再往下一层找，<code>EventEmitter</code> :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// event.js文件</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">EventEmitter</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.domain = <span class="literal">null</span>;</div><div class="line">  <span class="keyword">if</span> (EventEmitter.usingDomains) &#123;</div><div class="line">    domain = domain || <span class="built_in">require</span>(<span class="string">'domain'</span>);</div><div class="line">    <span class="keyword">if</span> (domain.active &amp;&amp; !(<span class="keyword">this</span> <span class="keyword">instanceof</span> domain.Domain)) &#123;</div><div class="line">      <span class="keyword">this</span>.domain = domain.active;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>._events || <span class="keyword">this</span>._events === <span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">this</span>)._events) &#123;</div><div class="line">    <span class="keyword">this</span>._events = <span class="keyword">new</span> EventHandlers();</div><div class="line">    <span class="keyword">this</span>._eventsCount = <span class="number">0</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>._maxListeners = <span class="keyword">this</span>._maxListeners || <span class="literal">undefined</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同样是给app对象添加了一些属性，原型方法上又继承了setMaxListeners、getMaxListeners、emit、addListener、<strong>on</strong>、prependListener、once、prependOnceListener、removeListener、removeAllListeners、listeners、listenerCount、eventNames方法。</p>
+<p>我们终于找到了on方法，app的on方法原来是继承自EventEmitter.prototype。而on方法其实就是给某个事件的events队列里添加上监听器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// events.js文件</span></div><div class="line">EventEmitter.prototype.on = EventEmitter.prototype.addListener;</div><div class="line"></div><div class="line">EventEmitter.prototype.addListener = <span class="function"><span class="keyword">function</span> <span class="title">addListener</span>(<span class="params">type, listener</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> _addListener(<span class="keyword">this</span>, type, listener, <span class="literal">false</span>);<span class="comment">// this 指的是调用on方法的对象</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_addListener</span>(<span class="params">target, type, listener, prepend</span>) </span>&#123; <span class="comment">// prepend表示是否将监听器添加到最前</span></div><div class="line">  <span class="keyword">var</span> m;</div><div class="line">  <span class="keyword">var</span> events;</div><div class="line">  <span class="keyword">var</span> existing;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> listener !== <span class="string">'function'</span>)</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'"listener" argument must be a function'</span>);</div><div class="line"></div><div class="line">  events = target._events; </div><div class="line">  <span class="comment">// 在app上绑定的所有事件以及相应的监听器。&#123;'connection':[listener1,listener2,...],'close':[listener1,listener2,...],...&#125;，注意，当只有一个监听器的时候，并不是一个数组，只是一个listener</span></div><div class="line">  <span class="keyword">if</span> (!events) &#123;</div><div class="line">    events = target._events = <span class="keyword">new</span> EventHandlers(); <span class="comment">// 空对象</span></div><div class="line">    target._eventsCount = <span class="number">0</span>; <span class="comment">// 事件计数</span></div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// To avoid recursion（递归） in the case that type === "newListener"! Before</span></div><div class="line">    <span class="comment">// adding it to the listeners, first emit "newListener".</span></div><div class="line">    <span class="keyword">if</span> (events.newListener) &#123; <span class="comment">// 避免有事件名称叫'newListener'</span></div><div class="line">      target.emit(<span class="string">'newListener'</span>, type,</div><div class="line">                  listener.listener ? listener.listener : listener);</div><div class="line"></div><div class="line">      <span class="comment">// Re-assign `events` because a newListener handler could have caused the</span></div><div class="line">      <span class="comment">// this._events to be assigned to a new object</span></div><div class="line">      events = target._events;</div><div class="line">    &#125;</div><div class="line">    existing = events[type]; </div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (!existing) &#123; </div><div class="line">    <span class="comment">// Optimize the case of one listener. Don't need the extra array object.</span></div><div class="line">    existing = events[type] = listener;</div><div class="line">    ++target._eventsCount;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> existing === <span class="string">'function'</span>) &#123;</div><div class="line">      <span class="comment">// Adding the second element, need to change to array.</span></div><div class="line">      existing = events[type] = prepend ? [listener, existing] :</div><div class="line">                                          [existing, listener];</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="comment">// If we've already got an array, just append.</span></div><div class="line">      <span class="keyword">if</span> (prepend) &#123;</div><div class="line">        existing.unshift(listener);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        existing.push(listener);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Check for listener leak</span></div><div class="line">    <span class="keyword">if</span> (!existing.warned) &#123;</div><div class="line">      m = $getMaxListeners(target);</div><div class="line">      <span class="keyword">if</span> (m &amp;&amp; m &gt; <span class="number">0</span> &amp;&amp; existing.length &gt; m) &#123;</div><div class="line">        existing.warned = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">const</span> w = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Possible EventEmitter memory leak detected. '</span> +</div><div class="line">                            <span class="string">`<span class="subst">$&#123;existing.length&#125;</span> <span class="subst">$&#123;<span class="built_in">String</span>(type)&#125;</span> listeners `</span> +</div><div class="line">                            <span class="string">'added. Use emitter.setMaxListeners() to '</span> +</div><div class="line">                            <span class="string">'increase limit'</span>);</div><div class="line">        w.name = <span class="string">'MaxListenersExceededWarning'</span>;</div><div class="line">        w.emitter = target;</div><div class="line">        w.type = type;</div><div class="line">        w.count = existing.length;</div><div class="line">        process.emitWarning(w);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> target;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而自定义的这些事件的触发则是通过emit方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// events.js文件</span></div><div class="line">EventEmitter.prototype.emit = <span class="function"><span class="keyword">function</span> <span class="title">emit</span>(<span class="params">type</span>) </span>&#123; <span class="comment">// 事件发射器，事件触发器</span></div><div class="line">  <span class="keyword">var</span> er, handler, len, args, i, events, domain;</div><div class="line">  <span class="keyword">var</span> needDomainExit = <span class="literal">false</span>;</div><div class="line">  <span class="keyword">var</span> doError = (type === <span class="string">'error'</span>);</div><div class="line"></div><div class="line">  events = <span class="keyword">this</span>._events;</div><div class="line">  <span class="keyword">if</span> (events)</div><div class="line">    doError = (doError &amp;&amp; events.error == <span class="literal">null</span>);</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (!doError)</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"></div><div class="line">  domain = <span class="keyword">this</span>.domain;</div><div class="line"></div><div class="line">  <span class="comment">// If there is no 'error' event listener then throw.</span></div><div class="line">  <span class="keyword">if</span> (doError) &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">arguments</span>.length &gt; <span class="number">1</span>)</div><div class="line">      er = <span class="built_in">arguments</span>[<span class="number">1</span>];</div><div class="line">    <span class="keyword">if</span> (domain) &#123;</div><div class="line">      <span class="keyword">if</span> (!er)</div><div class="line">        er = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Uncaught, unspecified "error" event'</span>);</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> er === <span class="string">'object'</span> &amp;&amp; er !== <span class="literal">null</span>) &#123;</div><div class="line">        er.domainEmitter = <span class="keyword">this</span>;</div><div class="line">        er.domain = domain;</div><div class="line">        er.domainThrown = <span class="literal">false</span>;</div><div class="line">      &#125;</div><div class="line">      domain.emit(<span class="string">'error'</span>, er);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (er <span class="keyword">instanceof</span> <span class="built_in">Error</span>) &#123;</div><div class="line">      <span class="keyword">throw</span> er; <span class="comment">// Unhandled 'error' event</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="comment">// At least give some kind of context to the user</span></div><div class="line">      <span class="keyword">var</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Uncaught, unspecified "error" event. ('</span> + er + <span class="string">')'</span>);</div><div class="line">      err.context = er;</div><div class="line">      <span class="keyword">throw</span> err;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  handler = events[type];</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (!handler)</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (domain &amp;&amp; <span class="keyword">this</span> !== process) &#123;</div><div class="line">    domain.enter();</div><div class="line">    needDomainExit = <span class="literal">true</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> isFn = <span class="keyword">typeof</span> handler === <span class="string">'function'</span>;</div><div class="line">  len = <span class="built_in">arguments</span>.length;</div><div class="line">  <span class="keyword">switch</span> (len) &#123;</div><div class="line">    <span class="comment">// fast cases</span></div><div class="line">    <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">      emitNone(handler, isFn, <span class="keyword">this</span>);</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">      emitOne(handler, isFn, <span class="keyword">this</span>, <span class="built_in">arguments</span>[<span class="number">1</span>]);</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">      emitTwo(handler, isFn, <span class="keyword">this</span>, <span class="built_in">arguments</span>[<span class="number">1</span>], <span class="built_in">arguments</span>[<span class="number">2</span>]);</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">      emitThree(handler, isFn, <span class="keyword">this</span>, <span class="built_in">arguments</span>[<span class="number">1</span>], <span class="built_in">arguments</span>[<span class="number">2</span>], <span class="built_in">arguments</span>[<span class="number">3</span>]);</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    <span class="comment">// slower</span></div><div class="line">    <span class="keyword">default</span>:</div><div class="line">      args = <span class="keyword">new</span> <span class="built_in">Array</span>(len - <span class="number">1</span>);</div><div class="line">      <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; len; i++)</div><div class="line">        args[i - <span class="number">1</span>] = <span class="built_in">arguments</span>[i];</div><div class="line">      emitMany(handler, isFn, <span class="keyword">this</span>, args);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (needDomainExit)</div><div class="line">    domain.exit();</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h5 id="Step3"><a href="#Step3" class="headerlink" title="Step3"></a>Step3</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.listen(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'server is running'</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这一步是设置服务要监听的端口，调用的是app的listen方法，前面提到，这个方法其实是继承自<code>net.Server</code> 原型上的方法，源码中有一句</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (hasCallback) &#123;</div><div class="line">    <span class="keyword">this</span>.once(<span class="string">'listening'</span>, cb);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>这样，我们就为app对象，添加上了’listening’事件（this.once继承的是EventEmitter的原型）。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#NodeJS几行代码搭建服务器的背后"><span class="toc-text">NodeJS几行代码搭建服务器的背后</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Step1"><span class="toc-text">Step1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step2"><span class="toc-text">Step2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step3"><span class="toc-text">Step3</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2016/11/22/DOM-API-查漏补缺/" class="next">Next post DOM API 查漏补缺 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by 管木凯 using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1643068483,3832667908&fm=21&gp=0.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+

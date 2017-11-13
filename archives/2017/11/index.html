@@ -1,8 +1,14 @@
 
 
+  
 
 
 
+
+  
+
+
+  
 
 
 <!doctype html>
@@ -16,13 +22,9 @@
   
   
   
-    <meta name="description" content="有些API啊总是用了忘，用了忘。好记性不如烂笔头，赶紧记下来把，就当是做一个工具箱了。
-
-document.documentElment这个API获取到的就是我们html标签
-getBoundingClientRect()这个API里包含了我们选中元素距离浏览器窗口的上下左右距离，并且，还有一个width属性，这个属性是当前元素的宽度
-document.documentElement.get...">
+    <meta name="description" content="">
   
-  <title>DOM API 查漏补缺 [ 小石头的个人博客 ]</title>
+  <title>Archives: 11/2017: 2017 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -41,24 +43,6 @@ document.documentElement.get...">
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
-      <a href="/2017/11/13/NodeJS几行代码搭建服务器的背后/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        
-      </div>
-    </div>
-  
-  
-    <div class="item next">
-      <a href="/2016/11/22/移动端rem适配函数/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        移动端rem适配函数
-      </div>
-    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -84,7 +68,7 @@ document.documentElement.get...">
           </li>
         
           
-            <li>
+            <li class="active">
           
             <a href="/archives">Archives</a>
             
@@ -123,53 +107,71 @@ document.documentElement.get...">
     <div id="content-inner">
       
       
-  <article id="post">
-    <h1>DOM API 查漏补缺</h1>
-    <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-11-22</span>
-      
-      
-    </p>
+  <article>
     
-    <p>有些API啊总是用了忘，用了忘。好记性不如烂笔头，赶紧记下来把，<br>就当是做一个工具箱了。</p>
-<ol>
-<li><code>document.documentElment</code>这个API获取到的就是我们html标签</li>
-<li><code>getBoundingClientRect()</code>这个API里包含了我们选中元素距离浏览器窗口的上下<br>左右距离，并且，还有一个width属性，这个属性是当前元素的宽度</li>
-<li><code>document.documentElement.getBoundingClientRect().width</code>可以获取到html标签<br>的宽度，<strong>要注意这个属性在移动端获取到的其实是viewport这个视图容器的宽度，<br>所以我们在移动端的时候，一定要在meta标签里设置viewport为device-width</strong>这在用rem布局的时候，会用到</li>
-<li><code>document.body.clientWidth</code>，同样的，这个API也可以在rem布局的时候使用，得到<br>的是body标签的宽度</li>
-<li><code>window.addEventListener(&#39;pageshow&#39;,function(){})</code>这个事件是页面显示事件。<br>这个事件和window.onload事件差不多，但是在某些浏览器中，有”往返缓存”的特性，<br>所以在单击前进后退按钮的时候，有可能不会触发onload事件，所以这个时候我们就需要使用pageshow事件了。</li>
-<li><code>event.persisted</code>事件对象上的这个属性用来判断，在有”往返缓存”特性的浏览器中<br>当前页面是从服务器请求的，还是bfcache的</li>
-<li>其实手机上的分辨率的提高，是能够将css中1px的内容展示得更清楚，<strong>并不是</strong>能够展示更多的东西</li>
-<li></li>
-</ol>
 
-  </article>
-  <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
-  <div class="random-toc">
-    <h2>Table of Content</h2>
+  <div id="recent-posts">
+    <h1>Archives
+    
+      <span class="posts-count">
+      Total
+      1
+      
+        post
+      
+      </span>
+    
+    </h1>
+    
+    
+      
+      
+        
+      
+      
+    
+    
+    
+      
+      
+        
+        <h3 class="archive-year-title">2017
+        
+          <span class="posts-count">
+          Total
+          1
+          
+            post
+          
+          </span>
+        
+        </h3>
+      
+      <div class="post-title-item">
+  
+  <a href="/2017/11/13/NodeJS几行代码搭建服务器的背后/">
+  
+    NodeJS几行代码搭建服务器的背后利用NodeJS搭建起一个web服务器，只需要下面几行简单的代码
+12345678910// app.js文件cons...
+  
+  </a>
+  <p class="page-title-sub">
+    <span id = "post-title-date">11-13</span>
+    
+    
+    
+      <br>
+      
+      
+    
+  </p>
+  
+</div>
     
   </div>
-</div>
 
-  
-<nav id="pagination">
-  
-    <a href="/2017/11/13/NodeJS几行代码搭建服务器的背后/" class="prev">&larr; Prev post </a>
-  
 
-  
-
-  
-    <a href="/2016/11/22/移动端rem适配函数/" class="next">Next post 移动端rem适配函数 &rarr;</a>
-  
-</nav>
-
-  <!-- JiaThis Button BEGIN -->
-
-<!-- JiaThis Button END -->
-
+  </article>
 
       
       
@@ -264,8 +266,6 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
-
-  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
