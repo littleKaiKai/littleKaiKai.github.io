@@ -16,13 +16,11 @@
   
   
   
-    <meta name="description" content="有些API啊总是用了忘，用了忘。好记性不如烂笔头，赶紧记下来把，就当是做一个工具箱了。
-
-document.documentElment这个API获取到的就是我们html标签
-getBoundingClientRect()这个API里包含了我们选中元素距离浏览器窗口的上下左右距离，并且，还有一个width属性，这个属性是当前元素的宽度
-document.documentElement.get...">
+    <meta name="description" content="在业务需求中，我们可能会碰到要求某个div的边框是半透明的，以方便背景的颜色透上来。当然，这种设计其实也不常见，但是还是想在这里记录一下，这里面可能踩的坑。
+首先，写一个简单的demo，如下：
+12345678910111213141516171819202122&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;    &lt;me...">
   
-  <title>DOM API 查漏补缺 [ 小石头的个人博客 ]</title>
+  <title>半透明边框 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -41,22 +39,13 @@ document.documentElement.get...">
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
+  
+    <div class="item next">
       <a href="/2017/03/31/NodeJS几行代码搭建服务器的背后/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
         NodeJS几行代码搭建服务器的背后
-      </div>
-    </div>
-  
-  
-    <div class="item next">
-      <a href="/2016/11/22/移动端rem适配函数/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        移动端rem适配函数
       </div>
     </div>
   
@@ -124,24 +113,24 @@ document.documentElement.get...">
       
       
   <article id="post">
-    <h1>DOM API 查漏补缺</h1>
+    <h1>半透明边框</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-11-22</span>
+      <span id = "post-title-date">Created at 2017-11-14</span>
       
       
     </p>
     
-    <p>有些API啊总是用了忘，用了忘。好记性不如烂笔头，赶紧记下来把，<br>就当是做一个工具箱了。</p>
-<ol>
-<li><code>document.documentElment</code>这个API获取到的就是我们html标签</li>
-<li><code>getBoundingClientRect()</code>这个API里包含了我们选中元素距离浏览器窗口的上下<br>左右距离，并且，还有一个width属性，这个属性是当前元素的宽度</li>
-<li><code>document.documentElement.getBoundingClientRect().width</code>可以获取到html标签<br>的宽度，<strong>要注意这个属性在移动端获取到的其实是viewport这个视图容器的宽度，<br>所以我们在移动端的时候，一定要在meta标签里设置viewport为device-width</strong>这在用rem布局的时候，会用到</li>
-<li><code>document.body.clientWidth</code>，同样的，这个API也可以在rem布局的时候使用，得到<br>的是body标签的宽度</li>
-<li><code>window.addEventListener(&#39;pageshow&#39;,function(){})</code>这个事件是页面显示事件。<br>这个事件和window.onload事件差不多，但是在某些浏览器中，有”往返缓存”的特性，<br>所以在单击前进后退按钮的时候，有可能不会触发onload事件，所以这个时候我们就需要使用pageshow事件了。</li>
-<li><code>event.persisted</code>事件对象上的这个属性用来判断，在有”往返缓存”特性的浏览器中<br>当前页面是从服务器请求的，还是bfcache的</li>
-<li>其实手机上的分辨率的提高，是能够将css中1px的内容展示得更清楚，<strong>并不是</strong>能够展示更多的东西</li>
-<li></li>
-</ol>
+    <p>在业务需求中，我们可能会碰到要求某个div的边框是半透明的，以方便背景的颜色透上来。当然，这种设计其实也不常见，但是还是想在这里记录一下，这里面可能踩的坑。</p>
+<p>首先，写一个简单的demo，如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">        body &#123;</div><div class="line">            background-color: red;</div><div class="line">        &#125;</div><div class="line">        .box &#123;</div><div class="line">            margin: 100px 100px;</div><div class="line">            width: 100px;</div><div class="line">            height: 100px;</div><div class="line">            border: 10px solid rgba(255, 255, 255, 0.3); // 0.3透明度的白色</div><div class="line">            background-color: yellow;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>但实际效果并不如我们的预期，</p>
+<p><img src="http://article-h5.bjcnc.scs.sohucs.com/mmblog/border-transparent/pre.png" alt="之前的样式"></p>
+<p>实际效果看起来，边框处透上来的颜色是div的黄色，而不是body背景的红色。而我们想透上来的其实是body背景的颜色。其实，在css2.1中，这就是背景的工作原理。但是幸好，<strong>背景与边框</strong>第三版中，为了我们提供了一个属性<code>background-clip</code>来帮助我们解决这个问题。</p>
+<p><code>background-clip</code>属性的默认值是<code>border-box</code>，意思是div的背景截止到外边框，并在外边框处和外背景隔绝。而<code>padding-box</code>则是将div的背景截止到padding的边缘，并在此处和外背景隔绝，这就符合我们的意图了。</p>
+<p>在div的样式中加入：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">background-clip</span>: <span class="selector-tag">padding-box</span>;</div></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="http://article-h5.bjcnc.scs.sohucs.com/mmblog/border-transparent/after.png" alt="加了background-clip之后的"></p>
 
   </article>
   <div class="random-toc-area">
@@ -156,13 +145,11 @@ document.documentElement.get...">
   
 <nav id="pagination">
   
-    <a href="/2017/03/31/NodeJS几行代码搭建服务器的背后/" class="prev">&larr; Prev post NodeJS几行代码搭建服务器的背后</a>
-  
 
   
 
   
-    <a href="/2016/11/22/移动端rem适配函数/" class="next">Next post 移动端rem适配函数 &rarr;</a>
+    <a href="/2017/03/31/NodeJS几行代码搭建服务器的背后/" class="next">Next post NodeJS几行代码搭建服务器的背后 &rarr;</a>
   
 </nav>
 

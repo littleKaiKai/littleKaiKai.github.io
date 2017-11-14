@@ -16,10 +16,10 @@
   
   
   
-    <meta name="description" content="NodeJS几行代码搭建服务器的背后利用NodeJS搭建起一个web服务器，只需要下面几行简单的代码
-12345678910// app.js文件const http = require('http');const app = http.createServer(function(req,res)&#123;  res.writeHead(200,&#123;'content-type':'...">
+    <meta name="description" content="利用NodeJS搭建起一个web服务器，只需要下面几行简单的代码
+12345678910// app.js文件const http = require('http');const app = http.createServer(function(req,res)&#123;  res.writeHead(200,&#123;'content-type':'text/plain'&#125;)...">
   
-  <title> [ 小石头的个人博客 ]</title>
+  <title>NodeJS几行代码搭建服务器的背后 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -37,6 +37,15 @@
 
 <body>
 <div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2017/11/14/半透明边框/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        半透明边框
+      </div>
+    </div>
   
   
     <div class="item next">
@@ -112,14 +121,14 @@
       
       
   <article id="post">
-    <h1>No Title</h1>
+    <h1>NodeJS几行代码搭建服务器的背后</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2017-11-13</span>
+      <span id = "post-title-date">Created at 2017-03-31</span>
       
       
     </p>
     
-    <h4 id="NodeJS几行代码搭建服务器的背后"><a href="#NodeJS几行代码搭建服务器的背后" class="headerlink" title="NodeJS几行代码搭建服务器的背后"></a>NodeJS几行代码搭建服务器的背后</h4><p>利用NodeJS搭建起一个web服务器，只需要下面几行简单的代码</p>
+    <p>利用NodeJS搭建起一个web服务器，只需要下面几行简单的代码</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// app.js文件</span></div><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">const</span> app = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">  res.writeHead(<span class="number">200</span>,&#123;<span class="string">'content-type'</span>:<span class="string">'text/plain'</span>&#125;);</div><div class="line">  res.write(<span class="string">'hello world'</span>);</div><div class="line">  res.end();</div><div class="line">&#125;);</div><div class="line">app.listen(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'server is running'</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p>命令行<code>node app</code>，然后在浏览器中访问<a href="http://127.0.0.1:3000，我们就能够看到&#39;hello" target="_blank" rel="external">http://127.0.0.1:3000，我们就能够看到&#39;hello</a> world’了。</p>
 <p>大家都明白，我们之所以能够用几行代码，就起一个服务，是因为node做好了一系列的封装，那么，在这几行代码的背后，node究竟做了哪些呢？我们来一步一步地研究。</p>
@@ -158,12 +167,14 @@
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#NodeJS几行代码搭建服务器的背后"><span class="toc-text">NodeJS几行代码搭建服务器的背后</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Step1"><span class="toc-text">Step1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step2"><span class="toc-text">Step2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step3"><span class="toc-text">Step3</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Step1"><span class="toc-text">Step1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step2"><span class="toc-text">Step2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step3"><span class="toc-text">Step3</span></a></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
+  
+    <a href="/2017/11/14/半透明边框/" class="prev">&larr; Prev post 半透明边框</a>
   
 
   
