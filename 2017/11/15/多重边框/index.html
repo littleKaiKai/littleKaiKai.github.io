@@ -1,12 +1,8 @@
 
 
-  
 
 
 
-
-
-  
 
 
 <!doctype html>
@@ -20,9 +16,12 @@
   
   
   
-    <meta name="description" content="">
+    <meta name="description" content="在我们常见的业务中，对于多重边框的需求可能不是很大，记录在这里，多重边框实现的方法，方便未来使用的时候查阅。
+首先我们来看一下，视觉图：
+
+要实现这个彩虹边框，我们用常规的border-radius是实现不了的，用before、after伪元素，数量又不够，用多个div来模拟，又显然是小题大做了，而且引入那么多的dom结构也不是我们想看到的。其实用box-shadow可以来实现这个效果，代码...">
   
-  <title>Archives: 2017 [ 小石头的个人博客 ]</title>
+  <title>多重边框 [ 小石头的个人博客 ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -41,6 +40,15 @@
 <body>
 <div class="side-navigate hide-area">
   
+  
+    <div class="item next">
+      <a href="/2017/11/14/半透明边框/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        半透明边框
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -66,7 +74,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/archives">Archives</a>
             
@@ -105,132 +113,55 @@
     <div id="content-inner">
       
       
-  <article>
-    
-
-  <div id="recent-posts">
-    <h1>Archives
-    
-      <span class="posts-count">
-      Total
-      3
+  <article id="post">
+    <h1>多重边框</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2017-11-15</span>
       
-        posts
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="/tags/CSS/">CSS</a>
       
       </span>
-    
-    </h1>
-    
-    
       
-      
-        
-      
-      
+    </p>
     
-      
-      
-      
-    
-      
-      
-      
-    
-    
-    
-      
-      
-        
-        <h3 class="archive-year-title">2017
-        
-          <span class="posts-count">
-          Total
-          3
-          
-            posts
-          
-          </span>
-        
-        </h3>
-      
-      <div class="post-title-item">
-  
-  <a href="/2017/11/15/多重边框/">
-  
-    多重边框
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-15</span>
-    
-    
-    <span id = "post-title-tags">
-    Tag
-    
-    
-      
-      
-      <a href="/tags/CSS/">CSS</a>
-    
-    </span>
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2017/11/14/半透明边框/">
-  
-    半透明边框
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">11-14</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2017/03/31/NodeJS几行代码搭建服务器的背后/">
-  
-    NodeJS几行代码搭建服务器的背后
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">3-31</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-  </div>
-
+    <p>在我们常见的业务中，对于多重边框的需求可能不是很大，记录在这里，多重边框实现的方法，方便未来使用的时候查阅。</p>
+<p>首先我们来看一下，视觉图：</p>
+<p><img src="http://article-h5.bjcnc.scs.sohucs.com/mmblog/multiply-border/box-shadow.png" alt=""></p>
+<p>要实现这个彩虹边框，我们用常规的<code>border-radius</code>是实现不了的，用<code>before</code>、<code>after</code>伪元素，数量又不够，用多个div来模拟，又显然是小题大做了，而且引入那么多的dom结构也不是我们想看到的。其实用<code>box-shadow</code>可以来实现这个效果，代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>使用box-shadow来模拟多重边框<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">        .box &#123;</div><div class="line">            width: 100px;</div><div class="line">            height: 100px;</div><div class="line">            margin: 100px 100px;</div><div class="line">            background-color: red;</div><div class="line">            box-shadow: 0 0 0 10px orange, 0 0 0 15px yellow, 0 0 0 20px green;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2017/11/14/半透明边框/" class="next">Next post 半透明边框 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
 
       
       
@@ -325,6 +256,8 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
+
+  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
