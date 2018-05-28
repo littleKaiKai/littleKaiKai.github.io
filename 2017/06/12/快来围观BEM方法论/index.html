@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="博客、前端"><title>快来围观BEM方法论 | 凯小木的个人博客</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">快来围观BEM方法论</h1><a id="logo" href="/.">凯小木的个人博客</a><p class="description">天道酬勤</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">快来围观BEM方法论</h1><div class="post-meta"><a href="/2017/06/12/快来围观BEM方法论/#comments" class="comment-count"></a><p><span class="date">Jun 12, 2017</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><h1 id="常见问答"><a href="#常见问答" class="headerlink" title="常见问答"></a><a href="#frequently-asked-questions"></a>常见问答</h1><h2 id="为什么BEM？"><a href="#为什么BEM？" class="headerlink" title="为什么BEM？"></a><a href="#why-bem"></a>为什么BEM？</h2><ul>
+<li><a href="#how-does-bem-differ-from-oocss-amcss-smacss-suitcss">BEM和OOCSS, AMCSS, SMACSS, SUITCSS有什么区别？</a></li>
+<li><a href="#what-is-the-difference-between-bem-and-web-components">BEM和Web Components有什么区别？</a></li>
+<li><a href="#what-is-the-difference-between-bem-and-web-components">BEM和Bootstrap有什么区别？</a></li>
+</ul>
+<h2 id="块和元素"><a href="#块和元素" class="headerlink" title="块和元素"></a><a href="#blocks-and-elements"></a>块和元素</h2><ul>
+<li><a href="#should-i-create-a-block-or-an-element">我应该创建一个块还是一个元素？</a></li>
+<li><a href="#what-is-the-correct-way-to-modify-the-appearance-of-every-block-instance-on-a-page">如何正确修改页面中每个块实例的外观？</a></li>
+<li><a href="#why-include-the-block-name-in-modifier-and-element-names">为什么要在修饰符和元素的名称中写上块的名字？</a></li>
+<li><a href="#why-create-separate-directories-and-files-for-every-block-and-technology">为什么要为每一个块和技术创建单独的目录和文件？</a></li>
+<li><a href="#can-block-elements-inherit-css-properties-from-the-block">块元素能从块中继承CSS属性吗？</a></li>
+<li><a href="#can-i-create-wrapper-blocks">我可以创建包装器模块吗?</a></li>
+<li><a href="#can-i-create-elements-of-elements-block__elem1__elem2">我可以创建元素的元素吗 (块<strong>元素1</strong>元素2)？</a></li>
+</ul>
+<h2 id="修饰符和混合"><a href="#修饰符和混合" class="headerlink" title="修饰符和混合"></a><a href="#modifiers-and-mixes"></a>修饰符和混合</h2><ul>
+<li><a href="#should-i-create-a-modifier-or-an-mix">我应该创建一个修饰符还是混合？</a></li>
+<li><a href="#how-should-i-choose-between-a-boolean-modifier-and-a-key-value-modifier">我应该选用布尔值的修饰符还是key-value修饰符？</a></li>
+<li><a href="#what-makes-a-good-modifier-name">如何起一个好的修饰符名字？</a></li>
+<li><a href="#how-do-i-make-global-modifiers-for-blocks">如何为块创建一个全局修饰符？</a></li>
+<li><a href="#why-isnt-the-name-of-the-block-modifier-written-in-the-element-name-block_mod__elem">为什么不把块修饰符的名字写进元素名字 (block_mod__elem)？</a></li>
+</ul>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a><a href="#css"></a>CSS</h2><ul>
+<li><a href="#how-should-my-site-adapt-to-devices">怎样使我的网站自适应？</a></li>
+<li><a href="#can-i-combine-tags-and-classes-in-a-selector">我可以把标签和类组合到一个选择器中吗？</a></li>
+<li><a href="#can-i-use-nested-selectors">我可以使用嵌套的选择器吗？</a></li>
+<li><a href="#can-i-use-combined-selectors">我可以使用组合选择器吗？</a></li>
+<li><a href="#can-i-use-custom-tag-selectors">我可以使用自定义标签选择器吗？</a></li>
+<li><a href="#can-i-use-a-css-reset">我可以使用CSS重置吗？</a></li>
+<li><a href="#can-i-write-block_mod-instead-of-block-block_mod-since-the-modifier-name-already-contains-all-the-block-information">既然修饰符的名字中已经包含了块的信息，那么我可以直接写”块_修饰符”而不是”块 块_修饰符”吗？</a></li>
+<li><a href="#can-i-create-helper-classes">我可以创建助手类吗？</a></li>
+<li><a href="#why-are-the-external-geometry-and-positioning-set-via-the-parent-block">为什么大小和定位是通过父块设置的？</a></li>
+</ul>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a><a href="#javascript"></a>JavaScript</h2><ul>
+<li><a href="#why-use-i-bemjs-when-there-is-jquery">当项目已经引入jQuery时，为什么要使用i-bem.js？</a></li>
+</ul>
+<p><strong>我有不同的问题</strong>，如果从上面你还不能得到你想要的答案，提交你的问题到<a href="https://en.bem.info/forum/" target="_blank" rel="external">我们的论坛</a>。</p>
+<h2 id="BEM与OOCSS-AMCSS-SMACSS-SUITCSS相比，有什么区别？"><a href="#BEM与OOCSS-AMCSS-SMACSS-SUITCSS相比，有什么区别？" class="headerlink" title="BEM与OOCSS, AMCSS, SMACSS, SUITCSS相比，有什么区别？"></a><a href="#how-does-bem-differ-from-oocss-amcss-smacss-suitcss"></a>BEM与OOCSS, AMCSS, SMACSS, SUITCSS相比，有什么区别？</h2><ol>
+<li>BEM既适用于JavaScript也适用于CSS。</li>
+<li>和所列的这些CSS方案相比，BEM和web组件有着更多的相似之处。详见<a href="#what-is-the-difference-between-bem-and-web-components">BEM和Web Components有什么区别？</a></li>
+<li>BEM为创建项目的体系结构提供了全面的解决方案，并且有助于组织项目开发。查看更多关于<a href="https://en.bem.info/methodology/solved-problems/" target="_blank" rel="external">BEM方法在web开发中的应用</a>。</li>
+</ol>
+<blockquote>
+<p>更多信息关于<a href="https://en.bem.info/method/" target="_blank" rel="external">BEM方法论</a>。</p>
+</blockquote>
+<p>如果只是在CSS中使用BEM方法，你只需要遵循<a href="https://en.bem.info/methodology/css/" target="_blank" rel="external">这些建议</a>。</p>
+<h2 id="BEM和Web-Components有什么区别？"><a href="#BEM和Web-Components有什么区别？" class="headerlink" title="BEM和Web Components有什么区别？"></a><a href="#what-is-the-difference-between-bem-and-web-components"></a>BEM和Web Components有什么区别？</h2><p><strong>浏览器支持</strong></p>
+<ul>
+<li>Web Components <a href="http://caniuse.com/#search=Web%20Components" target="_blank" rel="external">不兼容</a>  Safari, iOS Safari, Internet Explorer, 以及 Firefox。</li>
+<li>BEM兼容所有浏览器。</li>
+</ul>
+<p><strong>封装</strong></p>
+<ul>
+<li>Web Component使用Shadow DOM。</li>
+<li>BEM使用块<a href="https://en.bem.info/methodology/key-concepts/#element" target="_blank" rel="external">元素</a>。</li>
+</ul>
+<p><strong>模板执行</strong></p>
+<ul>
+<li>在Web Components中，模板总是在浏览器中执行的。这种方式解决了一些索引问题。</li>
+<li>在BEM中，模板可能是在开发阶段生成的。然后通过准备好的HTML，模板既可以在浏览器中执行，也可以在服务器端执行。</li>
+<li>Web Components依赖于一条很重要的原则，使用字符串插入。</li>
+<li>BEM采用声明式方法，它有助于灵活地管理模板，避免冗余。</li>
+</ul>
+<p><strong>Build vs HTML import</strong></p>
+<ul>
+<li>Web Components使用的是工作在浏览器的HTML Imports(<a href="https://w3c.github.io/webcomponents/spec/imports/" target="_blank" rel="external">HTML Imports</a>)。 <a href="http://webcomponents.org/articles/introduction-to-html-imports/#aggregating-network-requests" target="_blank" rel="external">Vulcanize</a> 工具是用来将多个HTML文件合并到一个文件中。</li>
+<li>我们在BEM平台中使用下面这些构建工具：<ul>
+<li><a href="https://en.bem.info/tools/bem/enb-bem/" target="_blank" rel="external">ENB</a></li>
+<li><a href="http://gulpjs.com" target="_blank" rel="external">Gulp</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>基于DOM树的抽象体 vs 自定义元素</strong></p>
+<ul>
+<li>在Web Components中，使用的是<a href="https://www.w3.org/TR/custom-elements/" target="_blank" rel="external">自定义元素</a>。这种方法只允许在一个DOM节点上托管一个组件。</li>
+<li>BEM中引入了<a href="https://en.bem.info/methodology/key-concepts/#bem-tree" target="_blank" rel="external">BEM tree</a>的概念，为了在一个节点上托管多个<a href="https://en.bem.info/methodology/key-concepts/#bem-entity" target="_blank" rel="external">BEM 实体</a>，BEM 使用了 <a href="https://en.bem.info/methodology/key-concepts/#mix" target="_blank" rel="external">mixes</a></li>
+</ul>
+<h2 id="BEM和Bootstrap有什么区别？"><a href="#BEM和Bootstrap有什么区别？" class="headerlink" title="BEM和Bootstrap有什么区别？"></a><a href="#what-is-the-difference-between-bem-and-bootstrap"></a>BEM和Bootstrap有什么区别？</h2><p>在BEM的体系中，<a href="http://getbootstrap.com/" target="_blank" rel="external">Bootstrap</a>是一个免费的分布式集合，这个集合为建站和创建应用提供了各种现成的块。<br>BEM是一个方法论，它可以允许你：</p>
+<ul>
+<li>为项目创建体系结构。</li>
+<li>基于独立的块开发web应用程序。</li>
+<li>有助于项目支持。</li>
+</ul>
+<p>它也是开源库的一个框架：</p>
+<ul>
+<li><a href="https://en.bem.info/platform/libs/bem-components/" target="_blank" rel="external">bem-组件</a> — 一个包含表单控件和其他web页面组件的库。</li>
+<li><a href="https://en.bem.info/platform/libs/bem-core/" target="_blank" rel="external">bem-核心</a> — 这个库中的块为web开发提供了一个专门的JavaScript框架。</li>
+<li><a href="https://en.bem.info/platform/libs/bem-history/" target="_blank" rel="external">bem-历史</a> — 对BEM历史API的一个包装。</li>
+</ul>
+<h2 id="我应该创建一个块还是一个元素？"><a href="#我应该创建一个块还是一个元素？" class="headerlink" title="我应该创建一个块还是一个元素？"></a><a href="#should-i-create-a-block-or-an-element"></a>我应该创建一个块还是一个元素？</h2><p>对于创建块和元素，BEM中并没有特别严格的规则。这更多地取决于开发者的个人习惯。然而，我们确实有<a href="https://en.bem.info/methodology/quick-start/#a-block-or-an-element-when-should-i-use-which" target="_blank" rel="external">一些建议</a>来帮助你解决这个问题。</p>
+<h2 id="修改页面上每个块实例外观的正确方法是什么？"><a href="#修改页面上每个块实例外观的正确方法是什么？" class="headerlink" title="修改页面上每个块实例外观的正确方法是什么？"></a><a href="#what-is-the-correct-way-to-modify-the-appearance-of-every-block-instance-on-a-page"></a>修改页面上每个块实例外观的正确方法是什么？</h2><p>如果你想修改相同块的样式，你可以使用：</p>
+<ul>
+<li>修饰符，如果你很有可能重新使用这个样式的块。</li>
+<li>Mixes，如果这个块在当前环境下有着特殊的样式，并且，你不会再在工程中复用这个样式的块。</li>
+</ul>
+<blockquote>
+<p>更多使用mixes和修饰符的信息请看<a href="#should-i-create-a-modifier-or-an-mix">我应该创建一个修饰符还是mix？</a></p>
+</blockquote>
+<h2 id="为什么在修饰符和元素的名字中含有块的名字？"><a href="#为什么在修饰符和元素的名字中含有块的名字？" class="headerlink" title="为什么在修饰符和元素的名字中含有块的名字？"></a><a href="#why-include-the-block-name-in-modifier-and-element-names"></a>为什么在修饰符和元素的名字中含有块的名字？</h2><p>块的名称在BEM的命名体系中：</p>
+<ul>
+<li><a href="#namespace">支撑命名空间</a>。</li>
+<li><a href="#mixes">实现Mixes</a>。</li>
+<li><a href="#code-searching">简化代码搜索</a></li>
+</ul>
+<blockquote>
+<p>BEM方法论允许命名的自由，可见<a href="https://en.bem.info/methodology/naming-convention/#alternative-naming-schemes" target="_blank" rel="external">BEM实体的命名策略</a>，但是在一个工程中，命名应该保持一致。</p>
+</blockquote>
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a><a href="#namespace"></a>命名空间</h3><p>块的名称为元素和修饰符创建了一个命名空间，使它们独一无二。这有助于减少一个块的元素和修饰符对另一个块实现的影响。</p>
+<h3 id="Mixes"><a href="#Mixes" class="headerlink" title="Mixes"></a><a href="#mixes"></a>Mixes</h3><p>当混合修饰符时，必须要指定命名空间，以便清晰修饰符被应用到了哪个实体上。如果有一个块的名称没有被指定，那么这个修饰符将会被应用到所有的混淆BEM实体上。<br>假设我们有一个菜单项(<code>menu__item</code>)和按钮(<code>button</code>)的mix：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;...&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>增加一个没有块名的叫<code>active</code>的修饰符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;...&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>在这种形式下，HTML的标记并不明确：</p>
+<ul>
+<li>和修饰符关联的是菜单项<code>menu__item.active</code>还是按钮<code>button.active</code>。</li>
+<li>它指的是哪个BEM实体（它是一个修饰符和块的混合还是两个块的混合）。</li>
+</ul>
+<p>当包含块的名称和修饰符的名称的时候，HTML标记就会变得明确和好理解多了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;...&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="代码搜索"><a href="#代码搜索" class="headerlink" title="代码搜索"></a><a href="#code-search"></a>代码搜索</h3><p>唯一的名称使得在代码和文件系统中识别实体变得更加简单。<br>找到所有的<code>button_active</code>要比找到所有的<code>active</code>简单多了，因为后者的搜索结果会显示出所有可能的组合：<code>select_active</code>，<code>checkbox_active</code>， <code>menu__item_active</code>等。</p>
+<h2 id="为什么每个块和技术创建单独的目录和文件"><a href="#为什么每个块和技术创建单独的目录和文件" class="headerlink" title="为什么每个块和技术创建单独的目录和文件?"></a><a href="#why-create-separate-directories-and-files-for-every-block-and-technology"></a>为什么每个块和技术创建单独的目录和文件?</h2><p>为了<a href="https://en.bem.info/methodology/filestructure/#a-block-implementation-is-divided-into-separate-files" target="_blank" rel="external">方便开发和支持</a>，一个BEM工程的文件结构被拆分成嵌套的目录和文件。<br>你不一定非要遵循<a href="../method/filestructure/filestructure.ru.md#nested">推荐的文件系统结构</a>。你可以使用任何可用的，遵循BEM原则的文件系统,如:</p>
+<ul>
+<li><a href="https://en.bem.info/methodology/filestructure/#flat" target="_blank" rel="external">Flat</a>。</li>
+<li><a href="https://en.bem.info/methodology/filestructure/#flex" target="_blank" rel="external">Flex</a>。</li>
+</ul>
+<h2 id="块元素能从块中继承CSS属性吗？"><a href="#块元素能从块中继承CSS属性吗？" class="headerlink" title="块元素能从块中继承CSS属性吗？"></a><a href="#can-block-elements-inherit-css-properties-from-the-block"></a>块元素能从块中继承CSS属性吗？</h2><p>BEM的继承和常规的继承一样，页面中一个HTML元素的CSS属性同样适用于所有子级元素。<br>这意味着，如果要将相同的样式应用到块的所有元素中，那么最好是为块设置CSS规则。如果块的元素有不同的样式，那么就为这些元素单独设置样式。为了避免生成代码中出现重复，使用CSS优化器将具有相同CSS规则的选择器组合起来。</p>
+<h2 id="我可以创建包装器块吗？"><a href="#我可以创建包装器块吗？" class="headerlink" title="我可以创建包装器块吗？"></a><a href="#can-i-create-wrapper-blocks"></a>我可以创建包装器块吗？</h2><p>使用抽象的包装块是没有必要的，因为通过mixes和额外的块元素同样可以达到目的。</p>
+<blockquote>
+<p>更多信息，请查看<a href="https://en.bem.info/methodology/css/#wrappers" target="_blank" rel="external">HTML for CSS</a>。</p>
+</blockquote>
+<h2 id="我能够创建元素的元素吗-blockelem1elem2-？"><a href="#我能够创建元素的元素吗-blockelem1elem2-？" class="headerlink" title="我能够创建元素的元素吗(blockelem1elem2)？"></a><a href="#can-i-create-elements-of-elements-block__elem1__elem2"></a>我能够创建元素的元素吗(block<strong>elem1</strong>elem2)？</h2><p>元素的元素的存在限制了你修改块中内部结构的能力。你不能在不修改代码的情况下，移动元素，删除元素，或者增加新的元素。</p>
+<blockquote>
+<p>更多信息，请看<a href="https://en.bem.info/methodology/quick-start/#nesting-1" target="_blank" rel="external">快速开始</a></p>
+</blockquote>
+<h2 id="我应该创建一个修饰符还是一个mix？"><a href="#我应该创建一个修饰符还是一个mix？" class="headerlink" title="我应该创建一个修饰符还是一个mix？"></a><a href="#should-i-create-a-modifier-or-an-mix"></a>我应该创建一个修饰符还是一个mix？</h2><h3 id="创建一个修饰符"><a href="#创建一个修饰符" class="headerlink" title="创建一个修饰符"></a><a href="#create-a-modifier"></a>创建一个修饰符</h3><p>如果你打算复用你的实现，并且它不依赖于其他页面组件的实现，比方说， <code>select</code>块有修饰符<strong>hovered</strong>, <strong>focused</strong>, 和 <strong>opened</strong>。<br><img src="http://s1.qhres.com/static/fa23b26c828c4ed8.svg" alt="Modifiers of the &quot;select&quot; block"></p>
+<h3 id="创建一个mix"><a href="#创建一个mix" class="headerlink" title="创建一个mix"></a><a href="#create-a-mix"></a>创建一个mix</h3><p>如果你的实现只是想在一个特定环境中，不需要在项目的其他地方复用。<br>比如说，在下面这些情况下，我们很有可能会创建一个mix：</p>
+<ul>
+<li>为项目实现特定的业务逻辑。</li>
+<li>为所处上下文定义<a href="https://en.bem.info/methodology/css/#external-geometry-and-positioning" target="_blank" rel="external">外形尺寸</a>。</li>
+</ul>
+<h2 id="我应该选用布尔值的修饰符还是key-value修饰符？"><a href="#我应该选用布尔值的修饰符还是key-value修饰符？" class="headerlink" title="我应该选用布尔值的修饰符还是key-value修饰符？"></a><a href="#how-should-i-choose-between-a-boolean-modifier-and-a-key-value-modifier"></a>我应该选用布尔值的修饰符还是key-value修饰符？</h2><p>修饰符的名称描述了块或者元素的状态。它遵循以下格式：</p>
+<ul>
+<li>对于布尔型修饰符 – <code>block-name_mod-name</code>。</li>
+<li>对于key-value修饰符 – <code>block-name_mod-name_mod-val</code></li>
+</ul>
+<h3 id="创建一个布尔型修饰符"><a href="#创建一个布尔型修饰符" class="headerlink" title="创建一个布尔型修饰符"></a><a href="#create-a-boolean-modifier"></a>创建一个布尔型修饰符</h3><p>当块的状态只是和修饰符的存在与否相关，和修饰符的值无关紧要时。一个例子是，一个修饰符用来描述“disabled”状态：<code>disabled</code>。<br><strong>例子</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;...&lt;/div&gt;</div><div class="line">&lt;div&gt;...&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="创建一个key-value修饰符"><a href="#创建一个key-value修饰符" class="headerlink" title="创建一个key-value修饰符"></a><a href="#create-a-key-value-modifier"></a>创建一个key-value修饰符</h3><p>如果一个块有多种不同的状态。一个例子是，一个<code>size</code>修饰符有<code>s</code> , <code>m</code> 和 <code>l</code>三种值。<br><strong>例子</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;...&lt;/div&gt;</div><div class="line">&lt;div&gt;...&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="如何起一个好的修饰符名字？"><a href="#如何起一个好的修饰符名字？" class="headerlink" title="如何起一个好的修饰符名字？"></a><a href="#what-makes-a-good-modifier-name"></a>如何起一个好的修饰符名字？</h2><p>BEM方法建议根据语义选择修饰符的名称，而不是根据它们描述的CSS属性。<br>来看一个例子：<br>HTML实现如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;button class=&quot;button button_background_yellow&quot;&gt;...&lt;/button&gt;</div></pre></td></tr></table></figure></p>
+<p><code>button_background_yellow</code>这个修饰符的名字并不是一个好的选择，因为：<br>如果将背景颜色（<code>yellow</code>）改为<code>red</code>，你不仅要更改CSS代码，还要更改选择器名称、模板和可能的JavaScript代码。<br>如果添加其他CSS属性，如<code>border</code>或<code>line-height</code>，修饰符的名称将不再与其内容匹配。</p>
+<p>一个好的名称是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;button class=&quot;button button_view_action&quot;&gt;...&lt;/button&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="如何为块创建全局修饰符？"><a href="#如何为块创建全局修饰符？" class="headerlink" title="如何为块创建全局修饰符？"></a><a href="#how-do-i-make-global-modifiers-for-blocks"></a>如何为块创建全局修饰符？</h2><p>BEM并没有全局修饰符的概念，因为任何修饰符的名字总是伴有：</p>
+<ul>
+<li>块的名字</li>
+<li>元素的名字</li>
+</ul>
+<p>如果需要在一个块外移动CSS属性并将其应用到项目中不同的BEM实体上，那么创建一个单独的CSS块。然后，您可以使用<a href="https://en.bem.info/methodology/key-concepts/#mix" target="_blank" rel="external">mixes</a>组合不同块的实现：</p>
+<blockquote>
+<p>有关更多信息，请参见<a href="https://en.bem.info/methodology/css/#styling-groups-of-blocks" target="_blank" rel="external">块的样式组</a></p>
+</blockquote>
+<h2 id="为什么不把块修饰符的名称写到元素名中？-block-mod-elem-？"><a href="#为什么不把块修饰符的名称写到元素名中？-block-mod-elem-？" class="headerlink" title="为什么不把块修饰符的名称写到元素名中？ (block_mod__elem)？"></a><a href="#why-isn39t-the-name-of-the-block-modifier-written-in-the-element-name-block_mod__elem"></a>为什么不把块修饰符的名称写到元素名中？ (block_mod__elem)？</h2><p>元素是块的集成部分，而块修饰符并不是。因此，只有块的名字能够为元素设置命名空间。<br>这是很重要的，原因如下</p>
+<ul>
+<li><p>一个块可以有很多修饰符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">    &lt;div&gt;...&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修饰符决定块或元素的状态，它可以在JavaScript执行过程中改变。</p>
+</li>
+</ul>
+<h2 id="我的站点如何实现自适应？"><a href="#我的站点如何实现自适应？" class="headerlink" title="我的站点如何实现自适应？"></a><a href="#how-should-my-site-adapt-to-devices"></a>我的站点如何实现自适应？</h2><p>根据浏览器窗口的大小，有几种办法可以改变页面元素的尺寸：</p>
+<ul>
+<li><a href="#media-queries">使用媒体查询</a>。</li>
+<li><a href="#switching-a-modifier">切换修饰符</a>。</li>
+</ul>
+<p>在这两种情况下，必须设置断点，这是在站点的不同布局之间切换的条件。</p>
+<h3 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a><a href="#media-queries"></a>媒体查询</h3><p>文件系统：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">common.blocks/</div><div class="line">    button/</div><div class="line">        button.css    # CSS button implementation</div></pre></td></tr></table></figure></p>
+<p>CSS实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@media (max-width: 767px) &#123;</div><div class="line">    .button &#123;</div><div class="line">          left: 0;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@media (max-width: 479px) &#123;</div><div class="line">    .button &#123;</div><div class="line">        right: 0;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>注意</strong>块的名称应够足够通用，以便于基于多种目的使用它们。比如说，当屏幕宽度变化时，如果某个块的位置可以被改变为<code>right</code> ，那么把这个块叫做<code>sidebar-left</code>就显然不是一个好主意。</p>
+</blockquote>
+<h3 id="切换修饰符"><a href="#切换修饰符" class="headerlink" title="切换修饰符"></a><a href="#switching-a-modifier"></a>切换修饰符</h3><p>文件结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">common.blocks/</div><div class="line">    button/</div><div class="line">        _position/</div><div class="line">            button_position_left.css</div><div class="line">            button_position_left.css</div><div class="line">        button.js   # JS button implementation</div></pre></td></tr></table></figure></p>
+<p>button_position_left.css:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.button_position_left &#123;</div><div class="line">    left: 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>button_position_right.css:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.button_position_right &#123;</div><div class="line">    right: 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用JavaScript改变DOM节点上的CSS类。</p>
+<blockquote>
+<p>有关更多信息，请详见<a href="https://en.bem.info/platform/tutorials/i-bem/modifiers/#toggling-a-modifier" target="_blank" rel="external">切换修饰符</a></p>
+</blockquote>
+<h2 id="我可以在选择器中组合标签和类吗？"><a href="#我可以在选择器中组合标签和类吗？" class="headerlink" title="我可以在选择器中组合标签和类吗？"></a><a href="#can-i-combine-tags-and-classes-in-a-selector"></a>我可以在选择器中组合标签和类吗？</h2><p>将标记和类组合在选择器中会使CSS规则太具体。BEM方法并不建议在选择器中将标记和类组合在一起。</p>
+<blockquote>
+<p>有关更多信息，请详见<a href="https://en.bem.info/methodology/css/#combining-tag-and-class-in-selector" target="_blank" rel="external">将标签和类组合在选择器中</a>。</p>
+</blockquote>
+<h2 id="我可以使用嵌套选择器吗？"><a href="#我可以使用嵌套选择器吗？" class="headerlink" title="我可以使用嵌套选择器吗？"></a><a href="#can-i-use-nested-selectors"></a>我可以使用嵌套选择器吗？</h2><p>嵌套选择器增加了代码耦合，使重用变得不可能。BEM方法允许使用嵌套选择器，但我们建议尽量减少它们的使用。</p>
+<blockquote>
+<p>有关更多信息，请详见<a href="https://en.bem.info/methodology/css/#nested-selectors" target="_blank" rel="external">嵌套选择器</a></p>
+</blockquote>
+<h2 id="我可以使用组合选择器吗？"><a href="#我可以使用组合选择器吗？" class="headerlink" title="我可以使用组合选择器吗？"></a><a href="#can-i-use-combined-selectors"></a>我可以使用组合选择器吗？</h2><p>与单个选择器相比，组合选择器具有更高的CSS特殊性。重新定义组合选择器的能力取决于它们被声明的顺序。BEM方法不建议使用组合选择器。</p>
+<blockquote>
+<p>有关更多信息，请详见<a href="https://en.bem.info/methodology/css/#combined-selectors" target="_blank" rel="external">组合选择器</a></p>
+</blockquote>
+<h2 id="我能使用自定义标签选择器吗？"><a href="#我能使用自定义标签选择器吗？" class="headerlink" title="我能使用自定义标签选择器吗？"></a><a href="#can-i-use-custom-tag-selectors"></a>我能使用自定义标签选择器吗？</h2><p>在HTML中，块可以用<a href="https://www.w3.org/TR/custom-elements/" target="_blank" rel="external">自定义元素</a>来描述，为了：</p>
+<ul>
+<li>优化页面结构，增强页面内容的语义化。</li>
+<li>作为结果，可以使用自定义标签选择器代替类选择器。</li>
+<li>将HTML元素与将由JavaScript使用的附加数据相关联。</li>
+</ul>
+<p>BEM方法鼓励增强Web页面的语义化，但它不建议拒绝类选择器以支持自定义标签。如果你替换它们，则只能使用修饰符类。</p>
+<p><strong>举例</strong><br>HTML实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">`&lt;icon-twitter class=&quot;icon_social_twitter&quot;&gt;...&lt;/icon-twitter&gt;`</div></pre></td></tr></table></figure></p>
+<p>CSS实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">icon-twitter &#123;&#125;</div><div class="line">.icon_social_twitter &#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>这种方法涉及几个限制：</p>
+<ul>
+<li>你不能使用<a href="https://en.bem.info/methodology/key-concepts/#mix" target="_blank" rel="external">mixes</a>。</li>
+<li>并不是所有的块都可以使用自定义HTML元素来表示。例如，所有链接都需要<code>标签，但是还需要各种字段</code></li>
+</ul>
+<h2 id="我可以使用CSS重置吗？"><a href="#我可以使用CSS重置吗？" class="headerlink" title="我可以使用CSS重置吗？"></a><a href="#can-i-use-a-css-reset"></a>我可以使用CSS重置吗？</h2><p>在一个页面上，一个<a href="https://en.bem.info/methodology/key-concepts/#block" target="_blank" rel="external">块</a>是一个逻辑和功能上的独立组件。它不应该受到页面范围CSS规则的影响。否则块的独立性受到损害，它们的重用成为问题。<br>CSS重置是通过<a href="#how-do-i-make-global-modifiers-for-blocks">全局CSS规则</a>实现的。它们通常是由标签选择器来写的，而这在BEM方法中是不推荐的。<br><strong>举例</strong><br>CSS实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ul, ol &#123;</div><div class="line">    list-style: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果你一定要重置你的样式，在BEM项目中，你可以按照每一个块来完成。<br>让我们来看一个例子：<br>该项目有用HTML标签来表示并且需要重置样式的<code>.menu</code>和<code>.list</code>块。所以每个块都需要单独重置样式。为了避免生成代码中出现重复，使用CSS优化器将具有相同CSS规则的选择器组合起来。<br>如果项目不使用CSS优化器，则可以应用CSS预处理器。然后你可以通过逐点<a href="https://en.bem.info/methodology/key-concepts/#mix" target="_blank" rel="external">混合</a>样式标准的方式为每一个新创建的块重置样式。<br>所以在SASS中看起来是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/* Style reset for the `&lt;ul&gt;` tag */</div><div class="line">.menu &#123;</div><div class="line">    @include reset-list;</div><div class="line">&#125;</div><div class="line">...</div><div class="line">/* Style reset for the `&lt;ul&gt;` tag */</div><div class="line">.list &#123;</div><div class="line">    @include reset-list;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>注意</strong> 这种方式，只有在你的项目中没有CSS优化器的时候使用。</p>
+</blockquote>
+<h2 id="由于修饰符的名称中已经包含了块的所有信息，那么我可以直接写block-mod而不是block-block-mod吗？"><a href="#由于修饰符的名称中已经包含了块的所有信息，那么我可以直接写block-mod而不是block-block-mod吗？" class="headerlink" title="由于修饰符的名称中已经包含了块的所有信息，那么我可以直接写block_mod而不是block block_mod吗？"></a><a href="#can-i-write-block_mod-instead-of-block-block_mod-since-the-modifier-name-already-contains-all-the-block-information"></a>由于修饰符的名称中已经包含了块的所有信息，那么我可以直接写block_mod而不是block block_mod吗？</h2><p>如果你只留下了修饰符类，不指明块或者元素本身的类，那么，你只能在<code>css .block_mod {}</code>选择器中定义所有的块的基本CSS属性。<br>在块被使用（比如说，响应DOM事件）时，或者修饰符在被其他块引用时，修饰符都是可以发生变化的。所以，你也必须要把这个块的基本功能的CSS代码复制到它所有的修饰符中。<br>在同一个DOM节点上合并多个修饰符会导致代码冗余。</p>
+<h2 id="我可以创建助手类吗？"><a href="#我可以创建助手类吗？" class="headerlink" title="我可以创建助手类吗？"></a><a href="#can-i-create-helper-classes"></a>我可以创建助手类吗？</h2><p>BEM方法对于创建助手类并没有严格的要求。这很大程度上取决于开发人员的具体实现和个人偏好。如果你需要这种类型的块，你可以使用<a href="https://en.bem.info/methodology/key-concepts/#mix" target="_blank" rel="external">mix</a>。<br>在<a href="https://en.bem.info/platform/libs/bem-core/" target="_blank" rel="external">BEM-核心</a>中的例子是<code>clearfix</code> 块，在<a href="https://en.bem.info/platform/libs/bem-components/" target="_blank" rel="external">BEM-组件</a>中的例子是<code>z-index-group</code>。</p>
+<blockquote>
+<p>有关使用mixes的更多信息，请看<a href="https://en.bem.info/methodology/css/#styling-groups-of-blocks" target="_blank" rel="external">块的样式组</a></p>
+</blockquote>
+<h2 id="为什么外部几何尺寸和定位是通过父块设置的？"><a href="#为什么外部几何尺寸和定位是通过父块设置的？" class="headerlink" title="为什么外部几何尺寸和定位是通过父块设置的？"></a><a href="#why-are-the-external-geometry-and-positioning-set-via-the-parent-block"></a>为什么外部几何尺寸和定位是通过父块设置的？</h2><p>BEM方法的要点是创建可扩展的和可复用的页面组件。如果创建一个可以复用的块，那么阻止块写入这些有阻碍性的CSS属性是有意义的。<br>这些CSS属性包括：</p>
+<ul>
+<li><code>margin</code></li>
+<li><code>position</code></li>
+</ul>
+<blockquote>
+<p>有关更多信息，请详见 <a href="https://en.bem.info/methodology/css/#external-geometry-and-positioning" target="_blank" rel="external">外部几何尺寸与定位</a></p>
+</blockquote>
+<h2 id="当项目已经引入jQuery时，为什么要使用i-bem-js？"><a href="#当项目已经引入jQuery时，为什么要使用i-bem-js？" class="headerlink" title="当项目已经引入jQuery时，为什么要使用i-bem.js？"></a><a href="#why-use-i-bemjs-when-there-is-jquery"></a>当项目已经引入jQuery时，为什么要使用i-bem.js？</h2><p><a href="https://en.bem.info/technology/i-bem/" target="_blank" rel="external">i-bem.js</a> 是在用块，元素和修饰符开发JavaScript工程时专门所用的框架。<br><code>i-bem.js</code>并不是为了替换任何通用的框架，比如说jQuery。<br><code>i-bem.js</code>使你能够:</p>
+<ul>
+<li>使用块、元素、修饰符来开发Web页面。</li>
+<li>使JavaScript代码、模板以及BEM风格的CSS规则集成在一起。</li>
+<li>通过一系列的状态来描述块的逻辑。<br>​              </li>
+</ul>
+</div><div class="tags"><a href="/tags/HTML-CSS/">HTML CSS</a></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/2017/07/31/深入了解React的子组件---Max-Stoibers-Blog/" class="pre">深入了解React的子组件 - Max Stoibers Blog</a><a href="/2017/05/24/JavaScript中函数的千面—Bocoup/" class="next">JavaScript中函数的千面—Bocoup</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常见问答"><span class="toc-text">常见问答</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么BEM？"><span class="toc-text">为什么BEM？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块和元素"><span class="toc-text">块和元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修饰符和混合"><span class="toc-text">修饰符和混合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS"><span class="toc-text">CSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript"><span class="toc-text">JavaScript</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BEM与OOCSS-AMCSS-SMACSS-SUITCSS相比，有什么区别？"><span class="toc-text">BEM与OOCSS, AMCSS, SMACSS, SUITCSS相比，有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BEM和Web-Components有什么区别？"><span class="toc-text">BEM和Web Components有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BEM和Bootstrap有什么区别？"><span class="toc-text">BEM和Bootstrap有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我应该创建一个块还是一个元素？"><span class="toc-text">我应该创建一个块还是一个元素？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改页面上每个块实例外观的正确方法是什么？"><span class="toc-text">修改页面上每个块实例外观的正确方法是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么在修饰符和元素的名字中含有块的名字？"><span class="toc-text">为什么在修饰符和元素的名字中含有块的名字？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命名空间"><span class="toc-text">命名空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mixes"><span class="toc-text">Mixes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码搜索"><span class="toc-text">代码搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么每个块和技术创建单独的目录和文件"><span class="toc-text">为什么每个块和技术创建单独的目录和文件?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块元素能从块中继承CSS属性吗？"><span class="toc-text">块元素能从块中继承CSS属性吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以创建包装器块吗？"><span class="toc-text">我可以创建包装器块吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我能够创建元素的元素吗-blockelem1elem2-？"><span class="toc-text">我能够创建元素的元素吗(blockelem1elem2)？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我应该创建一个修饰符还是一个mix？"><span class="toc-text">我应该创建一个修饰符还是一个mix？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个修饰符"><span class="toc-text">创建一个修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个mix"><span class="toc-text">创建一个mix</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我应该选用布尔值的修饰符还是key-value修饰符？"><span class="toc-text">我应该选用布尔值的修饰符还是key-value修饰符？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个布尔型修饰符"><span class="toc-text">创建一个布尔型修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个key-value修饰符"><span class="toc-text">创建一个key-value修饰符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何起一个好的修饰符名字？"><span class="toc-text">如何起一个好的修饰符名字？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何为块创建全局修饰符？"><span class="toc-text">如何为块创建全局修饰符？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么不把块修饰符的名称写到元素名中？-block-mod-elem-？"><span class="toc-text">为什么不把块修饰符的名称写到元素名中？ (block_mod__elem)？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我的站点如何实现自适应？"><span class="toc-text">我的站点如何实现自适应？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#媒体查询"><span class="toc-text">媒体查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切换修饰符"><span class="toc-text">切换修饰符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以在选择器中组合标签和类吗？"><span class="toc-text">我可以在选择器中组合标签和类吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以使用嵌套选择器吗？"><span class="toc-text">我可以使用嵌套选择器吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以使用组合选择器吗？"><span class="toc-text">我可以使用组合选择器吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我能使用自定义标签选择器吗？"><span class="toc-text">我能使用自定义标签选择器吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以使用CSS重置吗？"><span class="toc-text">我可以使用CSS重置吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由于修饰符的名称中已经包含了块的所有信息，那么我可以直接写block-mod而不是block-block-mod吗？"><span class="toc-text">由于修饰符的名称中已经包含了块的所有信息，那么我可以直接写block_mod而不是block block_mod吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以创建助手类吗？"><span class="toc-text">我可以创建助手类吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么外部几何尺寸和定位是通过父块设置的？"><span class="toc-text">为什么外部几何尺寸和定位是通过父块设置的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#当项目已经引入jQuery时，为什么要使用i-bem-js？"><span class="toc-text">当项目已经引入jQuery时，为什么要使用i-bem.js？</span></a></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/05/23/webpack插件编写/">webpack插件编写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/05/四角切角的实现/">四角切角的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/05/指令式编程-VS-声明式编程/">指令式编程 VS 声明式编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/01/记切角在工作中的一次使用/">记切角在工作中的一次使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/28/半椭圆/">如何将元素设置成半圆/半椭圆</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/27/适配iPhoneX（持续更新）/">适配iPhoneX（持续更新）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/24/水平条纹和斜向条纹/">水平条纹和斜向条纹</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/21/让我们一起创建一个-JavaScript-Wait函数–-Hacker-Noon/">让我们一起创建一个 JavaScript Wait函数– Hacker Noon</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/移动端兼容性（持续更新）/">移动端兼容性（持续更新）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/15/多重边框/">多重边框</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/CSS3-linear-gradient/" style="font-size: 15px;">CSS3 linear-gradient</a> <a href="/tags/HTML-PS/" style="font-size: 15px;">HTML PS</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a> <a href="/tags/CSS3-切角/" style="font-size: 15px;">CSS3 切角</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/JavaScript-元编程-众成翻译/" style="font-size: 15px;">JavaScript 元编程 众成翻译</a> <a href="/tags/JavaScript-众成翻译/" style="font-size: 15px;">JavaScript 众成翻译</a> <a href="/tags/HTML-CSS/" style="font-size: 15px;">HTML CSS</a> <a href="/tags/React-众成翻译/" style="font-size: 15px;">React 众成翻译</a> <a href="/tags/PostCSS-众成翻译/" style="font-size: 15px;">PostCSS 众成翻译</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">管木凯.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script></body></html>
